@@ -1,0 +1,4 @@
+name: SpriteSMP
+version: '${project.version}'
+main: gmail.aryanj1010.spritesmp.SpriteSMP
+api-version: '1.20'
