@@ -24,8 +24,17 @@ public class PlayerSprites extends AbstractFile{
     public items rerollSprite (Player p) {
         while (true) {
             items i = sprites[new Random().nextInt(sprites.length)];
-            if (!i.toString().equals(config.get(p.getUniqueId().toString()))) addSprite(p, i);
+            if (!i.toString().equals(config.get(p.getUniqueId().toString()))) {addSprite(p, i);return i;}
         }
+    }
 
+    public items getSprite (Player p) {
+        switch (config.get(p.getUniqueId().toString()).toString()) {
+            case "FireSprite": return items.FireSprite;
+            case "WaterSprite": return items.WaterSprite;
+            case "AirSprite": return items.AirSprite;
+            case "EarthSprite": return items.EarthSprite;
+            default:return null;
+        }
     }
 }

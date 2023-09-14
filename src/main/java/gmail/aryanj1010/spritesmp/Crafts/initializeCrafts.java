@@ -13,95 +13,95 @@ import static gmail.aryanj1010.spritesmp.Items.items.*;
 
 public class initializeCrafts {
 
-    static List<ItemStack> sprites = Arrays.asList(FireSprite.getItem().getItem(), WaterSprite.getItem().getItem(), AirSprite.getItem().getItem(), EarthSprite.getItem().getItem());
+    static List<ItemStack> sprites = Arrays.asList(FireSprite.getFullItem().getItem(), WaterSprite.getFullItem().getItem(), AirSprite.getFullItem().getItem(), EarthSprite.getFullItem().getItem());
 
-    public static ShapedRecipe fireSword = new CraftingTableCraft(FireSword.getItem().getItem(), new ExactChoice[]{
+    public static CraftingTableCraft fireSword = new CraftingTableCraft(FireSword.getFullItem().getItem(), new ExactChoice[]{
             new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK)),
-            new ExactChoice(FireSprite.getItem().getItem()),
+            new ExactChoice(FireSprite.getFullItem().getItem()),
             new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK)),
             new ExactChoice(new ItemStack(Material.EMERALD_BLOCK)),
             new ExactChoice(new ItemStack(Material.DIAMOND_SWORD)),
             new ExactChoice(new ItemStack(Material.EMERALD_BLOCK)),
             new ExactChoice(new ItemStack(Material.GOLD_BLOCK)),
-            new ExactChoice(FireSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.GOLD_BLOCK))}).getRecipe();
-    public static ShapedRecipe waterSword = new CraftingTableCraft(WaterSword.getItem().getItem(),new ExactChoice[]{
+            new ExactChoice(FireSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.GOLD_BLOCK))});
+    public static CraftingTableCraft waterSword = new CraftingTableCraft(WaterSword.getFullItem().getItem(),new ExactChoice[]{
             new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK)),
-            new ExactChoice(WaterSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK)),
-            new ExactChoice(new ItemStack(Material.EMERALD_BLOCK)),
-            new ExactChoice(new ItemStack(Material.DIAMOND_SWORD)),
-            new ExactChoice(new ItemStack(Material.EMERALD_BLOCK)),
-            new ExactChoice(new ItemStack(Material.GOLD_BLOCK)),
-            new ExactChoice(WaterSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.GOLD_BLOCK))}).getRecipe();
-    public static ShapedRecipe airSword = new CraftingTableCraft(AirSword.getItem().getItem(),new ExactChoice[]{
-            new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK)),
-            new ExactChoice(AirSprite.getItem().getItem()),
+            new ExactChoice(WaterSprite.getFullItem().getItem()),
             new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK)),
             new ExactChoice(new ItemStack(Material.EMERALD_BLOCK)),
             new ExactChoice(new ItemStack(Material.DIAMOND_SWORD)),
             new ExactChoice(new ItemStack(Material.EMERALD_BLOCK)),
             new ExactChoice(new ItemStack(Material.GOLD_BLOCK)),
-            new ExactChoice(AirSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.GOLD_BLOCK))}).getRecipe();
-    public static ShapedRecipe earthSword = new CraftingTableCraft(EarthSword.getItem().getItem(),new ExactChoice[]{
+            new ExactChoice(WaterSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.GOLD_BLOCK))});
+    public static CraftingTableCraft airSword = new CraftingTableCraft(AirSword.getFullItem().getItem(),new ExactChoice[]{
             new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK)),
-            new ExactChoice(EarthSprite.getItem().getItem()),
+            new ExactChoice(AirSprite.getFullItem().getItem()),
             new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK)),
             new ExactChoice(new ItemStack(Material.EMERALD_BLOCK)),
             new ExactChoice(new ItemStack(Material.DIAMOND_SWORD)),
             new ExactChoice(new ItemStack(Material.EMERALD_BLOCK)),
             new ExactChoice(new ItemStack(Material.GOLD_BLOCK)),
-            new ExactChoice(EarthSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.GOLD_BLOCK))}).getRecipe();
-
-
-
-    public static ShapedRecipe advancedFireSword = new CraftingTableCraft(AdvancedFireSword.getItem().getItem(),new ExactChoice[]{
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
-            new ExactChoice(FireSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
-            new ExactChoice(FireSprite.getItem().getItem()),
+            new ExactChoice(AirSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.GOLD_BLOCK))});
+    public static CraftingTableCraft earthSword = new CraftingTableCraft(EarthSword.getFullItem().getItem(),new ExactChoice[]{
+            new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK)),
+            new ExactChoice(EarthSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK)),
+            new ExactChoice(new ItemStack(Material.EMERALD_BLOCK)),
             new ExactChoice(new ItemStack(Material.DIAMOND_SWORD)),
-            new ExactChoice(FireSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
-            new ExactChoice(FireSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT))}).getRecipe();
-    public static ShapedRecipe advancedWaterSword = new CraftingTableCraft(AdvancedWaterSword.getItem().getItem(),new ExactChoice[]{
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
-            new ExactChoice(WaterSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
-            new ExactChoice(WaterSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.DIAMOND_SWORD)),
-            new ExactChoice(WaterSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
-            new ExactChoice(WaterSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT))}).getRecipe();
-    public static ShapedRecipe advancedAirSword = new CraftingTableCraft(AdvancedAirSword.getItem().getItem(),new ExactChoice[]{
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
-            new ExactChoice(AirSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
-            new ExactChoice(AirSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.DIAMOND_SWORD)),
-            new ExactChoice(AirSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
-            new ExactChoice(AirSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT))}).getRecipe();
-    public static ShapedRecipe advancedEarthSword = new CraftingTableCraft(AdvancedEarthSword.getItem().getItem(),new ExactChoice[]{
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
-            new ExactChoice(EarthSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
-            new ExactChoice(EarthSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.DIAMOND_SWORD)),
-            new ExactChoice(EarthSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
-            new ExactChoice(EarthSprite.getItem().getItem()),
-            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT))}).getRecipe();
+            new ExactChoice(new ItemStack(Material.EMERALD_BLOCK)),
+            new ExactChoice(new ItemStack(Material.GOLD_BLOCK)),
+            new ExactChoice(EarthSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.GOLD_BLOCK))});
 
 
 
-    public static ShapedRecipe revivalSprite = new CraftingTableCraft(RevivalSprite.getItem().getItem(),new ExactChoice[]{
+    public static CraftingTableCraft advancedFireSword = new CraftingTableCraft(AdvancedFireSword.getFullItem().getItem(),new ExactChoice[]{
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
+            new ExactChoice(FireSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
+            new ExactChoice(FireSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.DIAMOND_SWORD)),
+            new ExactChoice(FireSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
+            new ExactChoice(FireSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT))});
+    public static CraftingTableCraft advancedWaterSword = new CraftingTableCraft(AdvancedWaterSword.getFullItem().getItem(),new ExactChoice[]{
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
+            new ExactChoice(WaterSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
+            new ExactChoice(WaterSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.DIAMOND_SWORD)),
+            new ExactChoice(WaterSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
+            new ExactChoice(WaterSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT))});
+    public static CraftingTableCraft advancedAirSword = new CraftingTableCraft(AdvancedAirSword.getFullItem().getItem(),new ExactChoice[]{
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
+            new ExactChoice(AirSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
+            new ExactChoice(AirSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.DIAMOND_SWORD)),
+            new ExactChoice(AirSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
+            new ExactChoice(AirSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT))});
+    public static CraftingTableCraft advancedEarthSword = new CraftingTableCraft(AdvancedEarthSword.getFullItem().getItem(),new ExactChoice[]{
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
+            new ExactChoice(EarthSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
+            new ExactChoice(EarthSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.DIAMOND_SWORD)),
+            new ExactChoice(EarthSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
+            new ExactChoice(EarthSprite.getFullItem().getItem()),
+            new ExactChoice(new ItemStack(Material.NETHERITE_INGOT))});
+
+
+
+    public static CraftingTableCraft revivalSprite = new CraftingTableCraft(RevivalSprite.getFullItem().getItem(),new ExactChoice[]{
             new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK)),
             new ExactChoice(sprites),
             new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK)),
@@ -110,17 +110,17 @@ public class initializeCrafts {
             new ExactChoice(sprites),
             new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK)),
             new ExactChoice(sprites),
-            new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK))}).getRecipe();
-     public static ShapedRecipe rerollSprite = new CraftingTableCraft(RerollSprite.getItem().getItem(),new ExactChoice[]{
+            new ExactChoice(new ItemStack(Material.DIAMOND_BLOCK))});
+     public static CraftingTableCraft rerollSprite = new CraftingTableCraft(RerollSprite.getFullItem().getItem(),new ExactChoice[]{
+             new ExactChoice(new ItemStack(Material.EMERALD_BLOCK)),
+             new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
+             new ExactChoice(new ItemStack(Material.GOLD_BLOCK)),
              new ExactChoice(sprites),
+             new ExactChoice(new ItemStack(Material.TOTEM_OF_UNDYING)),
              new ExactChoice(sprites),
-             new ExactChoice(sprites),
-             new ExactChoice(sprites),
-             new ExactChoice(sprites),
-             new ExactChoice(sprites),
-             new ExactChoice(sprites),
-             new ExactChoice(sprites),
-             new ExactChoice(sprites)}).getRecipe();
+             new ExactChoice(new ItemStack(Material.GOLD_BLOCK)),
+             new ExactChoice(new ItemStack(Material.NETHERITE_INGOT)),
+             new ExactChoice(new ItemStack(Material.EMERALD_BLOCK))});
 
 
 }

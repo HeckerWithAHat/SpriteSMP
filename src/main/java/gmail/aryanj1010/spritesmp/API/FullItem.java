@@ -10,14 +10,16 @@ public class FullItem {
     ItemStack is;
     ItemMeta im;
     public FullItem(Material material, int count, String name, String[] lore, boolean unbreakable, int cmd) {
-        is = new ItemStack(material, count);
-        im = is.getItemMeta();
-        im.setLocalizedName(name);
-        im.setDisplayName(name);
-        im.setLore(Arrays.asList(lore));
-        im.setUnbreakable(unbreakable);
-        im.setCustomModelData(cmd);
-        is.setItemMeta(im);
+        ItemStack itemstack = new ItemStack(material, count);
+        ItemMeta itemmeta = itemstack.getItemMeta();
+        itemmeta.setDisplayName(name);
+        itemmeta.setLocalizedName(name);
+        itemmeta.setLore(Arrays.asList(lore));
+        itemmeta.setUnbreakable(unbreakable);
+        itemmeta.setCustomModelData(cmd);
+        itemstack.setItemMeta(itemmeta);
+        is=itemstack;
+        im=itemmeta;
     }
 
     public ItemStack getItem() {

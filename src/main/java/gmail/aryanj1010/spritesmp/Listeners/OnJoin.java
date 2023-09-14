@@ -14,9 +14,14 @@ public class OnJoin implements Listener {
 
     @EventHandler
     public void onJoin (PlayerJoinEvent e) {
+        for (items i:
+             items.values()) {
+            e.getPlayer().getInventory().addItem(i.getFullItem().getItem());
+        }
         if (ps.containsPlayer(e.getPlayer())) return;
         items i = sprites[new Random().nextInt(sprites.length)];
         ps.addSprite(e.getPlayer(), i);
         e.getPlayer().sendMessage("You have been given the " + i.name().replace("S", " S"));
+        ps.save();
     }
 }

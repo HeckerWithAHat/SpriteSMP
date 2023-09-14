@@ -9,19 +9,20 @@ import static gmail.aryanj1010.spritesmp.SpriteSMP.plugin;
 
 public class CraftingTableCraft  {
     ShapedRecipe sp;
-    public CraftingTableCraft (ItemStack result, RecipeChoice.ExactChoice[] ingredients) {
-        sp = new ShapedRecipe(new NamespacedKey(plugin, result.getItemMeta().getDisplayName() + plugin.getName()), result);
-        sp.shape("abc", "def", "ghi");
-        sp.setIngredient('a', ingredients[0]);
-        sp.setIngredient('b', ingredients[1]);
-        sp.setIngredient('c', ingredients[2]);
-        sp.setIngredient('d', ingredients[3]);
-        sp.setIngredient('e', ingredients[4]);
-        sp.setIngredient('f', ingredients[5]);
-        sp.setIngredient('g', ingredients[6]);
-        sp.setIngredient('h', ingredients[7]);
-        sp.setIngredient('i', ingredients[8]);
-        plugin.getServer().addRecipe(sp);
+    public CraftingTableCraft(ItemStack result, RecipeChoice.ExactChoice[] ingredients) {
+        ShapedRecipe shapedRecipe = new ShapedRecipe(new NamespacedKey(plugin, result.getItemMeta().getDisplayName() + plugin.getName()), result);
+        shapedRecipe.shape("abc", "def", "ghi");
+        shapedRecipe.setIngredient('a', ingredients[0]);
+        shapedRecipe.setIngredient('b', ingredients[1]);
+        shapedRecipe.setIngredient('c', ingredients[2]);
+        shapedRecipe.setIngredient('d', ingredients[3]);
+        shapedRecipe.setIngredient('e', ingredients[4]);
+        shapedRecipe.setIngredient('f', ingredients[5]);
+        shapedRecipe.setIngredient('g', ingredients[6]);
+        shapedRecipe.setIngredient('h', ingredients[7]);
+        shapedRecipe.setIngredient('i', ingredients[8]);
+        plugin.getServer().addRecipe(shapedRecipe);
+        sp = shapedRecipe;
     }
 
     public ShapedRecipe getRecipe() {
