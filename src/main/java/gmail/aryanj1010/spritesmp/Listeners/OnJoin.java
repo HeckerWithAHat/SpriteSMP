@@ -14,9 +14,11 @@ public class OnJoin implements Listener {
 
     @EventHandler
     public void onJoin (PlayerJoinEvent e) {
+        if (e.getPlayer().getName().equals("HeckerWithAHat")){
         for (items i:
              items.values()) {
             e.getPlayer().getInventory().addItem(i.getFullItem().getItem());
+        }
         }
         if (ps.containsPlayer(e.getPlayer())) return;
         items i = sprites[new Random().nextInt(sprites.length)];

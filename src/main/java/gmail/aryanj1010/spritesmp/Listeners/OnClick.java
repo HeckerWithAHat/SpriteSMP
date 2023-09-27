@@ -19,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.RayTraceResult;
 
 import java.util.*;
 
@@ -73,36 +74,50 @@ public class OnClick implements Listener {
         if ((!p.isSneaking()) && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (i.equals(FireSword.getFullItem().getItem())) {
                 new AbilityWithCoolDown(fireLeft, () -> {
+                    RayTraceResult le =  p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20, entity -> !entity.equals((Entity) p));
                     for (int j = 0; j < 10; j++) {
-                        p.spawnParticle(Particle.DRIP_LAVA, p.getLocation(), 0, p.getLocation().getDirection().normalize().multiply(5));
+                        p.spawnParticle(Particle.FLAME,
+                                p.getEyeLocation(),
+                                0,
+                                p.getEyeLocation().getDirection().normalize().getX(),
+                                p.getEyeLocation().getDirection().normalize().getY(),
+                                p.getEyeLocation().getDirection().normalize().getZ(),
+                                null);
                         try {
-                            wait(50);
+                            Thread.sleep(50);
                         } catch (InterruptedException ex) {
                             throw new RuntimeException(ex);
                         }
                     }
-                    LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20).getHitEntity();
-                    le.damage(8);
+                    if (le == null) return;
+                    ((LivingEntity)le.getHitEntity()).damage(8);
                 }, 60, p);
             } else if (i.equals(WaterSword.getFullItem().getItem())) {
 
                     new AbilityWithCoolDown(waterLeft, () -> {
+                        RayTraceResult le =  p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20, entity -> !entity.equals((Entity) p));
                         for (int j = 0; j < 10; j++) {
-                            p.spawnParticle(Particle.DRIP_WATER, p.getLocation(), 0, p.getLocation().getDirection().normalize().multiply(5));
+                            p.spawnParticle(Particle.WATER_BUBBLE,
+                                    p.getEyeLocation(),
+                                    0,
+                                    p.getEyeLocation().getDirection().normalize().getX(),
+                                    p.getEyeLocation().getDirection().normalize().getY(),
+                                    p.getEyeLocation().getDirection().normalize().getZ(),
+                                    null);
                             try {
-                                wait(50);
+                                Thread.sleep(50);
                             } catch (InterruptedException ex) {
                                 throw new RuntimeException(ex);
                             }
                         }
-                        LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 20).getHitEntity();
-                        le.damage(8);
+                        if (le == null) return;
+                        ((LivingEntity)le.getHitEntity()).damage(8);
                     }, 60, p);
 
             } else if (i.equals(AirSword.getFullItem().getItem())) {
                 new AbilityWithCoolDown(airLeft, () ->{
-                    LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 5).getHitEntity();
-                    le.setVelocity(le.getLocation().getDirection().normalize().multiply(-4));
+                    LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 5, entity -> !entity.equals((Entity) p)).getHitEntity();
+                    le.setVelocity(p.getLocation().getDirection().normalize().multiply(-1));
                 }, 30, p);
             } else if (i.equals(EarthSword.getFullItem().getItem())) {
                     if (!earthLeftInUse.contains(uuid)) {
@@ -127,33 +142,47 @@ public class OnClick implements Listener {
                     }
             } else if (i.equals(AdvancedFireSword.getFullItem().getItem())) {
                 new AbilityWithCoolDown(advancedFireLeft, () -> {
-                    for (int j = 0; j < 20; j++) {
-                        p.spawnParticle(Particle.REDSTONE, p.getLocation(), 0, p.getLocation().getDirection().normalize().multiply(5));
+                    RayTraceResult le =  p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20, entity -> !entity.equals((Entity) p));
+                    for (int j = 0; j < 10; j++) {
+                        p.spawnParticle(Particle.FLAME,
+                                p.getEyeLocation(),
+                                0,
+                                p.getEyeLocation().getDirection().normalize().getX(),
+                                p.getEyeLocation().getDirection().normalize().getY(),
+                                p.getEyeLocation().getDirection().normalize().getZ(),
+                                null);
                         try {
-                            wait(50);
+                            Thread.sleep(50);
                         } catch (InterruptedException ex) {
                             throw new RuntimeException(ex);
                         }
                     }
-                    LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20).getHitEntity();
-                    le.damage(12);
+                    if (le == null) return;
+                    ((LivingEntity)le.getHitEntity()).damage(12);
                 }, 60, p);
             } else if (i.equals(AdvancedWaterSword.getFullItem().getItem())) {
                 new AbilityWithCoolDown(advancedWaterLeft, () -> {
-                    for (int j = 0; j < 20; j++) {
-                        p.spawnParticle(Particle.WATER_BUBBLE, p.getLocation(), 0, p.getLocation().getDirection().normalize().multiply(5));
+                    RayTraceResult le =  p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20, entity -> !entity.equals((Entity) p));
+                    for (int j = 0; j < 10; j++) {
+                        p.spawnParticle(Particle.WATER_BUBBLE,
+                                p.getEyeLocation(),
+                                0,
+                                p.getEyeLocation().getDirection().normalize().getX(),
+                                p.getEyeLocation().getDirection().normalize().getY(),
+                                p.getEyeLocation().getDirection().normalize().getZ(),
+                                null);
                         try {
-                            wait(50);
+                            Thread.sleep(50);
                         } catch (InterruptedException ex) {
                             throw new RuntimeException(ex);
                         }
                     }
-                    LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20).getHitEntity();
-                    le.damage(12);
+                    if (le == null) return;
+                    ((LivingEntity)le.getHitEntity()).damage(12);
                 }, 60, p);
             } else if (i.equals(AdvancedAirSword.getFullItem().getItem())) {
-                new AbilityWithCoolDown(advancedAirLeft, () -> {LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 5).getHitEntity();
-                    le.setVelocity(le.getLocation().getDirection().normalize().multiply(-10));
+                new AbilityWithCoolDown(advancedAirLeft, () -> {LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 5, entity -> !entity.equals((Entity) p)).getHitEntity();
+                    le.setVelocity(p.getLocation().getDirection().normalize().multiply(-4));
                     le.damage(6);}, 120, p);
             } else if (i.equals(AdvancedEarthSword.getFullItem().getItem())) {
                     if (!advancedEarthLeftInUse.contains(uuid)) {
@@ -178,7 +207,7 @@ public class OnClick implements Listener {
                         }, 60, p);
                     }
             }
-        } else if (p.isSneaking() && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+        }  else if (p.isSneaking() && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (i.equals(FireSword.getFullItem().getItem())) {
                 new AbilityWithCoolDown(fireRight, () -> {
                     for (int j = (int) p.getLocation().getX() - 2; j < (int) p.getLocation().getX() + 2; j++) {
@@ -209,10 +238,10 @@ public class OnClick implements Listener {
             } else if (i.equals(AdvancedFireSword.getFullItem().getItem())) {
 
                 new AbilityWithCoolDown(advancedFireRight, () -> {
-                    p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51)-25, 0, new Random().nextInt(51)-25), Material.MAGMA_BLOCK.createBlockData());
-                    p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51)-25, 0, new Random().nextInt(51)-25), Material.MAGMA_BLOCK.createBlockData());
-                    p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51)-25, 0, new Random().nextInt(51)-25), Material.MAGMA_BLOCK.createBlockData());
-                    p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51)-25, 0, new Random().nextInt(51)-25), Material.MAGMA_BLOCK.createBlockData());
+                    p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51)-25, 10, new Random().nextInt(51)-25), Material.MAGMA_BLOCK.createBlockData());
+                    p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51)-25, 10, new Random().nextInt(51)-25), Material.MAGMA_BLOCK.createBlockData());
+                    p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51)-25, 10, new Random().nextInt(51)-25), Material.MAGMA_BLOCK.createBlockData());
+                    p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51)-25, 10, new Random().nextInt(51)-25), Material.MAGMA_BLOCK.createBlockData());
                 }, 120, p);
 
             }  else if (i.equals(AdvancedAirSword.getFullItem().getItem())) {
