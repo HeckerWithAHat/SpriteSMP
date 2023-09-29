@@ -20,6 +20,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.RayTraceResult;
+import org.bukkit.util.Vector;
 
 import java.util.*;
 
@@ -125,9 +126,10 @@ public class OnClick implements Listener {
                         fb.setHurtEntities(true);
                         fb.setDamagePerBlock(8);
                         fb.setMaxDamage(8);
+                        fb.setGravity(false);
                         earthLeftInUse.add(uuid);
                         int i1 = getServer().getScheduler().runTaskTimer(plugin, () -> {
-                            fb.teleport(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3)));
+                            fb.teleport(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3).add(new Vector(0,1,0))));
                         }, 0, 2).getTaskId();
                         earthLeftTaskNumbers.put(uuid, i1);
                         earthLeftFallingBlocks.put(uuid, fb);
@@ -136,7 +138,7 @@ public class OnClick implements Listener {
                             getScheduler().cancelTask(earthLeftTaskNumbers.get(uuid));
                             earthLeftTaskNumbers.remove(uuid);
                             earthLeftInUse.remove(uuid);
-                            earthLeftFallingBlocks.get(uuid).setVelocity(p.getLocation().getDirection().normalize().multiply(5));
+                            earthLeftFallingBlocks.get(uuid).setVelocity(p.getLocation().getDirection().normalize().multiply(2));
                             earthLeftFallingBlocks.remove(uuid);
                         }, 60, p);
                     }
@@ -190,9 +192,10 @@ public class OnClick implements Listener {
                         fb.setHurtEntities(true);
                         fb.setDamagePerBlock(12);
                         fb.setMaxDamage(12);
+                        fb.setGravity(false);
                         advancedEarthLeftInUse.add(uuid);
                         int i1 = getServer().getScheduler().runTaskTimer(plugin, () -> {
-                            fb.teleport(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3)));
+                            fb.teleport(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3).add(new Vector(0,1,0))));
                         }, 0, 2).getTaskId();
                         advancedEarthLeftTaskNumbers.put(uuid, i1);
                         advancedEarthLeftFallingBlocks.put(uuid, fb);
@@ -201,10 +204,10 @@ public class OnClick implements Listener {
                             getScheduler().cancelTask(advancedEarthLeftTaskNumbers.get(uuid));
                             advancedEarthLeftTaskNumbers.remove(uuid);
                             advancedEarthLeftInUse.remove(uuid);
-                            advancedEarthLeftFallingBlocks.get(uuid).setVelocity(p.getLocation().getDirection().normalize().multiply(5));
+                            advancedEarthLeftFallingBlocks.get(uuid).setVelocity(p.getLocation().getDirection().normalize().multiply(2));
                             advancedEarthLeftFallingBlocks.remove(uuid);
 
-                        }, 60, p);
+                        }, 90, p);
                     }
             }
         }  else if (p.isSneaking() && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
