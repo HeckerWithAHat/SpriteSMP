@@ -25,8 +25,7 @@ import org.bukkit.util.Vector;
 import java.util.*;
 
 import static gmail.aryanj1010.spritesmp.Items.items.*;
-import static gmail.aryanj1010.spritesmp.SpriteSMP.plugin;
-import static gmail.aryanj1010.spritesmp.SpriteSMP.ps;
+import static gmail.aryanj1010.spritesmp.SpriteSMP.*;
 import static org.bukkit.Bukkit.getScheduler;
 import static org.bukkit.Bukkit.getServer;
 
@@ -66,6 +65,8 @@ public class OnClick implements Listener {
     final HashMap<UUID, Integer> advancedEarthLeftTaskNumbers = new HashMap<>();
     final HashMap<UUID, FallingBlock> advancedEarthLeftFallingBlocks = new HashMap<>();
     final HashMap<UUID, Long> advancedEarthRight = new HashMap<>();
+
+    public static Inventory inv = getServer().createInventory(null, 36, "Revival Screen");
 
     @EventHandler
     public void onClick (PlayerInteractEvent e) {
@@ -261,7 +262,7 @@ public class OnClick implements Listener {
             }
         }
         if (e.getItem().isSimilar(RevivalSprite.getFullItem().getItem())) {
-            Inventory inv = getServer().createInventory(p, 36, "Revival Screen");
+            inv.clear();
             for (OfflinePlayer op:
                  getServer().getBannedPlayers()) {
                 ItemStack head = new ItemStack(Material.PLAYER_HEAD);
@@ -274,6 +275,34 @@ public class OnClick implements Listener {
         }
         if (e.getItem().isSimilar(RerollSprite.getFullItem().getItem())) {
             ps.rerollSprite(p);
+        }
+        if (e.getItem().isSimilar(AirSprite.getFullItem().getItem())) {
+            if (psc.getCount(e.getPlayer())<9){
+            e.getItem().setAmount(e.getItem().getAmount()-1);
+                psc.updatePlayer(e.getPlayer(), 1);} else {
+                e.getPlayer().sendMessage("You have reached the limit of 8 sprites");
+            }
+        }
+        if (e.getItem().isSimilar(FireSprite.getFullItem().getItem())) {
+            if (psc.getCount(e.getPlayer())<9){
+                e.getItem().setAmount(e.getItem().getAmount()-1);
+                psc.updatePlayer(e.getPlayer(), 1);} else {
+                e.getPlayer().sendMessage("You have reached the limit of 8 sprites");
+            }
+        }
+        if (e.getItem().isSimilar(WaterSprite.getFullItem().getItem())) {
+            if (psc.getCount(e.getPlayer())<9){
+                e.getItem().setAmount(e.getItem().getAmount()-1);
+                psc.updatePlayer(e.getPlayer(), 1);} else {
+                e.getPlayer().sendMessage("You have reached the limit of 8 sprites");
+            }
+        }
+        if (e.getItem().isSimilar(EarthSprite.getFullItem().getItem())) {
+            if (psc.getCount(e.getPlayer())<9){
+                e.getItem().setAmount(e.getItem().getAmount()-1);
+                psc.updatePlayer(e.getPlayer(), 1);} else {
+                e.getPlayer().sendMessage("You have reached the limit of 8 sprites");
+            }
         }
     }
 }
