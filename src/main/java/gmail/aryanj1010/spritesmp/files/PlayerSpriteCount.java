@@ -20,4 +20,8 @@ public class PlayerSpriteCount extends AbstractFile{
     public int getCount (Player p) {
         return config.getInt(p.getUniqueId().toString());
     }
+    public boolean containsPlayer (Player p) {
+        return config.contains(p.getUniqueId().toString());
+    }
+
 }

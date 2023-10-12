@@ -1,9 +1,12 @@
 package gmail.aryanj1010.spritesmp;
 
 
+import gmail.aryanj1010.spritesmp.Crafts.initializeCrafts;
 import gmail.aryanj1010.spritesmp.Items.items;
 import gmail.aryanj1010.spritesmp.files.PlayerSpriteCount;
 import gmail.aryanj1010.spritesmp.files.PlayerSprites;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -18,20 +21,20 @@ import java.util.Arrays;
 public final class SpriteSMP extends JavaPlugin {
     public static PlayerSprites ps;
     public static PlayerSpriteCount psc;
+    public static initializeCrafts ic;
     public static items[] sprites = new items[]{
             items.FireSprite,
             items.WaterSprite,
             items.AirSprite,
             items.EarthSprite};
-    public static Plugin plugin;
 
     @Override
     public void onEnable() {
+        ic = new initializeCrafts();
         // Plugin startup logic
         if (!getDataFolder().exists()) getDataFolder().mkdirs();
         ps = new PlayerSprites(this);
         psc = new PlayerSpriteCount(this);
-        plugin = getPlugin(this.getClass());
         getServer().getScheduler().runTaskTimer(this, ()-> {
             for (Player p:
                  getServer().getOnlinePlayers()) {
@@ -55,6 +58,7 @@ public final class SpriteSMP extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         ps.save();
+        psc.save();
     }
 
     public void updateEffects(Player p) {
@@ -71,5 +75,16 @@ public final class SpriteSMP extends JavaPlugin {
             case WaterSprite:p.addPotionEffect(water);break;
         }
         ps.save();
+        psc.save();
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (command.getName().equalsIgnoreCase("sprites")) {
+            if (sender instanceof Player) {
+                ((Player) sender).sendMessage("You have " + psc.getCount((Player) sender) + " Sprites");
+            }
+        }
+        return true;
     }
 }

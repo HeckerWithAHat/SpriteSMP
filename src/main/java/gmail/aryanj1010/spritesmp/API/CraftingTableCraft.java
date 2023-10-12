@@ -1,16 +1,17 @@
 package gmail.aryanj1010.spritesmp.API;
 
+import gmail.aryanj1010.spritesmp.SpriteSMP;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.plugin.Plugin;
 
-import static gmail.aryanj1010.spritesmp.SpriteSMP.plugin;
 
 public class CraftingTableCraft  {
     ShapedRecipe sp;
-    public CraftingTableCraft(ItemStack result, RecipeChoice.ExactChoice[] ingredients) {
-        ShapedRecipe shapedRecipe = new ShapedRecipe(new NamespacedKey(plugin, result.getItemMeta().getDisplayName() + plugin.getName()), result);
+    public CraftingTableCraft(ItemStack result, RecipeChoice[] ingredients, String name) {
+        ShapedRecipe shapedRecipe = new ShapedRecipe(new NamespacedKey(SpriteSMP.getPlugin(SpriteSMP.class), name + SpriteSMP.getPlugin(SpriteSMP.class).getName()), result);
         shapedRecipe.shape("abc", "def", "ghi");
         shapedRecipe.setIngredient('a', ingredients[0]);
         shapedRecipe.setIngredient('b', ingredients[1]);
@@ -21,8 +22,12 @@ public class CraftingTableCraft  {
         shapedRecipe.setIngredient('g', ingredients[6]);
         shapedRecipe.setIngredient('h', ingredients[7]);
         shapedRecipe.setIngredient('i', ingredients[8]);
-        plugin.getServer().addRecipe(shapedRecipe);
+        SpriteSMP.getPlugin(SpriteSMP.class).getServer().addRecipe(shapedRecipe);
         sp = shapedRecipe;
+        SpriteSMP.getPlugin(SpriteSMP.class).getServer().getConsoleSender().sendMessage(shapedRecipe.getChoiceMap().toString());
+        SpriteSMP.getPlugin(SpriteSMP.class).getServer().getConsoleSender().sendMessage(shapedRecipe.getShape());
+        SpriteSMP.getPlugin(SpriteSMP.class).getServer().getConsoleSender().sendMessage(shapedRecipe.getResult().getItemMeta().getDisplayName());
+        SpriteSMP.getPlugin(SpriteSMP.class).getServer().getConsoleSender().sendMessage(shapedRecipe.getKey().toString());
     }
 
     public ShapedRecipe getRecipe() {

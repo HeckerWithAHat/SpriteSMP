@@ -1,5 +1,6 @@
 package gmail.aryanj1010.spritesmp.Listeners;
 
+import gmail.aryanj1010.spritesmp.SpriteSMP;
 import org.bukkit.BanList;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,6 +18,6 @@ public class OnKill implements Listener {
 
         psc.updatePlayer(e.getEntity(), -1);
         if (e.getEntity().getKiller() != null && psc.getCount(e.getEntity().getKiller()) != 6)psc.updatePlayer(e.getEntity().getKiller(), 1);
-        if (psc.getCount(e.getEntity()) == -6) plugin.getServer().getBanList(BanList.Type.PROFILE).addBan(String.valueOf(e.getEntity().getPlayer()), "Out of Sprites", null, null);
+        if (psc.getCount(e.getEntity()) == -6) SpriteSMP.getPlugin(SpriteSMP.class).getServer().getBanList(BanList.Type.PROFILE).addBan(e.getEntity().getPlayer().getName(), "Out of Sprites", null, null);
     }
 }

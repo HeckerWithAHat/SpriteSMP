@@ -1,9 +1,12 @@
 package gmail.aryanj1010.spritesmp.API;
 
+import gmail.aryanj1010.spritesmp.SpriteSMP;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.UUID;
+
 
 public class AbilityWithCoolDown {
 
@@ -11,6 +14,7 @@ public class AbilityWithCoolDown {
         if (!cdHM.containsKey(runner.getUniqueId())) {
             ability.run();
             cdHM.put(runner.getUniqueId(), System.currentTimeMillis());
+            Bukkit.getScheduler().scheduleSyncDelayedTask(SpriteSMP.getPlugin(SpriteSMP.class), () -> {runner.sendMessage("");}, cooldownLength*1000L);
         } else {
             long timeElapsed = System.currentTimeMillis() - cdHM.get(runner.getUniqueId());
             if (timeElapsed >= cooldownLength * 1000L) {
