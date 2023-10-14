@@ -367,7 +367,28 @@ public class OnClick implements Listener {
         }
         if (e.getItem().isSimilar(RerollSprite.getFullItem().getItem())) {
             ps.rerollSprite(p);
-        }
+            e.getItem().setAmount(e.getItem().getAmount()-1);
 
+        }
+        if (e.getItem().isSimilar(FireSprite.getFullItem().getItem())&&psc.getCount(p) != 6){
+            psc.updatePlayer(p, 1);
+            e.getItem().setAmount(e.getItem().getAmount()-1);
+
+        }
+        if (e.getItem().isSimilar(WaterSprite.getFullItem().getItem())&&psc.getCount(p) != 6) {
+            psc.updatePlayer(p, 1);
+            e.getItem().setAmount(e.getItem().getAmount()-1);
+
+        }
+        if (e.getItem().isSimilar(AirSprite.getFullItem().getItem())&&psc.getCount(p) != 6){
+            psc.updatePlayer(p, 1);
+            e.getItem().setAmount(e.getItem().getAmount()-1);
+
+        }
+        if (e.getItem().isSimilar(EarthSprite.getFullItem().getItem()) && psc.getCount(p) != 6){
+            psc.updatePlayer(p, 1);
+            e.getItem().setAmount(e.getItem().getAmount()-1);
+
+        }
     }
 }

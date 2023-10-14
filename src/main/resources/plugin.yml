@@ -3,6 +3,12 @@ version: '${project.version}'
 main: gmail.aryanj1010.spritesmp.SpriteSMP
 api-version: '1.20'
 commands:
-  sprites:
-    usage: /sprites
+  spritecount:
+    usage: /spritecount
     description: show sprite count
+  sprite:
+    usage: /sprite
+    description: show current sprite
+  withdraw:
+    usage: /withdraw
+    description: withdraws a sprite

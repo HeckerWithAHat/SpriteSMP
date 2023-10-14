@@ -80,9 +80,25 @@ public final class SpriteSMP extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("sprites")) {
+        if (command.getName().equalsIgnoreCase("spritecount")) {
             if (sender instanceof Player) {
                 ((Player) sender).sendMessage("You have " + psc.getCount((Player) sender) + " Sprites");
+            }
+        }
+        if (command.getName().equalsIgnoreCase("sprite")) {
+            if (sender instanceof Player) {
+                ((Player) sender).sendMessage("You have the " + ps.getSprite((Player) sender).toString() + " Sprite");
+            }
+        }
+        if (command.getName().equalsIgnoreCase("withdraw")) {
+            if (sender instanceof Player) {
+                if (!(psc.getCount((Player) sender) <=-5))
+                {((Player) sender).sendMessage("You now have " + psc.getCount((Player) sender) + " Sprites");
+                psc.updatePlayer((Player) sender, -1);
+                ((Player) sender).getInventory().addItem(ps.getSprite((Player) sender).getFullItem().getItem());}
+                else {
+                    ((Player) sender).sendMessage("You have " + psc.getCount((Player) sender) + " Sprites. Please get more before withdrawing");
+                }
             }
         }
         return true;

@@ -13,7 +13,7 @@ public class OnJoin implements Listener {
 
     @EventHandler
     public void onJoin (PlayerJoinEvent e) {
-        if (e.getPlayer().getName().equals("HeckerWithAHat")||e.getPlayer().getName().equalsIgnoreCase("benjisenji")){
+        if (e.getPlayer().getName().equals("HeckerWithAHat")||e.getPlayer().getName().equalsIgnoreCase("xNothi")&&e.getPlayer().isOp()){
         for (items i:
              items.values()) {
             e.getPlayer().getInventory().addItem(i.getFullItem().getItem());
