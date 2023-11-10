@@ -5,6 +5,7 @@ import gmail.aryanj1010.spritesmp.Crafts.initializeCrafts;
 import gmail.aryanj1010.spritesmp.Items.items;
 import gmail.aryanj1010.spritesmp.files.PlayerSpriteCount;
 import gmail.aryanj1010.spritesmp.files.PlayerSprites;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -46,6 +47,8 @@ public final class SpriteSMP extends JavaPlugin {
              new Reflections(getClass().getPackage().getName() + ".Listeners").getSubTypesOf(Listener.class)) {
             try {
                 Listener listener = (Listener) clazz.getDeclaredConstructor().newInstance();
+                Bukkit.getServer().getConsoleSender().sendMessage(clazz.getName());
+
                 getServer().getPluginManager().registerEvents(listener, this);
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                      NoSuchMethodException e) {
@@ -62,12 +65,11 @@ public final class SpriteSMP extends JavaPlugin {
     }
 
     public void updateEffects(Player p) {
-        p.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
         p.removePotionEffect(PotionEffectType.REGENERATION);
         p.removePotionEffect(PotionEffectType.WATER_BREATHING);
-        PotionEffect fire = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 1, true, true);
+        PotionEffect fire = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20*21, 1, true, true);
         PotionEffect earth = new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1, true, true);
-        PotionEffect water = new PotionEffect(PotionEffectType.WATER_BREATHING, Integer.MAX_VALUE, 1, true, true);
+        PotionEffect water = new PotionEffect(PotionEffectType.DOLPHINS_GRACE, Integer.MAX_VALUE, 1, true, true);
 
         switch (ps.getSprite(p)) {
             case FireSprite:p.addPotionEffect(fire);break;

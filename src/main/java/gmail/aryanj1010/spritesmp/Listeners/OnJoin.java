@@ -1,10 +1,14 @@
 package gmail.aryanj1010.spritesmp.Listeners;
 
 import gmail.aryanj1010.spritesmp.Items.items;
+import gmail.aryanj1010.spritesmp.SpriteSMP;
+import org.bukkit.BanList;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.sql.Date;
+import java.time.Instant;
 import java.util.Random;
 
 import static gmail.aryanj1010.spritesmp.SpriteSMP.*;
@@ -26,5 +30,11 @@ public class OnJoin implements Listener {
         psc.addPlayer(e.getPlayer());
         e.getPlayer().sendMessage("You have been given the " + i.name().replace("S", " S"));
         ps.save();
+
+        if (psc.getCount(e.getPlayer()) <= -5) {
+            e.getPlayer().getInventory().clear();
+            SpriteSMP.getPlugin(SpriteSMP.class).getServer().getBanList(BanList.Type.NAME).addBan(e.getPlayer().toString(), "Out of Sprites", null, "HeckerWithAHat");
+            e.getPlayer().kickPlayer("Out of Sprites");
+        }
     }
 }

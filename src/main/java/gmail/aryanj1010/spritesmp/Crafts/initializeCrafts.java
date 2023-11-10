@@ -101,7 +101,16 @@ public class initializeCrafts {
             new ExactChoice(EarthSprite.getFullItem().getItem()),
             new MaterialChoice(Material.NETHERITE_INGOT)}, "advancedearthsword");
 
-
+    public static CraftingTableCraft endSword = new CraftingTableCraft(EndSword.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(sprites),
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(sprites),
+            new MaterialChoice(Material.DRAGON_EGG),
+            new ExactChoice(sprites),
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(sprites),
+            new MaterialChoice(Material.NETHERITE_INGOT)}, "endsword");
 
     public static CraftingTableCraft revivalSprite = new CraftingTableCraft(RevivalSprite.getFullItem().getItem(),new RecipeChoice[]{
             new MaterialChoice(Material.DIAMOND_BLOCK),
@@ -123,6 +132,46 @@ public class initializeCrafts {
              new MaterialChoice(Material.GOLD_BLOCK),
              new MaterialChoice(Material.NETHERITE_INGOT),
              new MaterialChoice(Material.EMERALD_BLOCK)}, "rerollsprite");
+    public static CraftingTableCraft fireSprite = new CraftingTableCraft(FireSprite.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.LAVA_BUCKET),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT)}, "firesprite");
+    public static CraftingTableCraft waterSprite = new CraftingTableCraft(WaterSprite.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.WATER_BUCKET),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT)}, "watersprite");
+    public static CraftingTableCraft earthSprite = new CraftingTableCraft(EarthSprite.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.OBSIDIAN),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT)}, "earthsprite");
+    public static CraftingTableCraft airSprite = new CraftingTableCraft(AirSprite.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.GLASS),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT)}, "airsprite");
 
 
 }

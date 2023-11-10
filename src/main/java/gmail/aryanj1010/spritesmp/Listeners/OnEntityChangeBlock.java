@@ -9,7 +9,7 @@ public class OnEntityChangeBlock implements Listener {
     @EventHandler
     public void onEntityChangeBlock (EntityChangeBlockEvent e) {
         if (e.getBlockData().getMaterial().equals(Material.MAGMA_BLOCK)) {
-            e.getBlock().getWorld().createExplosion(e.getBlock().getLocation(), 10);
+            e.getBlock().getWorld().createExplosion(e.getBlock().getLocation(), 5);
         }
     }
 }

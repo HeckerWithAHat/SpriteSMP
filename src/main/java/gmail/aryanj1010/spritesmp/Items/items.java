@@ -95,6 +95,15 @@ public enum items {
             ChatColor.WHITE+"Strength 2 and Speed 2",
             ChatColor.WHITE+"120 second cooldown"}, true, 4)),
 
+    EndSword(Type.Weapon, new FullItem(Material.NETHERITE_SWORD, 1, ChatColor.BLACK + "" + ChatColor.BOLD + "End Sword", new String[] {ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
+            ChatColor.WHITE+"Shoot Dragon's Breath",
+            ChatColor.WHITE+"5 second cooldown",
+            "",
+            ChatColor.WHITE+""+ChatColor.BOLD+"Shift Right click:",
+            ChatColor.WHITE+"Launches the User into the Air",
+            ChatColor.WHITE+"And allows temporary Gliding",
+            ChatColor.WHITE+"240 second cooldown"}, true, 5)),
+
     RevivalSprite(Type.Miscellaneous, new FullItem(Material.IRON_INGOT, 1, ChatColor.YELLOW + "Revival Sprite", new String[]{}, true, 1)),
     RerollSprite(Type.Miscellaneous, new FullItem(Material.IRON_INGOT, 1, "Reroll Sprite", new String[]{"This mythic item will swap your sprite ","and replace it with a brand new one"}, true, 2));
 

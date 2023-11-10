@@ -6,6 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import java.sql.Date;
+import java.time.Instant;
 import java.util.Objects;
 
 import static gmail.aryanj1010.spritesmp.SpriteSMP.*;
@@ -16,12 +18,14 @@ public class OnKill implements Listener {
         if (e.getEntity().getKiller() != null) {
         e.getDrops().add(ps.getSprite(Objects.requireNonNull(e.getEntity().getKiller())).getFullItem().getItem());}
         else {
-            e.getDrops().add(ps.getSprite(Objects.requireNonNull(e.getEntity())).getFullItem().getItem());}
-
-
-
+            e.getDrops().add(ps.getSprite(Objects.requireNonNull(e.getEntity())).getFullItem().getItem());
+        }
 
         psc.updatePlayer(e.getEntity(), -1);
-        if (psc.getCount(e.getEntity()) <= -6) SpriteSMP.getPlugin(SpriteSMP.class).getServer().getBanList(BanList.Type.PROFILE).addBan(e.getEntity().getPlayer().getName(), "Out of Sprites", null, null);
+        if (psc.getCount(e.getEntity()) <= -5) {
+            e.getEntity().getInventory().clear();
+            SpriteSMP.getPlugin(SpriteSMP.class).getServer().getBanList(BanList.Type.NAME).addBan(e.getEntity().toString(), "Out of Sprites", null, "HeckerWithAHat");
+            e.getEntity().kickPlayer("Out of Sprites");
+        }
     }
 }
