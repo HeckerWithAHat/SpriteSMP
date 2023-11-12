@@ -68,8 +68,8 @@ public final class SpriteSMP extends JavaPlugin {
         p.removePotionEffect(PotionEffectType.REGENERATION);
         p.removePotionEffect(PotionEffectType.WATER_BREATHING);
         PotionEffect fire = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20*21, 1, true, true);
-        PotionEffect earth = new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1, true, true);
-        PotionEffect water = new PotionEffect(PotionEffectType.DOLPHINS_GRACE, Integer.MAX_VALUE, 1, true, true);
+        PotionEffect earth = new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0, true, true);
+        PotionEffect water = new PotionEffect(PotionEffectType.DOLPHINS_GRACE, Integer.MAX_VALUE, 0, true, true);
 
         switch (ps.getSprite(p)) {
             case FireSprite:p.addPotionEffect(fire);break;

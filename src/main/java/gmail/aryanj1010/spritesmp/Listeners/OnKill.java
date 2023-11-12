@@ -24,7 +24,7 @@ public class OnKill implements Listener {
         psc.updatePlayer(e.getEntity(), -1);
         if (psc.getCount(e.getEntity()) <= -5) {
             e.getEntity().getInventory().clear();
-            SpriteSMP.getPlugin(SpriteSMP.class).getServer().getBanList(BanList.Type.NAME).addBan(e.getEntity().toString(), "Out of Sprites", null, "HeckerWithAHat");
+            SpriteSMP.getPlugin(SpriteSMP.class).getServer().dispatchCommand(getPlugin(SpriteSMP.class).getServer().getConsoleSender(), "ban " + e.getEntity().getName());
             e.getEntity().kickPlayer("Out of Sprites");
         }
     }

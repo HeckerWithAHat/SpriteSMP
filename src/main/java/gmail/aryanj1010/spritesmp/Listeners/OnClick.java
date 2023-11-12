@@ -368,6 +368,7 @@ public class OnClick implements Listener {
                 head.setItemMeta(hm);
                 inv.addItem(head);
             }
+            e.getItem().setAmount(e.getItem().getAmount()-1);
         }
         if (e.getItem().isSimilar(RerollSprite.getFullItem().getItem())) {
             ps.rerollSprite(p);

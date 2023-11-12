@@ -33,7 +33,7 @@ public class OnJoin implements Listener {
 
         if (psc.getCount(e.getPlayer()) <= -5) {
             e.getPlayer().getInventory().clear();
-            SpriteSMP.getPlugin(SpriteSMP.class).getServer().getBanList(BanList.Type.NAME).addBan(e.getPlayer().toString(), "Out of Sprites", null, "HeckerWithAHat");
+            SpriteSMP.getPlugin(SpriteSMP.class).getServer().dispatchCommand(getPlugin(SpriteSMP.class).getServer().getConsoleSender(), "ban " + e.getPlayer().getName());
             e.getPlayer().kickPlayer("Out of Sprites");
         }
     }
