@@ -12,6 +12,7 @@ import static org.bukkit.plugin.java.JavaPlugin.getPlugin;
 public class OnLeave implements Listener {
     @EventHandler
     public void onLeave (PlayerQuitEvent e) {
+        if (invisPlayers.isEmpty()) return;
         for (Player invisPlayer : invisPlayers) {
             e.getPlayer().showPlayer(getPlugin(SpriteSMP.class), invisPlayer);
         }
