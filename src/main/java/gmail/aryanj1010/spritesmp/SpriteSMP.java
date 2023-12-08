@@ -18,7 +18,13 @@ import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
+/**
+ * The main class of the SpriteSMP plugin.
+ * This class extends the JavaPlugin class and handles the plugin's initialization, shutdown, and commands.
+ */
 public final class SpriteSMP extends JavaPlugin {
     public static PlayerSprites ps;
     public static PlayerSpriteCount psc;
@@ -28,6 +34,9 @@ public final class SpriteSMP extends JavaPlugin {
             items.WaterSprite,
             items.AirSprite,
             items.EarthSprite};
+
+    public static HashMap<Player, Player> markedPlayer = new HashMap<>();
+    public static List<Player> invisPlayers;
 
     @Override
     public void onEnable() {

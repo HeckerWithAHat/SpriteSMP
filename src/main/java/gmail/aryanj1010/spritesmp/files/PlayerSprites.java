@@ -34,6 +34,9 @@ public class PlayerSprites extends AbstractFile{
             case "WaterSprite": return items.WaterSprite;
             case "AirSprite": return items.AirSprite;
             case "EarthSprite": return items.EarthSprite;
+            case "ShadowSprite": return items.ShadowSprite;
+            case "GlowSprite": return items.GlowSprite;
+
             default:return null;
         }
     }

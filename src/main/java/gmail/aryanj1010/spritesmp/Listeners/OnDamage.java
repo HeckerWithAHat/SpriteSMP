@@ -14,5 +14,6 @@ public class OnDamage implements Listener {
         if (!(e.getEntity() instanceof Player)) return;
         Player p = ((Player) e.getEntity());
         if (ps.getSprite(p).equals(items.AirSprite) && e.getCause().equals(EntityDamageEvent.DamageCause.FALL)) e.setCancelled(true);
+
     }
 }

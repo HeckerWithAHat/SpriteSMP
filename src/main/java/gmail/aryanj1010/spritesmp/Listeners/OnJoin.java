@@ -3,6 +3,7 @@ package gmail.aryanj1010.spritesmp.Listeners;
 import gmail.aryanj1010.spritesmp.Items.items;
 import gmail.aryanj1010.spritesmp.SpriteSMP;
 import org.bukkit.BanList;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -33,8 +34,12 @@ public class OnJoin implements Listener {
 
         if (psc.getCount(e.getPlayer()) <= -5) {
             e.getPlayer().getInventory().clear();
-            SpriteSMP.getPlugin(SpriteSMP.class).getServer().dispatchCommand(getPlugin(SpriteSMP.class).getServer().getConsoleSender(), "ban " + e.getPlayer().getName());
+            getPlugin(SpriteSMP.class).getServer().dispatchCommand(getPlugin(SpriteSMP.class).getServer().getConsoleSender(), "ban " + e.getPlayer().getName());
             e.getPlayer().kickPlayer("Out of Sprites");
+        }
+
+        for (Player invisPlayer : invisPlayers) {
+            e.getPlayer().hidePlayer(getPlugin(SpriteSMP.class), invisPlayer);
         }
     }
 }
