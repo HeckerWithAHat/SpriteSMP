@@ -148,6 +148,107 @@ public enum items {
             ChatColor.WHITE+"to full HP",
             ChatColor.WHITE+"120 second cooldown"}, true, 6)),
 
+
+    // Pickaxes
+    FirePickaxe(Type.Pickaxe, new FullItem(Material.DIAMOND_PICKAXE, 1, ChatColor.DARK_RED + "Fire Pickaxe", new String[]{
+            ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
+            ChatColor.WHITE+"Click on a player to mark them",
+            ChatColor.WHITE+"for 20 seconds",
+            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
+            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"60 second cooldown"
+    }, true, 1)),
+    WaterPickaxe(Type.Pickaxe, new FullItem(Material.DIAMOND_PICKAXE, 1, ChatColor.AQUA + "Water Pickaxe", new String[]{
+            ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
+            ChatColor.WHITE+"Click on a player to mark them",
+            ChatColor.WHITE+"for 20 seconds",
+            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
+            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"60 second cooldown"
+    }, true, 2)),
+    AirPickaxe(Type.Pickaxe, new FullItem(Material.DIAMOND_PICKAXE, 1, ChatColor.GRAY + "Air Pickaxe", new String[]{
+            ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
+            ChatColor.WHITE+"Click on a player to mark them",
+            ChatColor.WHITE+"for 20 seconds",
+            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
+            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"60 second cooldown"
+    }, true, 3)),
+    EarthPickaxe(Type.Pickaxe, new FullItem(Material.DIAMOND_PICKAXE, 1, ChatColor.DARK_GREEN + "Earth Pickaxe", new String[]{
+            ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
+            ChatColor.WHITE+"Click on a player to mark them",
+            ChatColor.WHITE+"for 20 seconds",
+            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
+            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"60 second cooldown"
+    }, true, 4)),
+    ShadowPickaxe(Type.Pickaxe, new FullItem(Material.DIAMOND_PICKAXE, 1, ChatColor.DARK_GRAY + "Shadow Pickaxe", new String[]{
+            ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
+            ChatColor.WHITE+"Click on a player to mark them",
+            ChatColor.WHITE+"for 20 seconds",
+            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
+            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"60 second cooldown"
+    }, true, 5)),
+    GlowPickaxe(Type.Pickaxe, new FullItem(Material.DIAMOND_PICKAXE, 1, ChatColor.YELLOW + "Glow Pickaxe", new String[]{
+            ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
+            ChatColor.WHITE+"Click on a player to mark them",
+            ChatColor.WHITE+"for 20 seconds",
+            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
+            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"60 second cooldown"
+    }, true, 6)),
+
+    // Shovels
+    FireShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.DARK_RED + "Fire Shovel", new String[]{
+            ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
+            ChatColor.WHITE+"Click on a player to mark them",
+            ChatColor.WHITE+"for 20 seconds",
+            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
+            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"60 second cooldown"
+    }, true, 1)),
+    WaterShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.AQUA + "Water Shovel", new String[]{
+            ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
+            ChatColor.WHITE+"Click on a player to mark them",
+            ChatColor.WHITE+"for 20 seconds",
+            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
+            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"60 second cooldown"
+    }, true, 2)),
+    AirShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.GRAY + "Air Shovel", new String[]{
+            ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
+            ChatColor.WHITE+"Click on a player to mark them",
+            ChatColor.WHITE+"for 20 seconds",
+            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
+            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"60 second cooldown"
+    }, true, 3)),
+    EarthShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.DARK_GREEN + "Earth Shovel", new String[]{
+            ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
+            ChatColor.WHITE+"Click on a player to mark them",
+            ChatColor.WHITE+"for 20 seconds",
+            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
+            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"60 second cooldown"
+    }, true, 4)),
+    ShadowShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.DARK_GRAY + "Shadow Shovel", new String[]{
+            ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
+            ChatColor.WHITE+"Click on a player to mark them",
+            ChatColor.WHITE+"for 20 seconds",
+            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
+            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"60 second cooldown"
+    }, true, 5)),
+    GlowShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.YELLOW + "Glow Shovel", new String[]{
+            ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
+            ChatColor.WHITE+"Click on a player to mark them",
+            ChatColor.WHITE+"for 20 seconds",
+            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
+            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"60 second cooldown"
+    }, true, 6)),
+
     // Blade Fragments
     FireBladeFragment(Type.BladeFragment, new FullItem(Material.GOLD_INGOT, 1, ChatColor.DARK_RED + "Fire Blade Fragment", new String[]{}, true, 1)),
     WaterBladeFragment(Type.BladeFragment, new FullItem(Material.GOLD_INGOT, 1, ChatColor.AQUA + "Water Blade Fragment", new String[]{}, true, 2)),
@@ -224,7 +325,7 @@ public enum items {
         this.type = type;
         this.item = item;
     }
-    enum Type {Sprite, Weapon, AdvancedWeapon, Miscellaneous, BladeFragment, Blade}
+    enum Type {Sprite, Weapon, AdvancedWeapon, Miscellaneous, BladeFragment, Blade, Pickaxe, Shovel}
 
     public Type getType() {
         return type;

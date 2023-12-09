@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.HashMap;
 import java.util.UUID;
 
+import static gmail.aryanj1010.spritesmp.Listeners.OnClick.waterRight;
 import static gmail.aryanj1010.spritesmp.SpriteSMP.markedPlayer;
 import static org.bukkit.Bukkit.getScheduler;
 import static org.bukkit.plugin.java.JavaPlugin.getPlugin;
@@ -23,17 +24,14 @@ public class OnClickEntity implements Listener {
 
     // Cooldowns
 
-    final HashMap<UUID, Long> advancedWaterRight = new HashMap<>();
-    final HashMap<UUID, Long> basicShadowRight = new HashMap<>();
-    final HashMap<UUID, Long> advancedShadowRight = new HashMap<>();
-    final HashMap<UUID, Long> basicGlowRight = new HashMap<>();
-    final HashMap<UUID, Long> advancedGlowRight = new HashMap<>();
+    final HashMap<UUID, Long> shadowRight = new HashMap<>();
+    final HashMap<UUID, Long> glowRight = new HashMap<>();
 
 
     @EventHandler
     public void onClickEntity (PlayerInteractEntityEvent e) {
         if (e.getPlayer().getInventory().getItem(e.getHand()).equals(items.AdvancedWaterSword.getFullItem().getItem())) {
-            new AbilityWithCoolDown(advancedWaterRight, () -> {
+            new AbilityWithCoolDown(waterRight, () -> {
                 PotionEffect slow = new PotionEffect(PotionEffectType.SLOW, 10 * 20, 255);
                 PotionEffect jump = new PotionEffect(PotionEffectType.JUMP, 10 * 20, 255);
                 PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 10 * 20, 1);
@@ -45,19 +43,19 @@ public class OnClickEntity implements Listener {
             }, 120, e.getPlayer());
         }
         if (e.getPlayer().getInventory().getItem(e.getHand()).equals(items.ShadowSword.getFullItem().getItem()) && !e.getPlayer().isSneaking()) {
-            new AbilityWithCoolDown(basicShadowRight, () -> {
+            new AbilityWithCoolDown(shadowRight, () -> {
                 PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 10*20, 255);
                 ((LivingEntity)e.getRightClicked()).addPotionEffect(blindness);
             }, 60, e.getPlayer());
         } else if (e.getPlayer().getInventory().getItem(e.getHand()).equals(items.AdvancedShadowSword.getFullItem().getItem()) && !e.getPlayer().isSneaking()) {
-            new AbilityWithCoolDown(advancedShadowRight, () -> {
+            new AbilityWithCoolDown(shadowRight, () -> {
                 PotionEffect blindness = new PotionEffect(PotionEffectType.BLINDNESS, 15*20, 255);
                 ((LivingEntity)e.getRightClicked()).addPotionEffect(blindness);
             }, 60, e.getPlayer());
         }
 
         if (e.getPlayer().getInventory().getItem(e.getHand()).equals(items.GlowSword.getFullItem().getItem()) && !e.getPlayer().isSneaking()) {
-            new AbilityWithCoolDown(basicGlowRight, () -> {
+            new AbilityWithCoolDown(glowRight, () -> {
                 if (!(e.getRightClicked() instanceof Player)) return;
                 PotionEffect glow = new PotionEffect(PotionEffectType.GLOWING, 10*20, 255);
                 ((LivingEntity)e.getRightClicked()).addPotionEffect(glow);
@@ -70,7 +68,7 @@ public class OnClickEntity implements Listener {
                 }, 10*20);
             }, 60, e.getPlayer());
         } else if (e.getPlayer().getInventory().getItem(e.getHand()).equals(items.AdvancedGlowSword.getFullItem().getItem()) && !e.getPlayer().isSneaking()) {
-            new AbilityWithCoolDown(advancedGlowRight, () -> {
+            new AbilityWithCoolDown(glowRight, () -> {
                 if (!(e.getRightClicked() instanceof Player)) return;
                 PotionEffect glow = new PotionEffect(PotionEffectType.GLOWING, 20*20, 255);
                 ((LivingEntity)e.getRightClicked()).addPotionEffect(glow);
