@@ -152,50 +152,40 @@ public enum items {
     // Pickaxes
     FirePickaxe(Type.Pickaxe, new FullItem(Material.DIAMOND_PICKAXE, 1, ChatColor.DARK_RED + "Fire Pickaxe", new String[]{
             ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
-            ChatColor.WHITE+"Click on a player to mark them",
-            ChatColor.WHITE+"for 20 seconds",
-            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
-            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"Autosmelt anything you break",
+            ChatColor.WHITE+"for 10 seconds",
             ChatColor.WHITE+"60 second cooldown"
     }, true, 1)),
     WaterPickaxe(Type.Pickaxe, new FullItem(Material.DIAMOND_PICKAXE, 1, ChatColor.AQUA + "Water Pickaxe", new String[]{
             ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
-            ChatColor.WHITE+"Click on a player to mark them",
-            ChatColor.WHITE+"for 20 seconds",
-            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
-            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"Dig faster when in water",
+            ChatColor.WHITE+"for 10 seconds",
             ChatColor.WHITE+"60 second cooldown"
     }, true, 2)),
     AirPickaxe(Type.Pickaxe, new FullItem(Material.DIAMOND_PICKAXE, 1, ChatColor.GRAY + "Air Pickaxe", new String[]{
             ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
-            ChatColor.WHITE+"Click on a player to mark them",
-            ChatColor.WHITE+"for 20 seconds",
-            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
-            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"Temporarily increases digging speed",
+            ChatColor.WHITE+"and jump height",
+            ChatColor.WHITE+"for 10 seconds",
             ChatColor.WHITE+"60 second cooldown"
     }, true, 3)),
     EarthPickaxe(Type.Pickaxe, new FullItem(Material.DIAMOND_PICKAXE, 1, ChatColor.DARK_GREEN + "Earth Pickaxe", new String[]{
             ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
-            ChatColor.WHITE+"Click on a player to mark them",
-            ChatColor.WHITE+"for 20 seconds",
-            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
-            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"Doubles all dropped items",
+            ChatColor.WHITE+"for 10 seconds",
             ChatColor.WHITE+"60 second cooldown"
     }, true, 4)),
     ShadowPickaxe(Type.Pickaxe, new FullItem(Material.DIAMOND_PICKAXE, 1, ChatColor.DARK_GRAY + "Shadow Pickaxe", new String[]{
             ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
-            ChatColor.WHITE+"Click on a player to mark them",
-            ChatColor.WHITE+"for 20 seconds",
-            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
-            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"Gives the player instant mining",
+            ChatColor.WHITE+"for 5 seconds",
             ChatColor.WHITE+"60 second cooldown"
     }, true, 5)),
     GlowPickaxe(Type.Pickaxe, new FullItem(Material.DIAMOND_PICKAXE, 1, ChatColor.YELLOW + "Glow Pickaxe", new String[]{
             ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
-            ChatColor.WHITE+"Click on a player to mark them",
-            ChatColor.WHITE+"for 20 seconds",
-            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
-            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"Allows the pickaxe to temporarily mine blocks in parallel universes",
+            ChatColor.WHITE+"yielding additional resources with each block",
+            ChatColor.WHITE+"for 10 seconds",
             ChatColor.WHITE+"60 second cooldown"
     }, true, 6)),
 
