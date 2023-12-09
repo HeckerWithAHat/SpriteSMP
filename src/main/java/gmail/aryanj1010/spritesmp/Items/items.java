@@ -148,6 +148,22 @@ public enum items {
             ChatColor.WHITE+"to full HP",
             ChatColor.WHITE+"120 second cooldown"}, true, 6)),
 
+    // Blade Fragments
+    FireBladeFragment(Type.BladeFragment, new FullItem(Material.GOLD_INGOT, 1, ChatColor.DARK_RED + "Fire Blade Fragment", new String[]{}, true, 1)),
+    WaterBladeFragment(Type.BladeFragment, new FullItem(Material.GOLD_INGOT, 1, ChatColor.AQUA + "Water Blade Fragment", new String[]{}, true, 2)),
+    AirBladeFragment(Type.BladeFragment, new FullItem(Material.GOLD_INGOT, 1, ChatColor.GRAY + "Air Blade Fragment", new String[]{}, true, 3)),
+    EarthBladeFragment(Type.BladeFragment, new FullItem(Material.GOLD_INGOT, 1, ChatColor.DARK_GREEN + "Earth Blade Fragment", new String[]{}, true, 4)),
+    ShadowBladeFragment(Type.BladeFragment, new FullItem(Material.GOLD_INGOT, 1, ChatColor.DARK_GRAY + "Shadow Blade Fragment", new String[]{}, true, 5)),
+    GlowBladeFragment(Type.BladeFragment, new FullItem(Material.GOLD_INGOT, 1, ChatColor.YELLOW + "Glow Blade Fragment", new String[]{}, true, 6)),
+
+    // Blades
+    FireBlade(Type.Blade, new FullItem(Material.NETHERITE_SCRAP, 1, ChatColor.DARK_RED + "Fire Blade", new String[]{}, true, 1)),
+    WaterBlade(Type.Blade, new FullItem(Material.NETHERITE_SCRAP, 1, ChatColor.AQUA + "Water Blade", new String[]{}, true, 2)),
+    AirBlade(Type.Blade, new FullItem(Material.NETHERITE_SCRAP, 1, ChatColor.GRAY + "Air Blade", new String[]{}, true, 3)),
+    EarthBlade(Type.Blade, new FullItem(Material.NETHERITE_SCRAP, 1, ChatColor.DARK_GREEN + "Earth Blade", new String[]{}, true, 4)),
+    ShadowBlade(Type.Blade, new FullItem(Material.NETHERITE_SCRAP, 1, ChatColor.DARK_GRAY + "Shadow Blade", new String[]{}, true, 5)),
+    GlowBlade(Type.Blade, new FullItem(Material.NETHERITE_SCRAP, 1, ChatColor.YELLOW + "Glow Blade", new String[]{}, true, 6)),
+
 
     EndSword(Type.Weapon, new FullItem(Material.NETHERITE_SWORD, 1, ChatColor.BLACK + "" + ChatColor.BOLD + "End Sword", new String[] {ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
             ChatColor.WHITE+"Shoot Dragon's Breath",
@@ -208,7 +224,7 @@ public enum items {
         this.type = type;
         this.item = item;
     }
-    enum Type {Sprite, Weapon, AdvancedWeapon, Miscellaneous}
+    enum Type {Sprite, Weapon, AdvancedWeapon, Miscellaneous, BladeFragment, Blade}
 
     public Type getType() {
         return type;
