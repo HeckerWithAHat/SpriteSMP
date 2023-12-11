@@ -5,6 +5,7 @@ import gmail.aryanj1010.spritesmp.Items.items;
 import gmail.aryanj1010.spritesmp.files.PlayerSpriteCount;
 import gmail.aryanj1010.spritesmp.files.PlayerSprites;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +37,7 @@ public final class SpriteSMP extends JavaPlugin {
   };
 
   public static HashMap<Player, Player> markedPlayer = new HashMap<>();
-  public static List<Player> invisPlayers;
+  public static List<Player> invisPlayers = new ArrayList<>();
 
   @Override
   public void onEnable() {

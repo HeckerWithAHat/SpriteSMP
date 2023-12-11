@@ -33,6 +33,7 @@ import static org.bukkit.Bukkit.*;
 public class OnClick implements Listener {
     static final HashMap<UUID, Long> fireLeft = new HashMap<>();
     static final HashMap<UUID, Long> fireRight = new HashMap<>();
+    static final HashMap<UUID, Long> firePickaxeRight = new HashMap<>();
 
     static final HashMap<UUID, Long> waterLeft = new HashMap<>();
 
@@ -301,6 +302,10 @@ public class OnClick implements Listener {
                     DragonFireball df = (DragonFireball) p.getWorld().spawn(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize()), DragonFireball.class);
                     df.setVelocity(p.getEyeLocation().getDirection().normalize());
                 }, 30, p);
+            } else if (i.equals(FirePickaxe.getFullItem().getItem())) {
+                new AbilityWithCoolDown(firePickaxeRight, () -> {
+
+                } , 60, p);
             }
 
 
