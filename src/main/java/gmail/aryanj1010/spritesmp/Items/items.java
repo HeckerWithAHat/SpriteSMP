@@ -192,50 +192,40 @@ public enum items {
     // Shovels
     FireShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.DARK_RED + "Fire Shovel", new String[]{
             ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
-            ChatColor.WHITE+"Click on a player to mark them",
-            ChatColor.WHITE+"for 20 seconds",
-            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
-            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"Triggers a powerful eruption from the shovel",
+            ChatColor.WHITE+"That clears blocks in a 5x5 radius",
             ChatColor.WHITE+"60 second cooldown"
     }, true, 1)),
     WaterShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.AQUA + "Water Shovel", new String[]{
             ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
-            ChatColor.WHITE+"Click on a player to mark them",
-            ChatColor.WHITE+"for 20 seconds",
-            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
-            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"Has a chance to drop an item",
+            ChatColor.WHITE+"when breaking a block",
+            ChatColor.WHITE+"for 10 seconds",
             ChatColor.WHITE+"60 second cooldown"
     }, true, 2)),
     AirShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.GRAY + "Air Shovel", new String[]{
             ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
-            ChatColor.WHITE+"Click on a player to mark them",
-            ChatColor.WHITE+"for 20 seconds",
-            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
-            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"Teleports all items in a 10x10 radius",
+            ChatColor.WHITE+"into the player's inventory",
             ChatColor.WHITE+"60 second cooldown"
     }, true, 3)),
     EarthShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.DARK_GREEN + "Earth Shovel", new String[]{
             ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
-            ChatColor.WHITE+"Click on a player to mark them",
-            ChatColor.WHITE+"for 20 seconds",
-            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
-            ChatColor.WHITE+"Only one player may be marked",
+            ChatColor.WHITE+"Generates a sphere of dirt",
+            ChatColor.WHITE+"at the clicked location",
             ChatColor.WHITE+"60 second cooldown"
     }, true, 4)),
     ShadowShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.DARK_GRAY + "Shadow Shovel", new String[]{
             ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
-            ChatColor.WHITE+"Click on a player to mark them",
+            ChatColor.WHITE+"Mined blocks infect their neighbors",
+            ChatColor.WHITE+"digging in a 3x3",
             ChatColor.WHITE+"for 20 seconds",
-            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
-            ChatColor.WHITE+"Only one player may be marked",
             ChatColor.WHITE+"60 second cooldown"
     }, true, 5)),
     GlowShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.YELLOW + "Glow Shovel", new String[]{
             ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
-            ChatColor.WHITE+"Click on a player to mark them",
+            ChatColor.WHITE+"Increases the player's mining speed",
             ChatColor.WHITE+"for 20 seconds",
-            ChatColor.WHITE+"dealing 10% more damage from a glow sword",
-            ChatColor.WHITE+"Only one player may be marked",
             ChatColor.WHITE+"60 second cooldown"
     }, true, 6)),
 

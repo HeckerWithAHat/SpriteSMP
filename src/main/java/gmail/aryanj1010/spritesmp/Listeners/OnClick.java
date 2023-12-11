@@ -300,8 +300,12 @@ public class OnClick implements Listener {
                 new AbilityWithCoolDown(endRight, () -> {
                     DragonFireball df = (DragonFireball) p.getWorld().spawn(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize()), DragonFireball.class);
                     df.setVelocity(p.getEyeLocation().getDirection().normalize());
-                }, 5, p);
+                }, 30, p);
             }
+
+
+        //SHIFT RIGHT CLICK ABILITIES
+
         } else if (p.isSneaking() && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (i.equals(FireSword.getFullItem().getItem()) && hasFire) {
                 new AbilityWithCoolDown(fireRight, () -> {
