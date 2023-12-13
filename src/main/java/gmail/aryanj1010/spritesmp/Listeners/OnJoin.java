@@ -1,5 +1,6 @@
 package gmail.aryanj1010.spritesmp.Listeners;
 
+import static gmail.aryanj1010.spritesmp.API.ActionBarManager.addActionBar;
 import static gmail.aryanj1010.spritesmp.SpriteSMP.*;
 
 import gmail.aryanj1010.spritesmp.Items.items;
@@ -19,13 +20,17 @@ public class OnJoin implements Listener {
   public void onJoin(PlayerJoinEvent e) {
     if (
       e.getPlayer().getName().equals("HeckerWithAHat") ||
-      e.getPlayer().getName().equalsIgnoreCase("xNothi") &&
+      e.getPlayer().getName().equalsIgnoreCase("ayonull") &&
       e.getPlayer().isOp()
     ) {
       for (items i : items.values()) {
         e.getPlayer().getInventory().addItem(i.getFullItem().getItem());
       }
     }
+    getPlugin(SpriteSMP.class).getServer().getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> {
+      addActionBar(e.getPlayer());
+    }, 20L);
+
     if (ps.containsPlayer(e.getPlayer())) return;
     if (psc.containsPlayer(e.getPlayer())) return;
     items i = sprites[new Random().nextInt(sprites.length)];

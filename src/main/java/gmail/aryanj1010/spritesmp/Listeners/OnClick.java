@@ -31,25 +31,38 @@ import static org.bukkit.Bukkit.*;
  * It handles various abilities based on the item the player is holding.
  */
 public class OnClick implements Listener {
-    static final HashMap<UUID, Long> fireLeft = new HashMap<>();
-    static final HashMap<UUID, Long> fireRight = new HashMap<>();
-    static final HashMap<UUID, Long> firePickaxeRight = new HashMap<>();
+    public static final HashMap<UUID, Long> fireRight = new HashMap<>();
+    public static final HashMap<UUID, Long> fireShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> firePickaxeRight = new HashMap<>();
+    public static final HashMap<UUID, Long> fireShovelRight = new HashMap<>();
 
-    static final HashMap<UUID, Long> waterLeft = new HashMap<>();
 
-    static final HashMap<UUID, Long> waterRight = new HashMap<>();
+    public static final HashMap<UUID, Long> waterRight = new HashMap<>();
+    public static final HashMap<UUID, Long> waterShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> waterPickaxeRight = new HashMap<>();
+    public static final HashMap<UUID, Long> waterShovelRight = new HashMap<>();
 
-    static final HashMap<UUID, Long> airLeft = new HashMap<>();
-    static final HashMap<UUID, Long> airRight = new HashMap<>();
 
-    static final HashMap<UUID, Long> earthLeft = new HashMap<>();
-    static final List<UUID> earthLeftInUse = new ArrayList<>();
-    static final HashMap<UUID, Integer> earthLeftTaskNumbers = new HashMap<>();
-    static final HashMap<UUID, FallingBlock> earthLeftFallingBlocks = new HashMap<>();
-    static final HashMap<UUID, Long> earthRight = new HashMap<>();
+    public static final HashMap<UUID, Long> airRight = new HashMap<>();
+    public static final HashMap<UUID, Long> airShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> airPickaxeRight = new HashMap<>();
+    public static final HashMap<UUID, Long> airShovelRight = new HashMap<>();
 
-    static final HashMap<UUID, Long> shadowShiftRight = new HashMap<>();
-    static final HashMap<UUID, Long> glowShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> earthRight = new HashMap<>();
+    public static final List<UUID> earthRightInUse = new ArrayList<>();
+    public static final HashMap<UUID, Integer> earthRightTaskNumbers = new HashMap<>();
+    public static final HashMap<UUID, FallingBlock> earthRightFallingBlocks = new HashMap<>();
+    public static final HashMap<UUID, Long> earthShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> earthPickaxeRight = new HashMap<>();
+    public static final HashMap<UUID, Long> earthShovelRight = new HashMap<>();
+
+    public static final HashMap<UUID, Long> shadowShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> shadowPickaxeRight = new HashMap<>();
+    public static final HashMap<UUID, Long> shadowShovelRight = new HashMap<>();
+
+    public static final HashMap<UUID, Long> glowShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> glowPickaxeRight = new HashMap<>();
+    public static final HashMap<UUID, Long> glowShovelRight = new HashMap<>();
 
 
     static final HashMap<UUID, Long> endRight = new HashMap<>();
@@ -85,7 +98,7 @@ public class OnClick implements Listener {
         UUID uuid = p.getUniqueId();
         if ((!p.isSneaking()) && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (i.equals(FireSword.getFullItem().getItem()) && hasFire) {
-                new AbilityWithCoolDown(fireLeft, () -> {
+                new AbilityWithCoolDown(fireRight, () -> {
                     RayTraceResult le = p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20, entity -> !entity.equals((Entity) p));
                     for (int j = 0; j < 10; j++) {
                         p.spawnParticle(Particle.FLAME,
@@ -106,7 +119,7 @@ public class OnClick implements Listener {
                 }, 60, p);
             } else if (i.equals(WaterSword.getFullItem().getItem()) && hasWater) {
 
-                new AbilityWithCoolDown(waterLeft, () -> {
+                new AbilityWithCoolDown(waterRight, () -> {
                     RayTraceResult le = p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20, entity -> !entity.equals((Entity) p));
                     for (int j = 0; j < 10; j++) {
                         p.spawnParticle(Particle.NAUTILUS,
@@ -127,7 +140,7 @@ public class OnClick implements Listener {
                 }, 60, p);
 
             } else if (i.equals(AirSword.getFullItem().getItem()) && hasAir) {
-                new AbilityWithCoolDown(airLeft, () -> {
+                new AbilityWithCoolDown(airRight, () -> {
                     LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 5, entity -> !entity.equals((Entity) p)).getHitEntity();
                     le.setVelocity(p.getLocation().getDirection().normalize().multiply(-1));
                 }, 30, p);
@@ -140,9 +153,9 @@ public class OnClick implements Listener {
                 if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.NETHER_PORTAL)) return;
                 if (e.getClickedBlock() != null && e.getClickedBlock().getType().toString().contains("SHULKER_BOX"))
                     return;
-                if (!earthLeftInUse.contains(p.getUniqueId())) {
+                if (!earthRightInUse.contains(p.getUniqueId())) {
 
-                    if (!earthLeft.containsKey(p.getUniqueId())) {
+                    if (!earthRight.containsKey(p.getUniqueId())) {
                         FallingBlock fb = p.getWorld().spawnFallingBlock(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3)), e.getClickedBlock().getType().createBlockData());
                         fb.setHurtEntities(true);
                         fb.setDamagePerBlock(8);
@@ -150,15 +163,15 @@ public class OnClick implements Listener {
                         fb.setGravity(false);
                         e.getClickedBlock().setType(Material.AIR);
 
-                        earthLeftInUse.add(p.getUniqueId());
+                        earthRightInUse.add(p.getUniqueId());
                         int i1 = getServer().getScheduler().runTaskTimer(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
                             fb.teleport(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3).add(new Vector(0, 0.25, 0))));
                             fb.setTicksLived(1);
                         }, 0, 2).getTaskId();
-                        earthLeftTaskNumbers.put(uuid, i1);
-                        earthLeftFallingBlocks.put(uuid, fb);
+                        earthRightTaskNumbers.put(uuid, i1);
+                        earthRightFallingBlocks.put(uuid, fb);
                     } else {
-                        long timeElapsed = System.currentTimeMillis() - earthLeft.get(p.getUniqueId());
+                        long timeElapsed = System.currentTimeMillis() - earthRight.get(p.getUniqueId());
 
                         if (timeElapsed >= 60000) {
                             FallingBlock fb = p.getWorld().spawnFallingBlock(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3)), e.getClickedBlock().getType().createBlockData());
@@ -168,13 +181,13 @@ public class OnClick implements Listener {
                             fb.setGravity(false);
                             e.getClickedBlock().setType(Material.AIR);
 
-                            earthLeftInUse.add(p.getUniqueId());
+                            earthRightInUse.add(p.getUniqueId());
                             int i1 = getServer().getScheduler().runTaskTimer(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
                                 fb.teleport(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3).add(new Vector(0, 0.25, 0))));
                                 fb.setTicksLived(1);
                             }, 0, 2).getTaskId();
-                            earthLeftTaskNumbers.put(uuid, i1);
-                            earthLeftFallingBlocks.put(uuid, fb);
+                            earthRightTaskNumbers.put(uuid, i1);
+                            earthRightFallingBlocks.put(uuid, fb);
                         } else {
                             p.sendMessage(60 + " seconds hasn't passed! Please Wait " + Math.round((float) (((60 * 1000L) - timeElapsed) / 1000)) + " seconds");
 
@@ -182,19 +195,19 @@ public class OnClick implements Listener {
                     }
                 } else {
 
-                    new AbilityWithCoolDown(earthLeft, () -> {
-                        getScheduler().cancelTask(earthLeftTaskNumbers.get(uuid));
-                        earthLeftTaskNumbers.remove(uuid);
-                        earthLeftFallingBlocks.get(uuid).setVelocity(p.getEyeLocation().getDirection().normalize().multiply(2));
-                        earthLeftFallingBlocks.get(uuid).setGravity(true);
-                        earthLeftFallingBlocks.remove(uuid);
-                        earthLeftInUse.remove(uuid);
+                    new AbilityWithCoolDown(earthRight, () -> {
+                        getScheduler().cancelTask(earthRightTaskNumbers.get(uuid));
+                        earthRightTaskNumbers.remove(uuid);
+                        earthRightFallingBlocks.get(uuid).setVelocity(p.getEyeLocation().getDirection().normalize().multiply(2));
+                        earthRightFallingBlocks.get(uuid).setGravity(true);
+                        earthRightFallingBlocks.remove(uuid);
+                        earthRightInUse.remove(uuid);
 
                     }, 60, p);
                 }
 
             } else if (i.equals(AdvancedFireSword.getFullItem().getItem()) && hasFire) {
-                new AbilityWithCoolDown(fireLeft, () -> {
+                new AbilityWithCoolDown(fireRight, () -> {
                     RayTraceResult le = p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20, entity -> !entity.equals((Entity) p));
                     for (int j = 0; j < 10; j++) {
                         p.spawnParticle(Particle.FLAME,
@@ -214,7 +227,7 @@ public class OnClick implements Listener {
                     ((LivingEntity) le.getHitEntity()).setHealth(((LivingEntity) le.getHitEntity()).getHealth() - 12);
                 }, 60, p);
             } else if (i.equals(AdvancedWaterSword.getFullItem().getItem()) && hasWater) {
-                new AbilityWithCoolDown(waterLeft, () -> {
+                new AbilityWithCoolDown(waterRight, () -> {
                     RayTraceResult le = p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20, entity -> !entity.equals((Entity) p));
                     for (int j = 0; j < 10; j++) {
                         p.spawnParticle(Particle.NAUTILUS,
@@ -234,7 +247,7 @@ public class OnClick implements Listener {
                     ((LivingEntity) le.getHitEntity()).setHealth(((LivingEntity) le.getHitEntity()).getHealth() - 12);
                 }, 60, p);
             } else if (i.equals(AdvancedAirSword.getFullItem().getItem()) && hasAir) {
-                new AbilityWithCoolDown(airLeft, () -> {
+                new AbilityWithCoolDown(airRight, () -> {
                     LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 5, entity -> !entity.equals((Entity) p)).getHitEntity();
                     le.setVelocity(p.getLocation().getDirection().normalize().multiply(-4));
                     le.damage(6);
@@ -249,8 +262,8 @@ public class OnClick implements Listener {
                 if (e.getClickedBlock() != null && e.getClickedBlock().getType().toString().contains("SHULKER_BOX"))
                     return;
 
-                if (!earthLeftInUse.contains(p.getUniqueId())) {
-                    if (!earthLeft.containsKey(p.getUniqueId())) {
+                if (!earthRightInUse.contains(p.getUniqueId())) {
+                    if (!earthRight.containsKey(p.getUniqueId())) {
                         FallingBlock fb = p.getWorld().spawnFallingBlock(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3)), e.getClickedBlock().getType().createBlockData());
                         fb.setHurtEntities(true);
                         fb.setDamagePerBlock(8);
@@ -258,15 +271,15 @@ public class OnClick implements Listener {
                         fb.setGravity(false);
                         e.getClickedBlock().setType(Material.AIR);
 
-                        earthLeftInUse.add(p.getUniqueId());
+                        earthRightInUse.add(p.getUniqueId());
                         int i1 = getServer().getScheduler().runTaskTimer(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
                             fb.teleport(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3).add(new Vector(0, 0.25, 0))));
                             fb.setTicksLived(1);
                         }, 0, 2).getTaskId();
-                        earthLeftTaskNumbers.put(uuid, i1);
-                        earthLeftFallingBlocks.put(uuid, fb);
+                        earthRightTaskNumbers.put(uuid, i1);
+                        earthRightFallingBlocks.put(uuid, fb);
                     } else {
-                        long timeElapsed = System.currentTimeMillis() - earthLeft.get(p.getUniqueId());
+                        long timeElapsed = System.currentTimeMillis() - earthRight.get(p.getUniqueId());
 
                         if (timeElapsed >= 60000) {
                             FallingBlock fb = p.getWorld().spawnFallingBlock(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3)), e.getClickedBlock().getType().createBlockData());
@@ -276,25 +289,25 @@ public class OnClick implements Listener {
                             fb.setGravity(false);
                             e.getClickedBlock().setType(Material.AIR);
 
-                            earthLeftInUse.add(p.getUniqueId());
+                            earthRightInUse.add(p.getUniqueId());
                             int i1 = getServer().getScheduler().runTaskTimer(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
                                 fb.teleport(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3).add(new Vector(0, 0.25, 0))));
                                 fb.setTicksLived(1);
                             }, 0, 2).getTaskId();
-                            earthLeftTaskNumbers.put(uuid, i1);
-                            earthLeftFallingBlocks.put(uuid, fb);
+                            earthRightTaskNumbers.put(uuid, i1);
+                            earthRightFallingBlocks.put(uuid, fb);
                         } else {
                             p.sendMessage(60 + " seconds hasn't passed! Please Wait " + Math.round((float) (((60 * 1000L) - timeElapsed) / 1000)) + " seconds");
                         }
                     }
                 } else {
-                    new AbilityWithCoolDown(earthLeft, () -> {
-                        getScheduler().cancelTask(earthLeftTaskNumbers.get(uuid));
-                        earthLeftTaskNumbers.remove(uuid);
-                        earthLeftInUse.remove(uuid);
-                        earthLeftFallingBlocks.get(uuid).setVelocity(p.getLocation().getDirection().normalize().multiply(2));
-                        earthLeftFallingBlocks.get(uuid).setGravity(true);
-                        earthLeftFallingBlocks.remove(uuid);
+                    new AbilityWithCoolDown(earthRight, () -> {
+                        getScheduler().cancelTask(earthRightTaskNumbers.get(uuid));
+                        earthRightTaskNumbers.remove(uuid);
+                        earthRightInUse.remove(uuid);
+                        earthRightFallingBlocks.get(uuid).setVelocity(p.getLocation().getDirection().normalize().multiply(2));
+                        earthRightFallingBlocks.get(uuid).setGravity(true);
+                        earthRightFallingBlocks.remove(uuid);
                     }, 60, p);
                 }
             } else if (i.equals(EndSword.getFullItem().getItem())) {
@@ -306,6 +319,10 @@ public class OnClick implements Listener {
                 new AbilityWithCoolDown(firePickaxeRight, () -> {
 
                 } , 60, p);
+            }else if (i.equals(FireShovel.getFullItem().getItem())) {
+                new AbilityWithCoolDown(fireShovelRight, () -> {
+
+                } , 60, p);
             }
 
 
@@ -313,7 +330,7 @@ public class OnClick implements Listener {
 
         } else if (p.isSneaking() && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (i.equals(FireSword.getFullItem().getItem()) && hasFire) {
-                new AbilityWithCoolDown(fireRight, () -> {
+                new AbilityWithCoolDown(fireShiftRight, () -> {
                     for (int j = (int) p.getLocation().getX() - 2; j < (int) p.getLocation().getX() + 2; j++) {
                         for (int k = (int) p.getLocation().getZ() - 2; k < (int) p.getLocation().getZ() + 2; k++) {
                             if (p.getWorld().getBlockAt(new Location(p.getWorld(), j, p.getLocation().getY(), k)).getType().equals(Material.AIR))
@@ -322,12 +339,12 @@ public class OnClick implements Listener {
                     }
                 }, 30, p);
             } else if (i.equals(WaterSword.getFullItem().getItem()) && p.getWorld().getBlockAt(p.getLocation()).getType().equals(Material.WATER) && hasWater) {
-                new AbilityWithCoolDown(waterRight, () -> {
+                new AbilityWithCoolDown(waterShiftRight, () -> {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 2));
                     p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * 5, 2));
                 }, 120, p);
             } else if (i.equals(AirSword.getFullItem().getItem()) && hasAir) {
-                new AbilityWithCoolDown(airRight, () -> {
+                new AbilityWithCoolDown(airShiftRight, () -> {
                     p.sendMessage("You can now fly for 5 seconds");
                     p.setAllowFlight(true);
                     getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> p.sendMessage("3"), 2 * 20);
@@ -340,7 +357,7 @@ public class OnClick implements Listener {
                 }, 60, p);
             } else if (i.equals(EarthSword.getFullItem().getItem()) && hasEarth) {
                 // Ability activation based on item clicked
-                new AbilityWithCoolDown(earthRight, () -> {
+                new AbilityWithCoolDown(earthShiftRight, () -> {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10 * 20, 1));
                     p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10 * 20, 1));
                 }, 40, p);
@@ -364,20 +381,20 @@ public class OnClick implements Listener {
                     p.getWorld().spawnParticle(Particle.REDSTONE, p.getLocation(), 10);
                 }, 120, p);
             } else if (i.equals(AdvancedFireSword.getFullItem().getItem()) && hasFire) {
-                new AbilityWithCoolDown(fireRight, () -> {
+                new AbilityWithCoolDown(fireShiftRight, () -> {
                     p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
                     p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
                     p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
                     p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
                 }, 120, p);
             } else if (i.equals(AdvancedAirSword.getFullItem().getItem()) && hasAir) {
-                new AbilityWithCoolDown(airRight, () -> {
+                new AbilityWithCoolDown(airShiftRight, () -> {
                     LivingEntity entity = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 20, en -> !en.equals((Entity) p)).getHitEntity();
                     entity.getWorld().strikeLightning(entity.getLocation());
                     entity.damage(16);
                 }, 180, p);
             } else if (i.equals(AdvancedEarthSword.getFullItem().getItem()) && hasEarth) {
-                new AbilityWithCoolDown(earthRight, () -> {
+                new AbilityWithCoolDown(earthShiftRight, () -> {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 1));
                     p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 15 * 20, 1));
                 }, 60, p);

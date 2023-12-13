@@ -12,6 +12,9 @@ commands:
   withdraw:
     usage: /withdraw
     description: withdraws a sprite
+  toggleSpriteDisplay:
+    usage: /toggleSpriteDisplay
+    description: toggles actionbar display
 
 permissions:
   spritesmp.*:

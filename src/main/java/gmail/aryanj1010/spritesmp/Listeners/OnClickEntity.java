@@ -1,5 +1,6 @@
 package gmail.aryanj1010.spritesmp.Listeners;
 
+import static gmail.aryanj1010.spritesmp.Listeners.OnClick.waterShiftRight;
 import static gmail.aryanj1010.spritesmp.SpriteSMP.markedPlayer;
 import static org.bukkit.Bukkit.getScheduler;
 import static org.bukkit.plugin.java.JavaPlugin.getPlugin;
@@ -21,11 +22,8 @@ public class OnClickEntity implements Listener {
 
   // Cooldowns
 
-  final HashMap<UUID, Long> advancedWaterRight = new HashMap<>();
-  final HashMap<UUID, Long> basicShadowRight = new HashMap<>();
-  final HashMap<UUID, Long> advancedShadowRight = new HashMap<>();
-  final HashMap<UUID, Long> basicGlowRight = new HashMap<>();
-  final HashMap<UUID, Long> advancedGlowRight = new HashMap<>();
+  public static final HashMap<UUID, Long> shadowRight = new HashMap<>();
+  public static final HashMap<UUID, Long> glowRight = new HashMap<>();
 
   @EventHandler
   public void onClickEntity(PlayerInteractEntityEvent e) {
@@ -37,7 +35,7 @@ public class OnClickEntity implements Listener {
         .equals(items.AdvancedWaterSword.getFullItem().getItem())
     ) {
       new AbilityWithCoolDown(
-        advancedWaterRight,
+              waterShiftRight,
         () -> {
           PotionEffect slow = new PotionEffect(
             PotionEffectType.SLOW,
@@ -77,7 +75,7 @@ public class OnClickEntity implements Listener {
       !e.getPlayer().isSneaking()
     ) {
       new AbilityWithCoolDown(
-        basicShadowRight,
+        shadowRight,
         () -> {
           PotionEffect blindness = new PotionEffect(
             PotionEffectType.BLINDNESS,
@@ -98,7 +96,7 @@ public class OnClickEntity implements Listener {
       !e.getPlayer().isSneaking()
     ) {
       new AbilityWithCoolDown(
-        advancedShadowRight,
+        shadowRight,
         () -> {
           PotionEffect blindness = new PotionEffect(
             PotionEffectType.BLINDNESS,
@@ -121,7 +119,7 @@ public class OnClickEntity implements Listener {
       !e.getPlayer().isSneaking()
     ) {
       new AbilityWithCoolDown(
-        basicGlowRight,
+        glowRight,
         () -> {
           if (!(e.getRightClicked() instanceof Player)) return;
           PotionEffect glow = new PotionEffect(
@@ -161,7 +159,7 @@ public class OnClickEntity implements Listener {
       !e.getPlayer().isSneaking()
     ) {
       new AbilityWithCoolDown(
-        advancedGlowRight,
+        glowRight,
         () -> {
           if (!(e.getRightClicked() instanceof Player)) return;
           PotionEffect glow = new PotionEffect(

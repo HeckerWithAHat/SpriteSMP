@@ -1,5 +1,7 @@
 package gmail.aryanj1010.spritesmp;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import gmail.aryanj1010.spritesmp.Crafts.initializeCrafts;
 import gmail.aryanj1010.spritesmp.Items.items;
 import gmail.aryanj1010.spritesmp.files.PlayerSpriteCount;
@@ -20,6 +22,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.reflections.Reflections;
 
+import static gmail.aryanj1010.spritesmp.API.ActionBarManager.*;
+
 /**
  * The main class of the SpriteSMP plugin.
  * This class extends the JavaPlugin class and handles the plugin's initialization, shutdown, and commands.
@@ -35,12 +39,13 @@ public final class SpriteSMP extends JavaPlugin {
     items.AirSprite,
     items.EarthSprite,
   };
-
+  public static ProtocolManager manager;
   public static HashMap<Player, Player> markedPlayer = new HashMap<>();
   public static List<Player> invisPlayers = new ArrayList<>();
 
   @Override
   public void onEnable() {
+    manager = ProtocolLibrary.getProtocolManager();
     ic = new initializeCrafts();
     // Plugin startup logic
     if (!getDataFolder().exists()) getDataFolder().mkdirs();
@@ -166,6 +171,15 @@ public final class SpriteSMP extends JavaPlugin {
               psc.getCount((Player) sender) +
               " Sprites. Please get more before withdrawing"
             );
+        }
+      }
+    }
+    if (command.getName().equalsIgnoreCase("toggleSpriteDisplay")) {
+      if (sender instanceof Player) {
+        if (playerActionBars.containsKey((Player)sender)) {
+          removeActionBar((Player)sender);
+        } else {
+          addActionBar((Player)sender);
         }
       }
     }
