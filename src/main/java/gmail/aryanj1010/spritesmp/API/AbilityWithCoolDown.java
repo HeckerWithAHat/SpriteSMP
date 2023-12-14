@@ -14,7 +14,6 @@ public class AbilityWithCoolDown {
         if (!cdHM.containsKey(runner.getUniqueId())) {
             ability.run();
             cdHM.put(runner.getUniqueId(), System.currentTimeMillis());
-            Bukkit.getScheduler().scheduleSyncDelayedTask(SpriteSMP.getPlugin(SpriteSMP.class), () -> {runner.sendMessage("");}, cooldownLength*1000L);
         } else {
             long timeElapsed = System.currentTimeMillis() - cdHM.get(runner.getUniqueId());
             if (timeElapsed >= cooldownLength * 1000L) {
