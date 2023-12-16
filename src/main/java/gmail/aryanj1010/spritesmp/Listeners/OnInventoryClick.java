@@ -26,7 +26,7 @@ public class OnInventoryClick implements Listener {
         .getServer()
         .dispatchCommand(
           getPlugin(SpriteSMP.class).getServer().getConsoleSender(),
-          "pardon " + e.getWhoClicked().getName()
+          "pardon " + e.getCurrentItem().getItemMeta().getDisplayName()
         );
       e.getCurrentItem().setAmount(0);
     }

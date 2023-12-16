@@ -232,4 +232,70 @@ public class initializeCrafts {
             new MaterialChoice(Material.IRON_INGOT),
             new MaterialChoice(Material.WITHER_SKELETON_SKULL),
             new MaterialChoice(Material.IRON_INGOT)}, "glowsprite");
+    public static CraftingTableCraft fireBlade = new CraftingTableCraft(FireBlade.getFullItem().getItem(),new RecipeChoice[]{
+            new ExactChoice(FireBladeFragment.getFullItem().getItem()),
+            new ExactChoice(FireBladeFragment.getFullItem().getItem()),
+            new ExactChoice(FireBladeFragment.getFullItem().getItem()),
+            new ExactChoice(FireBladeFragment.getFullItem().getItem()),
+            new ExactChoice(FireBladeFragment.getFullItem().getItem()),
+            new ExactChoice(FireBladeFragment.getFullItem().getItem()),
+            new ExactChoice(FireBladeFragment.getFullItem().getItem()),
+            new ExactChoice(FireBladeFragment.getFullItem().getItem()),
+            new ExactChoice(FireBladeFragment.getFullItem().getItem())
+    }, "fireblade");
+    public static CraftingTableCraft waterBlade = new CraftingTableCraft(WaterBlade.getFullItem().getItem(),new RecipeChoice[]{
+            new ExactChoice(WaterBladeFragment.getFullItem().getItem()),
+            new ExactChoice(WaterBladeFragment.getFullItem().getItem()),
+            new ExactChoice(WaterBladeFragment.getFullItem().getItem()),
+            new ExactChoice(WaterBladeFragment.getFullItem().getItem()),
+            new ExactChoice(WaterBladeFragment.getFullItem().getItem()),
+            new ExactChoice(WaterBladeFragment.getFullItem().getItem()),
+            new ExactChoice(WaterBladeFragment.getFullItem().getItem()),
+            new ExactChoice(WaterBladeFragment.getFullItem().getItem()),
+            new ExactChoice(WaterBladeFragment.getFullItem().getItem())
+    }, "waterblade");
+    public static CraftingTableCraft earthBlade = new CraftingTableCraft(EarthBlade.getFullItem().getItem(),new RecipeChoice[]{
+            new ExactChoice(EarthBladeFragment.getFullItem().getItem()),
+            new ExactChoice(EarthBladeFragment.getFullItem().getItem()),
+            new ExactChoice(EarthBladeFragment.getFullItem().getItem()),
+            new ExactChoice(EarthBladeFragment.getFullItem().getItem()),
+            new ExactChoice(EarthBladeFragment.getFullItem().getItem()),
+            new ExactChoice(EarthBladeFragment.getFullItem().getItem()),
+            new ExactChoice(EarthBladeFragment.getFullItem().getItem()),
+            new ExactChoice(EarthBladeFragment.getFullItem().getItem()),
+            new ExactChoice(EarthBladeFragment.getFullItem().getItem())
+    }, "waterblade");
+    public static CraftingTableCraft airBlade = new CraftingTableCraft(AirBlade.getFullItem().getItem(),new RecipeChoice[]{
+            new ExactChoice(AirBladeFragment.getFullItem().getItem()),
+            new ExactChoice(AirBladeFragment.getFullItem().getItem()),
+            new ExactChoice(AirBladeFragment.getFullItem().getItem()),
+            new ExactChoice(AirBladeFragment.getFullItem().getItem()),
+            new ExactChoice(AirBladeFragment.getFullItem().getItem()),
+            new ExactChoice(AirBladeFragment.getFullItem().getItem()),
+            new ExactChoice(AirBladeFragment.getFullItem().getItem()),
+            new ExactChoice(AirBladeFragment.getFullItem().getItem()),
+            new ExactChoice(AirBladeFragment.getFullItem().getItem())
+    }, "airblade");
+    public static CraftingTableCraft shadowBlade = new CraftingTableCraft(ShadowBlade.getFullItem().getItem(),new RecipeChoice[]{
+            new ExactChoice(ShadowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(ShadowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(ShadowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(ShadowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(ShadowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(ShadowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(ShadowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(ShadowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(ShadowBladeFragment.getFullItem().getItem())
+    }, "shadowblade");
+    public static CraftingTableCraft glowBlade = new CraftingTableCraft(GlowBlade.getFullItem().getItem(),new RecipeChoice[]{
+            new ExactChoice(GlowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(GlowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(GlowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(GlowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(GlowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(GlowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(GlowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(GlowBladeFragment.getFullItem().getItem()),
+            new ExactChoice(GlowBladeFragment.getFullItem().getItem())
+    }, "glowblade");
 }

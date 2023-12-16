@@ -38,12 +38,11 @@ public class OnKill implements Listener {
     psc.updatePlayer(e.getEntity(), -1);
     if (psc.getCount(e.getEntity()) <= -5) {
       e.getEntity().getInventory().clear();
-      SpriteSMP
-        .getPlugin(SpriteSMP.class)
+      getPlugin(SpriteSMP.class)
         .getServer()
         .dispatchCommand(
           getPlugin(SpriteSMP.class).getServer().getConsoleSender(),
-          "ban " + e.getEntity().getName()
+          "ban " + e.getEntity().getName() + "\"Out of Sprites\""
         );
       e.getEntity().kickPlayer("Out of Sprites");
     }

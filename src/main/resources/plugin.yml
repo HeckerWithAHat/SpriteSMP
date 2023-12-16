@@ -15,41 +15,8 @@ commands:
   toggleSpriteDisplay:
     usage: /toggleSpriteDisplay
     description: toggles actionbar display
+  admin:
+    usage: /spritesmp <itemgive | sprite | spritecount | unban>
+    description: sprite smp admin commands
+    default: op
 
-permissions:
-  spritesmp.*:
-    description: gives full access to all spritesmp plugin commands. DO NOT GIVE ANYONE ACCEPT ADMINS
-    default: op
-    children:
-      spritesmp.sprite: true
-      spritesmp.spritecount: true
-      spritesmp.withdraw: true
-      spritesmp.admin.add: true
-      spritesmp.admin.itemgive: true
-      spritesmp.admin.sprite.*: true
-      spritesmp.admin.sprite.set: true
-      spritesmp.admin.sprite.get: true
-      spritesmp.admin.spritecount.*: true
-      spritesmp.admin.spritecount.set: true
-      spritesmp.admin.spritecount.get: true
-  spritesmp.sprite:
-    description: allows usage of the /spritesmp sprite command and all aliases
-    default: true
-  spritesmp.spritecount:
-    description: allows usage of the /spritesmp spritecount command and all aliases
-    default: true
-  spritesmp.withdraw:
-    description: allows usage of the /spritesmp withdraw command and all aliases
-    default: true
-  spritesmp.admin.*:
-    description: gives access to all admin commands
-    default: op
-    children:
-      spritesmp.admin.add: true
-      spritesmp.admin.itemgive: true
-      spritesmp.admin.sprite.*: true
-      spritesmp.admin.sprite.set: true
-      spritesmp.admin.sprite.get: true
-      spritesmp.admin.spritecount.*: true
-      spritesmp.admin.spritecount.set: true
-      spritesmp.admin.spritecount.get: true

@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.profile.PlayerProfile;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
@@ -428,14 +429,18 @@ public class OnClick implements Listener {
             if (e.getItem().isSimilar(RevivalSprite.getFullItem().getItem())) {
                 // Clear inventory and display banned players' heads
                 inv.clear();
-                for (OfflinePlayer op : getServer().getBannedPlayers()) {
-                    ItemStack head = new ItemStack(Material.PLAYER_HEAD);
-                    SkullMeta hm = (SkullMeta) head.getItemMeta();
-                    hm.setOwningPlayer(op);
-                    hm.setDisplayName(op.getName());
-                    head.setItemMeta(hm);
-                    inv.addItem(head);
+                List<PlayerProfile> players = new ArrayList<>();
+                for (BanEntry be:
+                        getServer().getBanList(BanList.Type.PROFILE).getEntries()) {
+                    if (be.getReason().equalsIgnoreCase("Out of Sprites")) {
+                        ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+                        SkullMeta hm = (SkullMeta) head.getItemMeta();
+                        hm.setOwnerProfile((PlayerProfile) be.getBanTarget());
+                        hm.setDisplayName(((PlayerProfile) be.getBanTarget()).getName());
+                        head.setItemMeta(hm);
+                        inv.addItem(head);                    }
                 }
+                   p.openInventory(inv);
                 e.getItem().setAmount(e.getItem().getAmount() - 1);
             }
 

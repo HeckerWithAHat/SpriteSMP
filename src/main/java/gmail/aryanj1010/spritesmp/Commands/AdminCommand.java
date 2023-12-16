@@ -6,12 +6,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.DoubleSummaryStatistics;
-
 import static gmail.aryanj1010.spritesmp.SpriteSMP.ps;
 import static gmail.aryanj1010.spritesmp.SpriteSMP.psc;
 
-public class SpriteSMPCommand implements CommandExecutor {
+public class AdminCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) return true;

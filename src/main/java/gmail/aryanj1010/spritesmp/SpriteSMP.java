@@ -2,13 +2,14 @@ package gmail.aryanj1010.spritesmp;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
+import gmail.aryanj1010.spritesmp.Commands.AdminCommand;
+import gmail.aryanj1010.spritesmp.Commands.AdminTabCompletion;
 import gmail.aryanj1010.spritesmp.Crafts.initializeCrafts;
 import gmail.aryanj1010.spritesmp.Items.items;
 import gmail.aryanj1010.spritesmp.files.PlayerSpriteCount;
 import gmail.aryanj1010.spritesmp.files.PlayerSprites;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.bukkit.Bukkit;
@@ -16,7 +17,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -84,6 +84,8 @@ public final class SpriteSMP extends JavaPlugin {
         throw new RuntimeException(e);
       }
     }
+    getCommand("admin").setExecutor(new AdminCommand());
+    getCommand("admin").setTabCompleter(new AdminTabCompletion());
   }
 
   @Override
