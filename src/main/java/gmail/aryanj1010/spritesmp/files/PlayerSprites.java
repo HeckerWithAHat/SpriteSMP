@@ -17,14 +17,15 @@ public class PlayerSprites extends AbstractFile{
         return config.contains(p.getUniqueId().toString());
     }
 
-    public void addSprite (Player p, items sprite) {
+    public void setSprite(Player p, items sprite) {
         config.set(p.getUniqueId().toString(), sprite.toString());
     }
 
     public items rerollSprite (Player p) {
         while (true) {
             items i = sprites[new Random().nextInt(sprites.length)];
-            if (!i.toString().equals(config.get(p.getUniqueId().toString()))) {addSprite(p, i);return i;}
+            if (!i.toString().equals(config.get(p.getUniqueId().toString()))) {
+                setSprite(p, i);return i;}
         }
     }
 

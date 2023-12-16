@@ -16,7 +16,7 @@ commands:
     usage: /toggleSpriteDisplay
     description: toggles actionbar display
   admin:
-    usage: /spritesmp <itemgive | sprite | spritecount | unban>
+    usage: /spritesmp <itemgive|sprite|spritecount|unban>
     description: sprite smp admin commands
     default: op
 

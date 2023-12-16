@@ -5,10 +5,9 @@ import static gmail.aryanj1010.spritesmp.SpriteSMP.*;
 
 import gmail.aryanj1010.spritesmp.Items.items;
 import gmail.aryanj1010.spritesmp.SpriteSMP;
-import java.sql.Date;
-import java.time.Instant;
+
 import java.util.Random;
-import org.bukkit.BanList;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,15 +17,7 @@ public class OnJoin implements Listener {
 
   @EventHandler
   public void onJoin(PlayerJoinEvent e) {
-    if (
-      e.getPlayer().getName().equals("HeckerWithAHat") ||
-      e.getPlayer().getName().equalsIgnoreCase("ayonull") &&
-      e.getPlayer().isOp()
-    ) {
-      for (items i : items.values()) {
-        e.getPlayer().getInventory().addItem(i.getFullItem().getItem());
-      }
-    }
+
     getPlugin(SpriteSMP.class).getServer().getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> {
       addActionBar(e.getPlayer());
     }, 20L);
@@ -34,7 +25,7 @@ public class OnJoin implements Listener {
     if (ps.containsPlayer(e.getPlayer())) return;
     if (psc.containsPlayer(e.getPlayer())) return;
     items i = sprites[new Random().nextInt(sprites.length)];
-    ps.addSprite(e.getPlayer(), i);
+    ps.setSprite(e.getPlayer(), i);
     psc.addPlayer(e.getPlayer());
     e
       .getPlayer()

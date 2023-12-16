@@ -17,6 +17,10 @@ public class PlayerSpriteCount extends AbstractFile{
         config.set(p.getUniqueId().toString(), config.getInt(p.getUniqueId().toString()) + i);
         return config.getInt(p.getUniqueId().toString());
     }
+    public int setPlayer (Player p, int i) {
+        config.set(p.getUniqueId().toString(), i);
+        return config.getInt(p.getUniqueId().toString());
+    }
     public int getCount (Player p) {
         return config.getInt(p.getUniqueId().toString());
     }

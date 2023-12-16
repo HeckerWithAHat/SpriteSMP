@@ -21,8 +21,7 @@ public class OnInventoryClick implements Listener {
       e.getCurrentItem().getType().equals(Material.PLAYER_HEAD)
     ) {
       e.setCancelled(true);
-      SpriteSMP
-        .getPlugin(SpriteSMP.class)
+      getPlugin(SpriteSMP.class)
         .getServer()
         .dispatchCommand(
           getPlugin(SpriteSMP.class).getServer().getConsoleSender(),

@@ -475,7 +475,11 @@ public class OnClick implements Listener {
             }
 
             if (e.getItem().isSimilar(ShadowSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
-                getServer().getConsoleSender().sendMessage("test one passed");
+                // Increment player sprite count and consume item
+                psc.updatePlayer(p, 1);
+                e.getItem().setAmount(e.getItem().getAmount() - 1);
+            }
+            if (e.getItem().isSimilar(GlowSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
                 // Increment player sprite count and consume item
                 psc.updatePlayer(p, 1);
                 e.getItem().setAmount(e.getItem().getAmount() - 1);

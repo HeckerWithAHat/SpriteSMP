@@ -264,7 +264,7 @@ public class initializeCrafts {
             new ExactChoice(EarthBladeFragment.getFullItem().getItem()),
             new ExactChoice(EarthBladeFragment.getFullItem().getItem()),
             new ExactChoice(EarthBladeFragment.getFullItem().getItem())
-    }, "waterblade");
+    }, "earthblade");
     public static CraftingTableCraft airBlade = new CraftingTableCraft(AirBlade.getFullItem().getItem(),new RecipeChoice[]{
             new ExactChoice(AirBladeFragment.getFullItem().getItem()),
             new ExactChoice(AirBladeFragment.getFullItem().getItem()),

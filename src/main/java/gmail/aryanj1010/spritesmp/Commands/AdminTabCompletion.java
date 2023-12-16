@@ -57,11 +57,11 @@ public class AdminTabCompletion implements TabCompleter {
             return players;
         } else if (args.length == 4) {
             if (args[0].equalsIgnoreCase("sprite")) {
-                if (args[2].equalsIgnoreCase("set")) {
+                if (args[1].equalsIgnoreCase("set")) {
                     return List.of("fire", "water", "earth", "air", "shadow", "glow");
                 }
             } else if (args[0].equalsIgnoreCase("spritecount")) {
-                if (args[2].equalsIgnoreCase("set")) {
+                if (args[1].equalsIgnoreCase("set")) {
                     return List.of("-5", "-4", "-3", "-2", "-1", "0", "1", "2", "3", "4", "5", "6");
                 }
             }

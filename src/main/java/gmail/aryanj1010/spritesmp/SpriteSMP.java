@@ -46,11 +46,12 @@ public final class SpriteSMP extends JavaPlugin {
   @Override
   public void onEnable() {
     manager = ProtocolLibrary.getProtocolManager();
+    ps = new PlayerSprites(this);
+    psc = new PlayerSpriteCount(this);
     ic = new initializeCrafts();
     // Plugin startup logic
     if (!getDataFolder().exists()) getDataFolder().mkdirs();
-    ps = new PlayerSprites(this);
-    psc = new PlayerSpriteCount(this);
+
     getServer()
       .getScheduler()
       .runTaskTimer(
