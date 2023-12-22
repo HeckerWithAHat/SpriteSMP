@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -23,6 +24,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.reflections.Reflections;
 
 import static gmail.aryanj1010.spritesmp.API.ActionBarManager.*;
+import static gmail.aryanj1010.spritesmp.Items.items.AirPickaxe;
+import static gmail.aryanj1010.spritesmp.Items.items.WaterPickaxe;
 
 /**
  * The main class of the SpriteSMP plugin.
@@ -97,40 +100,13 @@ public final class SpriteSMP extends JavaPlugin {
   }
 
   public void updateEffects(Player p) {
-    p.removePotionEffect(PotionEffectType.REGENERATION);
-    p.removePotionEffect(PotionEffectType.WATER_BREATHING);
-    PotionEffect fire = new PotionEffect(
-      PotionEffectType.FIRE_RESISTANCE,
-      20 * 21,
-      1,
-      true,
-      true
-    );
-    PotionEffect earth = new PotionEffect(
-      PotionEffectType.REGENERATION,
-      Integer.MAX_VALUE,
-      0,
-      true,
-      true
-    );
-    PotionEffect water = new PotionEffect(
-      PotionEffectType.DOLPHINS_GRACE,
-      Integer.MAX_VALUE,
-      0,
-      true,
-      true
-    );
-
-    switch (ps.getSprite(p)) {
-      case FireSprite:
-        p.addPotionEffect(fire);
-        break;
-      case EarthSprite:
-        p.addPotionEffect(earth);
-        break;
-      case WaterSprite:
-        p.addPotionEffect(water);
-        break;
+    if (p.getInventory().getItemInMainHand().equals(AirPickaxe.getFullItem().getItem()) && ps.getSprite(p).equals(items.AirSprite)) {
+      p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 20 * 21, 1));
+      p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 20 * 21, 1));
+    } else if (p.getInventory().getItemInMainHand().equals(WaterPickaxe.getFullItem().getItem()) && ps.getSprite(p).equals(items.WaterSprite)) {
+      if (p.getLocation().getBlock().getType() == Material.WATER) {
+        p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 20 * 21, 1));
+      }
     }
     ps.save();
     psc.save();

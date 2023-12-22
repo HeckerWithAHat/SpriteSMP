@@ -34,36 +34,26 @@ import static org.bukkit.Bukkit.*;
 public class OnClick implements Listener {
     public static final HashMap<UUID, Long> fireRight = new HashMap<>();
     public static final HashMap<UUID, Long> fireShiftRight = new HashMap<>();
-    public static final HashMap<UUID, Long> firePickaxeRight = new HashMap<>();
-    public static final HashMap<UUID, Long> fireShovelRight = new HashMap<>();
 
 
     public static final HashMap<UUID, Long> waterRight = new HashMap<>();
     public static final HashMap<UUID, Long> waterShiftRight = new HashMap<>();
-    public static final HashMap<UUID, Long> waterPickaxeRight = new HashMap<>();
-    public static final HashMap<UUID, Long> waterShovelRight = new HashMap<>();
 
 
     public static final HashMap<UUID, Long> airRight = new HashMap<>();
     public static final HashMap<UUID, Long> airShiftRight = new HashMap<>();
-    public static final HashMap<UUID, Long> airPickaxeRight = new HashMap<>();
-    public static final HashMap<UUID, Long> airShovelRight = new HashMap<>();
 
     public static final HashMap<UUID, Long> earthRight = new HashMap<>();
     public static final List<UUID> earthRightInUse = new ArrayList<>();
     public static final HashMap<UUID, Integer> earthRightTaskNumbers = new HashMap<>();
     public static final HashMap<UUID, FallingBlock> earthRightFallingBlocks = new HashMap<>();
     public static final HashMap<UUID, Long> earthShiftRight = new HashMap<>();
-    public static final HashMap<UUID, Long> earthPickaxeRight = new HashMap<>();
-    public static final HashMap<UUID, Long> earthShovelRight = new HashMap<>();
 
+    public static final HashMap<UUID, Long> shadowRight = new HashMap<>();
     public static final HashMap<UUID, Long> shadowShiftRight = new HashMap<>();
-    public static final HashMap<UUID, Long> shadowPickaxeRight = new HashMap<>();
-    public static final HashMap<UUID, Long> shadowShovelRight = new HashMap<>();
 
+    public static final HashMap<UUID, Long> glowRight = new HashMap<>();
     public static final HashMap<UUID, Long> glowShiftRight = new HashMap<>();
-    public static final HashMap<UUID, Long> glowPickaxeRight = new HashMap<>();
-    public static final HashMap<UUID, Long> glowShovelRight = new HashMap<>();
 
 
     static final HashMap<UUID, Long> endRight = new HashMap<>();
@@ -316,14 +306,6 @@ public class OnClick implements Listener {
                     DragonFireball df = (DragonFireball) p.getWorld().spawn(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize()), DragonFireball.class);
                     df.setVelocity(p.getEyeLocation().getDirection().normalize());
                 }, 30, p);
-            } else if (i.equals(FirePickaxe.getFullItem().getItem())) {
-                new AbilityWithCoolDown(firePickaxeRight, () -> {
-
-                } , 60, p);
-            }else if (i.equals(FireShovel.getFullItem().getItem())) {
-                new AbilityWithCoolDown(fireShovelRight, () -> {
-
-                } , 60, p);
             }
 
 

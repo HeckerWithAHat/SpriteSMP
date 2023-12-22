@@ -1,6 +1,6 @@
 package gmail.aryanj1010.spritesmp.Listeners;
 
-import static gmail.aryanj1010.spritesmp.Listeners.OnClick.waterShiftRight;
+import static gmail.aryanj1010.spritesmp.Listeners.OnClick.*;
 import static gmail.aryanj1010.spritesmp.SpriteSMP.markedPlayer;
 import static org.bukkit.Bukkit.getScheduler;
 import static org.bukkit.plugin.java.JavaPlugin.getPlugin;
@@ -22,8 +22,7 @@ public class OnClickEntity implements Listener {
 
   // Cooldowns
 
-  public static final HashMap<UUID, Long> shadowRight = new HashMap<>();
-  public static final HashMap<UUID, Long> glowRight = new HashMap<>();
+
 
   @EventHandler
   public void onClickEntity(PlayerInteractEntityEvent e) {

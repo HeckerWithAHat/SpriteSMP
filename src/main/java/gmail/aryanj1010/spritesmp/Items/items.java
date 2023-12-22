@@ -34,7 +34,7 @@ public enum items {
             ChatColor.WHITE+"with a 4x4 radius",
             ChatColor.WHITE+"30 second cooldown"}, true, 1)),
     WaterSword(Type.Weapon, new FullItem(Material.DIAMOND_SWORD, 1, ChatColor.AQUA + "Basic Water Sword", new String[]{ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
-            ChatColor.WHITE+"Shoots a stream of bubbles at your enemy (only visible in water)",
+            ChatColor.WHITE+"Shoots a stream of bubbles at your enemy",
             ChatColor.WHITE+"dealing 3 hearts of damage",
             ChatColor.WHITE+"60 second cooldown",
             "",
@@ -193,7 +193,7 @@ public enum items {
     FireShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.DARK_RED + "Fire Shovel", new String[]{
             ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
             ChatColor.WHITE+"Triggers a powerful eruption from the shovel",
-            ChatColor.WHITE+"That clears blocks in a 5x5 radius",
+            ChatColor.WHITE+"That clears blocks in a 5 block radius",
             ChatColor.WHITE+"60 second cooldown"
     }, true, 1)),
     WaterShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.AQUA + "Water Shovel", new String[]{
@@ -205,7 +205,7 @@ public enum items {
     }, true, 2)),
     AirShovel(Type.Shovel, new FullItem(Material.DIAMOND_SHOVEL, 1, ChatColor.GRAY + "Air Shovel", new String[]{
             ChatColor.WHITE+""+ChatColor.BOLD+"Right Click:",
-            ChatColor.WHITE+"Teleports all items in a 10x10 radius",
+            ChatColor.WHITE+"Teleports all items in a 10 block radius",
             ChatColor.WHITE+"into the player's inventory",
             ChatColor.WHITE+"60 second cooldown"
     }, true, 3)),
