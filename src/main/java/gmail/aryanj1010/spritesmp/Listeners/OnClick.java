@@ -309,7 +309,7 @@ public class OnClick implements Listener {
             }
 
 
-        //SHIFT RIGHT CLICK ABILITIES
+            //SHIFT RIGHT CLICK ABILITIES
 
         } else if (p.isSneaking() && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (i.equals(FireSword.getFullItem().getItem()) && hasFire) {
@@ -406,140 +406,169 @@ public class OnClick implements Listener {
                     p.getWorld().spawnParticle(Particle.REDSTONE, p.getLocation(), 20);
                 }, 120, p);
             }
-
-            // Other item interactions
-            if (e.getItem().isSimilar(RevivalSprite.getFullItem().getItem())) {
-                // Clear inventory and display banned players' heads
-                inv.clear();
-                List<PlayerProfile> players = new ArrayList<>();
-                for (BanEntry be:
-                        getServer().getBanList(BanList.Type.PROFILE).getEntries()) {
-                    if (be.getReason().equalsIgnoreCase("Out of Sprites")) {
-                        ItemStack head = new ItemStack(Material.PLAYER_HEAD);
-                        SkullMeta hm = (SkullMeta) head.getItemMeta();
-                        hm.setOwnerProfile((PlayerProfile) be.getBanTarget());
-                        hm.setDisplayName(((PlayerProfile) be.getBanTarget()).getName());
-                        head.setItemMeta(hm);
-                        inv.addItem(head);                    }
+        }
+        // Other item interactions
+        if (e.getItem().isSimilar(RevivalSprite.getFullItem().getItem())) {
+            // Clear inventory and display banned players' heads
+            inv.clear();
+            List<PlayerProfile> players = new ArrayList<>();
+            for (BanEntry be :
+                    getServer().getBanList(BanList.Type.PROFILE).getEntries()) {
+                if (be.getReason().equalsIgnoreCase("Out of Sprites")) {
+                    ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+                    SkullMeta hm = (SkullMeta) head.getItemMeta();
+                    hm.setOwnerProfile((PlayerProfile) be.getBanTarget());
+                    hm.setDisplayName(((PlayerProfile) be.getBanTarget()).getName());
+                    head.setItemMeta(hm);
+                    inv.addItem(head);
                 }
-                   p.openInventory(inv);
-                e.getItem().setAmount(e.getItem().getAmount() - 1);
             }
+            p.openInventory(inv);
+            e.getItem().setAmount(e.getItem().getAmount() - 1);
+        }
 
-            if (e.getItem().isSimilar(RerollSprite.getFullItem().getItem())) {
-                // Reroll sprite ability
-                ps.rerollSprite(p);
-                e.getItem().setAmount(e.getItem().getAmount() - 1);
-            }
+        if (e.getItem().isSimilar(RerollSprite.getFullItem().getItem())) {
+            // Reroll sprite ability
+            ps.rerollSprite(p);
+            e.getItem().setAmount(e.getItem().getAmount() - 1);
+        }
 
-            if (e.getItem().isSimilar(FireSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
-                // Increment player sprite count and consume item
-                psc.updatePlayer(p, 1);
-                e.getItem().setAmount(e.getItem().getAmount() - 1);
-            }
+        if (e.getItem().isSimilar(FireSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
+            // Increment player sprite count and consume item
+            psc.updatePlayer(p, 1);
+            e.getItem().setAmount(e.getItem().getAmount() - 1);
+        }
 
-            if (e.getItem().isSimilar(WaterSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
-                // Increment player sprite count and consume item
-                psc.updatePlayer(p, 1);
-                e.getItem().setAmount(e.getItem().getAmount() - 1);
-            }
+        if (e.getItem().isSimilar(WaterSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
+            // Increment player sprite count and consume item
+            psc.updatePlayer(p, 1);
+            e.getItem().setAmount(e.getItem().getAmount() - 1);
+        }
 
-            if (e.getItem().isSimilar(AirSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
-                // Increment player sprite count and consume item
-                psc.updatePlayer(p, 1);
-                e.getItem().setAmount(e.getItem().getAmount() - 1);
-            }
+        if (e.getItem().isSimilar(AirSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
+            // Increment player sprite count and consume item
+            psc.updatePlayer(p, 1);
+            e.getItem().setAmount(e.getItem().getAmount() - 1);
+        }
 
-            if (e.getItem().isSimilar(EarthSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
-                // Increment player sprite count and consume item
-                psc.updatePlayer(p, 1);
-                e.getItem().setAmount(e.getItem().getAmount() - 1);
-            }
+        if (e.getItem().isSimilar(EarthSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
+            // Increment player sprite count and consume item
+            psc.updatePlayer(p, 1);
+            e.getItem().setAmount(e.getItem().getAmount() - 1);
+        }
 
-            if (e.getItem().isSimilar(ShadowSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
-                // Increment player sprite count and consume item
-                psc.updatePlayer(p, 1);
-                e.getItem().setAmount(e.getItem().getAmount() - 1);
-            }
-            if (e.getItem().isSimilar(GlowSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
-                // Increment player sprite count and consume item
-                psc.updatePlayer(p, 1);
-                e.getItem().setAmount(e.getItem().getAmount() - 1);
-            }
+        if (e.getItem().isSimilar(ShadowSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
+            // Increment player sprite count and consume item
+            psc.updatePlayer(p, 1);
+            e.getItem().setAmount(e.getItem().getAmount() - 1);
+        }
+        if (e.getItem().isSimilar(GlowSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
+            // Increment player sprite count and consume item
+            psc.updatePlayer(p, 1);
+            e.getItem().setAmount(e.getItem().getAmount() - 1);
+        }
 
-            if (e.getItem().equals(TomeOfArcanes.getFullItem().getItem())) {
-                // Handle Tome of Arcanes actions
-                Action a = e.getAction();
-                boolean lc = a.equals(Action.LEFT_CLICK_AIR) || a.equals(Action.LEFT_CLICK_BLOCK);
-                boolean rc = a.equals(Action.RIGHT_CLICK_AIR) || a.equals(Action.RIGHT_CLICK_BLOCK);
+        if (e.getItem().equals(TomeOfArcanes.getFullItem().getItem())) {
+            // Handle Tome of Arcanes actions
+            Action a = e.getAction();
+            boolean lc = a.equals(Action.LEFT_CLICK_AIR) || a.equals(Action.LEFT_CLICK_BLOCK);
+            boolean rc = a.equals(Action.RIGHT_CLICK_AIR) || a.equals(Action.RIGHT_CLICK_BLOCK);
 
-                if (lc && !p.isSneaking()) {
-                    new AbilityWithCoolDown(BOALeft, () -> {
-                        LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 5, entity -> !entity.equals((Entity) p)).getHitEntity();
-                        PotionEffect slow = new PotionEffect(PotionEffectType.SLOW, 10 * 20, 255);
-                        PotionEffect jump = new PotionEffect(PotionEffectType.JUMP, 10 * 20, 255);
-                        PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 10 * 20, 1);
-                        PotionEffect strength = new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10 * 20, 1);
-                        le.addPotionEffect(slow);
-                        le.addPotionEffect(jump);
-                        e.getPlayer().addPotionEffect(speed);
-                        e.getPlayer().addPotionEffect(strength);
-                    }, 120, p);
-                } else if (lc && p.isSneaking()) {
-                    new AbilityWithCoolDown(BOAShiftLeft, () -> {
-                        for (int j = 0; j < 8; j++) {
-                            p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
+            if (lc && !p.isSneaking()) {
+                new AbilityWithCoolDown(BOALeft, () -> {
+                    LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 5, entity -> !entity.equals((Entity) p)).getHitEntity();
+                    PotionEffect slow = new PotionEffect(PotionEffectType.SLOW, 10 * 20, 255);
+                    PotionEffect jump = new PotionEffect(PotionEffectType.JUMP, 10 * 20, 255);
+                    PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 10 * 20, 1);
+                    PotionEffect strength = new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10 * 20, 1);
+                    le.addPotionEffect(slow);
+                    le.addPotionEffect(jump);
+                    e.getPlayer().addPotionEffect(speed);
+                    e.getPlayer().addPotionEffect(strength);
+                }, 120, p);
+            } else if (lc && p.isSneaking()) {
+                new AbilityWithCoolDown(BOAShiftLeft, () -> {
+                    for (int j = 0; j < 8; j++) {
+                        p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
+                    }
+                }, 120, p);
+            } else if (rc && !p.isSneaking()) {
+                new AbilityWithCoolDown(BOARight, () -> {
+                    LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 5, entity -> !entity.equals((Entity) p)).getHitEntity();
+                    le.setVelocity(p.getLocation().getDirection().normalize().multiply(2));
+                }, 120, p);
+            } else if (rc && p.isSneaking()) {
+                new AbilityWithCoolDown(BOAShiftRight, () -> {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 25, 1));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 15 * 20, 1));
+
+                    List<FallingBlock> fallingBlocks = new ArrayList<>();
+
+                    int id = getScheduler().scheduleSyncRepeatingTask(getPlugin(SpriteSMP.class), new Runnable() {
+                        double angle = 0;
+
+                        @Override
+                        public void run() {
+                            Location center = p.getEyeLocation();
+                            double radius = 5; // Change this to adjust the circle's radius
+
+                            for (int i = 0; i < 3; i++) {
+                                if (fallingBlocks.size() <= i) {
+                                    fallingBlocks.add(center.getWorld().spawnFallingBlock(p.getEyeLocation(), Material.GRASS_BLOCK.createBlockData()));
+                                }
+
+                                FallingBlock fallingBlock = fallingBlocks.get(i);
+                                fallingBlock.setGravity(false);
+                                double x = center.getX() + radius * Math.cos(angle + i * ((2 * Math.PI) / 3)); // Adjust this to change the horizontal spacing
+                                double z = center.getZ() + radius * Math.sin(angle + i * ((2 * Math.PI) / 3)); // Adjust this to change the horizontal spacing
+                                fallingBlock.teleport(new Location(center.getWorld(), x, center.getY(), z));
+                            }
+
+                            angle += 1.5 * Math.PI / 180; // Change this to adjust the circle's speed
+                            if (angle > 2 * Math.PI) {
+                                angle = 0;
+                            }
                         }
-                    }, 120, p);
-                } else if (rc && !p.isSneaking()) {
-                    new AbilityWithCoolDown(BOARight, () -> {
-                        LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 5, entity -> !entity.equals((Entity) p)).getHitEntity();
-                        le.setVelocity(p.getLocation().getDirection().normalize().multiply(2));
-                    }, 120, p);
-                } else if (rc && p.isSneaking()) {
-                    new AbilityWithCoolDown(BOAShiftRight, () -> {
-                        p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 25, 1));
-                        p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 15 * 20, 1));
+                    }, 0, 1);
 
-                        List<FallingBlock> fallingBlocks = new ArrayList<>();
-
-                        int id = getScheduler().scheduleSyncRepeatingTask(getPlugin(SpriteSMP.class), new Runnable() {
-                            double angle = 0;
-
-                            @Override
-                            public void run() {
-                                Location center = p.getEyeLocation();
-                                double radius = 5; // Change this to adjust the circle's radius
-
-                                for (int i = 0; i < 3; i++) {
-                                    if (fallingBlocks.size() <= i) {
-                                        fallingBlocks.add(center.getWorld().spawnFallingBlock(p.getEyeLocation(), Material.GRASS_BLOCK.createBlockData()));
-                                    }
-
-                                    FallingBlock fallingBlock = fallingBlocks.get(i);
-                                    fallingBlock.setGravity(false);
-                                    double x = center.getX() + radius * Math.cos(angle + i * ((2 * Math.PI) / 3)); // Adjust this to change the horizontal spacing
-                                    double z = center.getZ() + radius * Math.sin(angle + i * ((2 * Math.PI) / 3)); // Adjust this to change the horizontal spacing
-                                    fallingBlock.teleport(new Location(center.getWorld(), x, center.getY(), z));
-                                }
-
-                                angle += 1.5 * Math.PI / 180; // Change this to adjust the circle's speed
-                                if (angle > 2 * Math.PI) {
-                                    angle = 0;
-                                }
-                            }
-                        }, 0, 1);
-
-                        getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> {
-                            getScheduler().cancelTask(id);
-                            for (FallingBlock fallingBlock : fallingBlocks) {
-                                fallingBlock.remove();
-                            }
-                        }, 25 * 20);
-                    }, 120, p);
+                    getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> {
+                        getScheduler().cancelTask(id);
+                        for (FallingBlock fallingBlock : fallingBlocks) {
+                            fallingBlock.remove();
+                        }
+                    }, 25 * 20);
+                }, 120, p);
+            }
+        } else if (e.getItem().clone().equals(ShadowShovel.getFullItem().getItem()) && hasShadow) {
+            if (e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+                Material m = e.getClickedBlock().getType();
+                if (
+                        m.equals(Material.CLAY) ||
+                        m.equals(Material.COARSE_DIRT) ||
+                        m.equals(Material.DIRT) ||
+                        m.equals(Material.DIRT_PATH) ||
+                        m.equals(Material.FARMLAND) ||
+                        m.equals(Material.GRASS_BLOCK) ||
+                        m.equals(Material.GRAVEL) ||
+                        m.equals(Material.MUD) ||
+                        m.equals(Material.MUDDY_MANGROVE_ROOTS) ||
+                        m.equals(Material.MYCELIUM) ||
+                        m.equals(Material.PODZOL) ||
+                        m.equals(Material.RED_SAND) ||
+                        m.equals(Material.ROOTED_DIRT) ||
+                        m.equals(Material.SAND) ||
+                        m.equals(Material.SNOW) ||
+                        m.equals(Material.SNOW_BLOCK) ||
+                        m.equals(Material.SOUL_SAND) ||
+                        m.equals(Material.SOUL_SOIL) ||
+                        m.equals(Material.SUSPICIOUS_GRAVEL) ||
+                        m.equals(Material.SUSPICIOUS_SAND)
+                    ) {
+                    e.getClickedBlock().breakNaturally();
                 }
             }
         }
+
     }
 }
 

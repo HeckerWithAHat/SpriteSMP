@@ -24,8 +24,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.reflections.Reflections;
 
 import static gmail.aryanj1010.spritesmp.API.ActionBarManager.*;
-import static gmail.aryanj1010.spritesmp.Items.items.AirPickaxe;
-import static gmail.aryanj1010.spritesmp.Items.items.WaterPickaxe;
+import static gmail.aryanj1010.spritesmp.Items.items.*;
 
 /**
  * The main class of the SpriteSMP plugin.
@@ -107,6 +106,8 @@ public final class SpriteSMP extends JavaPlugin {
       if (p.getLocation().getBlock().getType() == Material.WATER) {
         p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 20 * 21, 1));
       }
+    } else if (p.getInventory().getItemInMainHand().equals(GlowShovel.getFullItem().getItem()) && ps.getSprite(p).equals(items.GlowSprite)) {
+      p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 20 * 21, 1));
     }
     ps.save();
     psc.save();
