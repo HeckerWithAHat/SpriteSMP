@@ -4,6 +4,9 @@ import gmail.aryanj1010.spritesmp.API.AbilityWithCoolDown;
 import gmail.aryanj1010.spritesmp.Items.items;
 import gmail.aryanj1010.spritesmp.SpriteSMP;
 import org.bukkit.*;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.block.Block;
+import org.bukkit.block.data.type.Light;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -16,7 +19,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.RayTraceResult;
+import org.bukkit.potion.PotionEffectTypeCategory;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import java.util.*;
@@ -31,302 +36,256 @@ import static org.bukkit.Bukkit.*;
  * It handles various abilities based on the item the player is holding.
  */
 public class OnClick implements Listener {
-    final HashMap<UUID, Long> fireLeft = new HashMap<>();
     final HashMap<UUID, Long> fireRight = new HashMap<>();
+    final HashMap<UUID, Long> fireShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> waterLeft = new HashMap<>();
-    final List<UUID> waterLeftInUse = new ArrayList<>();
-    final HashMap<UUID, Integer> waterLeftTaskNumbers = new HashMap<>();
-    final HashMap<UUID, FallingBlock> waterLeftFallingBlocks = new HashMap<>();
     final HashMap<UUID, Long> waterRight = new HashMap<>();
+    final HashMap<UUID, Long> waterShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> airLeft = new HashMap<>();
     final HashMap<UUID, Long> airRight = new HashMap<>();
+    final HashMap<UUID, Long> airShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> earthLeft = new HashMap<>();
-    final List<UUID> earthLeftInUse = new ArrayList<>();
-    final HashMap<UUID, Integer> earthLeftTaskNumbers = new HashMap<>();
-    final HashMap<UUID, FallingBlock> earthLeftFallingBlocks = new HashMap<>();
     final HashMap<UUID, Long> earthRight = new HashMap<>();
+    final HashMap<UUID, Long> earthShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> basicShadowShiftRight = new HashMap<>();
-    final HashMap<UUID, Long> basicGlowShiftRight = new HashMap<>();
+    final HashMap<UUID, Long> thunderRight = new HashMap<>();
+    final HashMap<UUID, Long> thunderShiftRight = new HashMap<>();
+
+    final HashMap<UUID, Long> frostRight = new HashMap<>();
+    final HashMap<UUID, Long> frostShiftRight = new HashMap<>();
+
+    final HashMap<UUID, Long> lightRight = new HashMap<>();
+    final HashMap<UUID, Long> lightShiftRight = new HashMap<>();
+
+    final HashMap<UUID, Long> darkRight = new HashMap<>();
+    final HashMap<UUID, Long> darkShiftRight = new HashMap<>();
 
 
-    final HashMap<UUID, Long> advancedFireLeft = new HashMap<>();
     final HashMap<UUID, Long> advancedFireRight = new HashMap<>();
+    final HashMap<UUID, Long> advancedFireShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> advancedWaterLeft = new HashMap<>();
-    final List<UUID> advancedWaterLeftInUse = new ArrayList<>();
-    final HashMap<UUID, Integer> advancedWaterLeftTaskNumbers = new HashMap<>();
-    final HashMap<UUID, FallingBlock> advancedWaterLeftFallingBlocks = new HashMap<>();
+    final HashMap<UUID, Long> advancedWaterRight = new HashMap<>();
+    final HashMap<UUID, Long> advancedWaterShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> advancedAirLeft = new HashMap<>();
     final HashMap<UUID, Long> advancedAirRight = new HashMap<>();
+    final HashMap<UUID, Long> advancedAirShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> advancedEarthLeft = new HashMap<>();
-    final List<UUID> advancedEarthLeftInUse = new ArrayList<>();
-    final HashMap<UUID, Integer> advancedEarthLeftTaskNumbers = new HashMap<>();
-    final HashMap<UUID, FallingBlock> advancedEarthLeftFallingBlocks = new HashMap<>();
     final HashMap<UUID, Long> advancedEarthRight = new HashMap<>();
-    final HashMap<UUID, Long> advancedShadowShiftRight = new HashMap<>();
-    final HashMap<UUID, Long> advancedGlowShiftRight = new HashMap<>();
+    final HashMap<UUID, Long> advancedEarthShiftRight = new HashMap<>();
 
+    final HashMap<UUID, Long> advancedThunderRight = new HashMap<>();
+    final HashMap<UUID, Long> advancedThunderShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> endRight = new HashMap<>();
-    final HashMap<UUID, Long> endShiftRight = new HashMap<>();
+    final HashMap<UUID, Long> advancedFrostRight = new HashMap<>();
+    final HashMap<UUID, Long> advancedFrostShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> BOALeft = new HashMap<>();
-    final HashMap<UUID, Long> BOAShiftLeft = new HashMap<>();
-    final HashMap<UUID, Long> BOARight = new HashMap<>();
-    final HashMap<UUID, Long> BOAShiftRight = new HashMap<>();
+    final HashMap<UUID, Long> advancedLightRight = new HashMap<>();
+    final HashMap<UUID, Long> advancedLightShiftRight = new HashMap<>();
+
+    final HashMap<UUID, Long> advancedDarkRight = new HashMap<>();
+    final HashMap<UUID, Long> advancedDarkShiftRight = new HashMap<>();
 
 
     public static Inventory inv = getServer().createInventory(null, 36, "Revival Screen");
 
+
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
         if (e.getHand() != EquipmentSlot.HAND) return;
+
         items it = ps.getSprite(e.getPlayer());
-        boolean hasEarth = it == EarthSprite;
-        boolean hasAir = it == AirSprite;
-        boolean hasWater = it == WaterSprite;
-        boolean hasFire = it == FireSprite;
-        boolean hasShadow = it == ShadowSprite;
-        boolean hasGlow = it == GlowSprite;
+        boolean hasEarth = true;//it == EarthSprite;
+        boolean hasAir = true;//it == AirSprite;
+        boolean hasWater = true;//it == WaterSprite;
+        boolean hasFire = true;//it == FireSprite;
+        boolean hasThunder = true;//it == ThunderSprite;
+        boolean hasFrost = true;//it == FrostSprite;
+        boolean hasLight = true;//it == LightSprite;
+        boolean hasDark = true;//it == DarkSprite;
 
-        ItemStack i = e.getItem().clone();
-
-
-        if (i == null) return;
-        for (Map.Entry<Enchantment, Integer> entry : i.getEnchantments().entrySet()) {
-            i.removeEnchantment(entry.getKey());
-        }
         Player p = e.getPlayer();
         UUID uuid = p.getUniqueId();
-        if ((!p.isSneaking()) && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+        Action a = e.getAction();
+        if (e.getItem() == null) return;
+        ItemStack i = e.getItem().clone();
+        for (Map.Entry<Enchantment, Integer> entry : i.getEnchantments().entrySet())
+            i.removeEnchantment(entry.getKey());
+
+
+        if ((!p.isSneaking()) && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
             if (i.equals(FireSword.getFullItem().getItem()) && hasFire) {
-                new AbilityWithCoolDown(fireLeft, () -> {
-                    RayTraceResult le = p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20, entity -> !entity.equals((Entity) p));
-                    for (int j = 0; j < 10; j++) {
-                        p.spawnParticle(Particle.FLAME,
-                                p.getEyeLocation(),
-                                0,
-                                p.getEyeLocation().getDirection().normalize().getX(),
-                                p.getEyeLocation().getDirection().normalize().getY(),
-                                p.getEyeLocation().getDirection().normalize().getZ(),
-                                null);
-                        try {
-                            Thread.sleep(50);
-                        } catch (InterruptedException ex) {
-                            throw new RuntimeException(ex);
-                        }
+                new AbilityWithCoolDown(fireRight, () -> {
+                    for (Player visPlayer : getAllVisiblePlayers(p)) {
+                        visPlayer.damage(4 * (1 - Math.min(20, Math.max(visPlayer.getAttribute(Attribute.GENERIC_ARMOR).getValue() / 5, visPlayer.getAttribute(Attribute.GENERIC_ARMOR).getValue() - 4 / (2 + visPlayer.getAttribute(Attribute.GENERIC_ARMOR_TOUGHNESS).getValue() / 4))) / 25));
+                        visPlayer.setFireTicks(20 * 5);
                     }
-                    if (le == null) return;
-                    ((LivingEntity) le.getHitEntity()).setHealth(((LivingEntity) le.getHitEntity()).getHealth() - 8);
                 }, 60, p);
             } else if (i.equals(WaterSword.getFullItem().getItem()) && hasWater) {
+                new AbilityWithCoolDown(waterRight, () -> {
+                    for (Player visPlayer : getAllVisiblePlayers(p)) {
 
-                new AbilityWithCoolDown(waterLeft, () -> {
-                    RayTraceResult le = p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20, entity -> !entity.equals((Entity) p));
-                    for (int j = 0; j < 10; j++) {
-                        p.spawnParticle(Particle.NAUTILUS,
-                                p.getEyeLocation(),
-                                0,
-                                p.getEyeLocation().getDirection().normalize().getX(),
-                                p.getEyeLocation().getDirection().normalize().getY(),
-                                p.getEyeLocation().getDirection().normalize().getZ(),
-                                null);
-                        try {
-                            Thread.sleep(50);
-                        } catch (InterruptedException ex) {
-                            throw new RuntimeException(ex);
-                        }
+                        BukkitTask task = new BukkitRunnable() {
+                            public void run() {
+                                visPlayer.damage(1);
+                            }
+                        }.runTaskTimer(getPlugin(SpriteSMP.class), 0, 20);
+                        getServer().getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), task::cancel
+                        , 20 * 6);
                     }
-                    if (le == null) return;
-                    ((LivingEntity) le.getHitEntity()).setHealth(((LivingEntity) le.getHitEntity()).getHealth() - 8);
                 }, 60, p);
 
             } else if (i.equals(AirSword.getFullItem().getItem()) && hasAir) {
-                new AbilityWithCoolDown(airLeft, () -> {
-                    LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 5, entity -> !entity.equals((Entity) p)).getHitEntity();
-                    le.setVelocity(p.getLocation().getDirection().normalize().multiply(-1));
+                new AbilityWithCoolDown(airRight, () -> {
+
+                    p.setVelocity(p.getLocation().getDirection().normalize().multiply(2));
+
                 }, 30, p);
             } else if (i.equals(EarthSword.getFullItem().getItem()) && hasEarth) {
-                if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.BEDROCK)) return;
-                if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.END_PORTAL)) return;
-                if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.END_PORTAL_FRAME))
-                    return;
-                if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.END_GATEWAY)) return;
-                if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.NETHER_PORTAL)) return;
-                if (e.getClickedBlock() != null && e.getClickedBlock().getType().toString().contains("SHULKER_BOX"))
-                    return;
-                if (!earthLeftInUse.contains(p.getUniqueId())) {
-
-                    if (!earthLeft.containsKey(p.getUniqueId())) {
-                        FallingBlock fb = p.getWorld().spawnFallingBlock(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3)), e.getClickedBlock().getType().createBlockData());
-                        fb.setHurtEntities(true);
-                        fb.setDamagePerBlock(8);
-                        fb.setMaxDamage(8);
-                        fb.setGravity(false);
-                        e.getClickedBlock().setType(Material.AIR);
-
-                        earthLeftInUse.add(p.getUniqueId());
-                        int i1 = getServer().getScheduler().runTaskTimer(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
-                            fb.teleport(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3).add(new Vector(0, 0.25, 0))));
-                            fb.setTicksLived(1);
-                        }, 0, 2).getTaskId();
-                        earthLeftTaskNumbers.put(uuid, i1);
-                        earthLeftFallingBlocks.put(uuid, fb);
-                    } else {
-                        long timeElapsed = System.currentTimeMillis() - earthLeft.get(p.getUniqueId());
-
-                        if (timeElapsed >= 60000) {
-                            FallingBlock fb = p.getWorld().spawnFallingBlock(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3)), e.getClickedBlock().getType().createBlockData());
-                            fb.setHurtEntities(true);
-                            fb.setDamagePerBlock(8);
-                            fb.setMaxDamage(8);
-                            fb.setGravity(false);
-                            e.getClickedBlock().setType(Material.AIR);
-
-                            earthLeftInUse.add(p.getUniqueId());
-                            int i1 = getServer().getScheduler().runTaskTimer(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
-                                fb.teleport(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3).add(new Vector(0, 0.25, 0))));
-                                fb.setTicksLived(1);
-                            }, 0, 2).getTaskId();
-                            earthLeftTaskNumbers.put(uuid, i1);
-                            earthLeftFallingBlocks.put(uuid, fb);
-                        } else {
-                            p.sendMessage(60 + " seconds hasn't passed! Please Wait " + Math.round((float) (((60 * 1000L) - timeElapsed) / 1000)) + " seconds");
-
+                new AbilityWithCoolDown(earthRight, () -> {
+                    Material[] blocksConsideredEarth = {Material.DIRT, Material.GRASS_BLOCK, Material.STONE, Material.SAND, Material.SANDSTONE, Material.GRAVEL, Material.CLAY, Material.COBBLESTONE, Material.COAL_ORE, Material.IRON_ORE, Material.GOLD_ORE, Material.DIAMOND_ORE, Material.EMERALD_ORE, Material.REDSTONE_ORE, Material.LAPIS_ORE, Material.NETHER_QUARTZ_ORE, Material.NETHERRACK, Material.END_STONE, Material.BASALT, Material.GRANITE, Material.DIORITE, Material.ANDESITE, Material.RED_SAND, Material.RED_SANDSTONE, Material.BLACKSTONE};
+                    int amtOfBlocks = 0;
+                    for (int x = 5; x > 0; x--) {
+                        for (int y = 3; y > 0; y--) {
+                            for (int z = 5; z > 0; z--) {
+                                if (Arrays.asList(blocksConsideredEarth).contains(p.getWorld().getBlockAt(p.getLocation().add(x - 3, y - 2, z - 3)).getType())) {
+                                    p.getWorld().getBlockAt(p.getLocation().add(x-3, y-2, z-3)).setType(Material.AIR);
+                                    amtOfBlocks++;
+                                }
+                            }
                         }
                     }
-                } else {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, Math.clamp(amtOfBlocks / 10, 0, 3)));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 5, Math.clamp(amtOfBlocks / 10, 0, 3)));
+                }, 60, p);
+            } else if (i.equals(ThunderSword.getFullItem().getItem()) && hasThunder) {
+                new AbilityWithCoolDown(thunderRight, () -> {
+                    p.getWorld().setThundering(true);
+                    getServer().getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
+                        boolean raining = p.getWorld().hasStorm();
+                        p.getWorld().setThundering(false);
+                        if (!raining) p.getWorld().setStorm(false);
+                    }, 20*10);
+                    }, 120, p);
+            } else if (i.equals(FrostSword.getFullItem().getItem()) && hasFrost) {
+                new AbilityWithCoolDown(frostRight, () -> {
+                    int taskNum = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {
+                        Arrow arrowFired = p.launchProjectile(Arrow.class, p.getLocation().getDirection());
+                        arrowFired.setPickupStatus(AbstractArrow.PickupStatus.CREATIVE_ONLY);
+                        arrowFired.addCustomEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 5, 2), true);
+                        arrowFired.setColor(Color.BLUE);
 
-                    new AbilityWithCoolDown(earthLeft, () -> {
-                        getScheduler().cancelTask(earthLeftTaskNumbers.get(uuid));
-                        earthLeftTaskNumbers.remove(uuid);
-                        earthLeftFallingBlocks.get(uuid).setVelocity(p.getEyeLocation().getDirection().normalize().multiply(2));
-                        earthLeftFallingBlocks.get(uuid).setGravity(true);
-                        earthLeftFallingBlocks.remove(uuid);
-                        earthLeftInUse.remove(uuid);
-
+                    }, 0, 10).getTaskId();
+                    getServer().getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> getServer().getScheduler().cancelTask(taskNum), 10 * 20);
+                }, 60, p);
+            } else if (i.equals(LightSword.getFullItem().getItem()) && hasLight) {
+                new AbilityWithCoolDown(lightRight, () -> {
+                    for (PotionEffectType pet : PotionEffectType.values()) {
+                        if (pet.getCategory().equals(PotionEffectTypeCategory.HARMFUL)) {
+                            p.removePotionEffect(pet);
+                        }
+                    }
                     }, 60, p);
-                }
-
-            } else if (i.equals(AdvancedFireSword.getFullItem().getItem()) && hasFire) {
-                new AbilityWithCoolDown(advancedFireLeft, () -> {
-                    RayTraceResult le = p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20, entity -> !entity.equals((Entity) p));
-                    for (int j = 0; j < 10; j++) {
-                        p.spawnParticle(Particle.FLAME,
-                                p.getEyeLocation(),
-                                0,
-                                p.getEyeLocation().getDirection().normalize().getX(),
-                                p.getEyeLocation().getDirection().normalize().getY(),
-                                p.getEyeLocation().getDirection().normalize().getZ(),
-                                null);
-                        try {
-                            Thread.sleep(50);
-                        } catch (InterruptedException ex) {
-                            throw new RuntimeException(ex);
+            } else if (i.equals(DarkSword.getFullItem().getItem()) && hasDark) {
+                new AbilityWithCoolDown(darkRight, () -> {
+                    p.getNearbyEntities(5, 5, 5).forEach(entity -> {
+                        if (entity instanceof Player) {
+                            ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 20, 4));
                         }
+                    });
+                }, 30, p);
+            } else if (i.equals(AdvancedFireSword.getFullItem().getItem()) && hasFire) {
+                new AbilityWithCoolDown(advancedFireRight, () -> {
+                    for (Player visPlayer : getAllVisiblePlayers(p)) {
+                        visPlayer.damage(6 * (1 - Math.min(20, Math.max(visPlayer.getAttribute(Attribute.GENERIC_ARMOR).getValue() / 5, visPlayer.getAttribute(Attribute.GENERIC_ARMOR).getValue() - 6 / (2 + visPlayer.getAttribute(Attribute.GENERIC_ARMOR_TOUGHNESS).getValue() / 4))) / 25));
+                        visPlayer.setFireTicks(20 * 8);
                     }
-                    if (le == null) return;
-                    ((LivingEntity) le.getHitEntity()).setHealth(((LivingEntity) le.getHitEntity()).getHealth() - 12);
                 }, 60, p);
             } else if (i.equals(AdvancedWaterSword.getFullItem().getItem()) && hasWater) {
-                new AbilityWithCoolDown(advancedWaterLeft, () -> {
-                    RayTraceResult le = p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getLocation().getDirection().normalize(), 20, entity -> !entity.equals((Entity) p));
-                    for (int j = 0; j < 10; j++) {
-                        p.spawnParticle(Particle.NAUTILUS,
-                                p.getEyeLocation(),
-                                0,
-                                p.getEyeLocation().getDirection().normalize().getX(),
-                                p.getEyeLocation().getDirection().normalize().getY(),
-                                p.getEyeLocation().getDirection().normalize().getZ(),
-                                null);
-                        try {
-                            Thread.sleep(50);
-                        } catch (InterruptedException ex) {
-                            throw new RuntimeException(ex);
-                        }
+                new AbilityWithCoolDown(advancedWaterRight, () -> {
+                    for (Player visPlayer : getAllVisiblePlayers(p)) {
+                        BukkitTask task = new BukkitRunnable() {
+                            public void run() {
+                                visPlayer.damage(2);
+                            }
+                        }.runTaskTimer(getPlugin(SpriteSMP.class), 0, 20);
+                        getServer().getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
+                            task.cancel();
+                        }, 20 * 6);
                     }
-                    if (le == null) return;
-                    ((LivingEntity) le.getHitEntity()).setHealth(((LivingEntity) le.getHitEntity()).getHealth() - 12);
                 }, 60, p);
             } else if (i.equals(AdvancedAirSword.getFullItem().getItem()) && hasAir) {
-                new AbilityWithCoolDown(advancedAirLeft, () -> {
-                    LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 5, entity -> !entity.equals((Entity) p)).getHitEntity();
-                    le.setVelocity(p.getLocation().getDirection().normalize().multiply(-4));
-                    le.damage(6);
+                new AbilityWithCoolDown(advancedAirRight, () -> {
+
+                    p.setVelocity(p.getLocation().getDirection().normalize().multiply(4));
+
                 }, 120, p);
             } else if (i.equals(AdvancedEarthSword.getFullItem().getItem()) && hasEarth) {
-                if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.BEDROCK)) return;
-                if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.END_PORTAL)) return;
-                if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.END_PORTAL_FRAME))
-                    return;
-                if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.END_GATEWAY)) return;
-                if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.NETHER_PORTAL)) return;
-                if (e.getClickedBlock() != null && e.getClickedBlock().getType().toString().contains("SHULKER_BOX"))
-                    return;
-
-                if (!advancedEarthLeftInUse.contains(p.getUniqueId())) {
-                    if (!advancedEarthLeft.containsKey(p.getUniqueId())) {
-                        FallingBlock fb = p.getWorld().spawnFallingBlock(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3)), e.getClickedBlock().getType().createBlockData());
-                        fb.setHurtEntities(true);
-                        fb.setDamagePerBlock(8);
-                        fb.setMaxDamage(8);
-                        fb.setGravity(false);
-                        e.getClickedBlock().setType(Material.AIR);
-
-                        advancedEarthLeftInUse.add(p.getUniqueId());
-                        int i1 = getServer().getScheduler().runTaskTimer(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
-                            fb.teleport(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3).add(new Vector(0, 0.25, 0))));
-                            fb.setTicksLived(1);
-                        }, 0, 2).getTaskId();
-                        advancedEarthLeftTaskNumbers.put(uuid, i1);
-                        advancedEarthLeftFallingBlocks.put(uuid, fb);
-                    } else {
-                        long timeElapsed = System.currentTimeMillis() - advancedEarthLeft.get(p.getUniqueId());
-
-                        if (timeElapsed >= 60000) {
-                            FallingBlock fb = p.getWorld().spawnFallingBlock(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3)), e.getClickedBlock().getType().createBlockData());
-                            fb.setHurtEntities(true);
-                            fb.setDamagePerBlock(8);
-                            fb.setMaxDamage(8);
-                            fb.setGravity(false);
-                            e.getClickedBlock().setType(Material.AIR);
-
-                            advancedEarthLeftInUse.add(p.getUniqueId());
-                            int i1 = getServer().getScheduler().runTaskTimer(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
-                                fb.teleport(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(3).add(new Vector(0, 0.25, 0))));
-                                fb.setTicksLived(1);
-                            }, 0, 2).getTaskId();
-                            advancedEarthLeftTaskNumbers.put(uuid, i1);
-                            advancedEarthLeftFallingBlocks.put(uuid, fb);
-                        } else {
-                            p.sendMessage(60 + " seconds hasn't passed! Please Wait " + Math.round((float) (((60 * 1000L) - timeElapsed) / 1000)) + " seconds");
+                new AbilityWithCoolDown(advancedEarthRight, () -> {
+                    Material[] blocksConsideredEarth = {Material.DIRT, Material.GRASS_BLOCK, Material.STONE, Material.SAND, Material.SANDSTONE, Material.GRAVEL, Material.CLAY, Material.COBBLESTONE, Material.COAL_ORE, Material.IRON_ORE, Material.GOLD_ORE, Material.DIAMOND_ORE, Material.EMERALD_ORE, Material.REDSTONE_ORE, Material.LAPIS_ORE, Material.NETHER_QUARTZ_ORE, Material.NETHERRACK, Material.END_STONE, Material.BASALT, Material.GRANITE, Material.DIORITE, Material.ANDESITE, Material.RED_SAND, Material.RED_SANDSTONE, Material.BLACKSTONE};
+                    int amtOfBlocks = 0;
+                    for (int x = 7; x > 0; x--) {
+                        for (int y = 5; y > 0; y--) {
+                            for (int z = 7; z > 0; z--) {
+                                if (Arrays.asList(blocksConsideredEarth).contains(p.getWorld().getBlockAt(p.getLocation().add(x - 4, y - 3, z - 4)).getType())) {
+                                    p.getWorld().getBlockAt(p.getLocation().add(x-4, y-3, z-4)).setType(Material.AIR);
+                                    amtOfBlocks++;
+                                }
+                            }
                         }
                     }
-                } else {
-                    new AbilityWithCoolDown(advancedEarthLeft, () -> {
-                        getScheduler().cancelTask(advancedEarthLeftTaskNumbers.get(uuid));
-                        advancedEarthLeftTaskNumbers.remove(uuid);
-                        advancedEarthLeftInUse.remove(uuid);
-                        advancedEarthLeftFallingBlocks.get(uuid).setVelocity(p.getLocation().getDirection().normalize().multiply(2));
-                        advancedEarthLeftFallingBlocks.get(uuid).setGravity(true);
-                        advancedEarthLeftFallingBlocks.remove(uuid);
-                    }, 60, p);
-                }
-            } else if (i.equals(EndSword.getFullItem().getItem())) {
-                new AbilityWithCoolDown(endRight, () -> {
-                    DragonFireball df = (DragonFireball) p.getWorld().spawn(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize()), DragonFireball.class);
-                    df.setVelocity(p.getEyeLocation().getDirection().normalize());
-                }, 5, p);
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, Math.clamp(amtOfBlocks / 10, 0, 3)));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, Math.clamp(amtOfBlocks / 10, 0, 3)));
+                }, 120, p);
             }
-        } else if (p.isSneaking() && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+        } else if (i.equals(AdvancedThunderSword.getFullItem().getItem()) && hasThunder) {
+            new AbilityWithCoolDown(advancedThunderRight, () -> {
+                boolean raining = p.getWorld().hasStorm();
+                p.getWorld().setThundering(true);
+                getServer().getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
+                    p.getWorld().setThundering(false);
+                    if (!raining) p.getWorld().setStorm(false);
+                }, 20*20);
+            }, 120, p);
+        } else if (i.equals(AdvancedFrostSword.getFullItem().getItem()) && hasFrost) {
+            new AbilityWithCoolDown(advancedFrostRight, () -> {
+                int taskNum = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {
+                    Arrow arrowFired = p.launchProjectile(Arrow.class, p.getLocation().getDirection());
+                    arrowFired.setPickupStatus(AbstractArrow.PickupStatus.CREATIVE_ONLY);
+                    arrowFired.addCustomEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 5, 2), true);
+                    arrowFired.addCustomEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 5, 0), true);
+                    arrowFired.addCustomEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 5, 0), true);
+                    arrowFired.setColor(Color.BLUE);
+                }, 0, 8).getTaskId();
+                getServer().getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> getServer().getScheduler().cancelTask(taskNum), 8 * 25);
+            }, 60, p);
+        } else if (i.equals(AdvancedLightSword.getFullItem().getItem()) && hasLight) {
+            new AbilityWithCoolDown(advancedLightRight, () -> {
+                for (PotionEffectType pet : PotionEffectType.values()) {
+                    if (pet.getCategory().equals(PotionEffectTypeCategory.HARMFUL)) {
+                        p.removePotionEffect(pet);
+                    }
+                }
+            }, 30, p);
+        } else if (i.equals(AdvancedDarkSword.getFullItem().getItem()) && hasDark) {
+            new AbilityWithCoolDown(advancedDarkRight, () -> {
+                p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0));
+                p.getNearbyEntities(7, 7, 7).forEach(entity -> {
+                    if (entity instanceof Player) {
+                        ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 20, 4));
+                    }
+                });
+            }, 30, p);
+        }
+        /*
+
+
+            RIGHT CLICK ABILITIES
+
+
+        */
+        if (p.isSneaking() && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
             if (i.equals(FireSword.getFullItem().getItem()) && hasFire) {
-                new AbilityWithCoolDown(fireRight, () -> {
+                new AbilityWithCoolDown(fireShiftRight, () -> {
                     for (int j = (int) p.getLocation().getX() - 2; j < (int) p.getLocation().getX() + 2; j++) {
                         for (int k = (int) p.getLocation().getZ() - 2; k < (int) p.getLocation().getZ() + 2; k++) {
                             if (p.getWorld().getBlockAt(new Location(p.getWorld(), j, p.getLocation().getY(), k)).getType().equals(Material.AIR))
@@ -335,93 +294,162 @@ public class OnClick implements Listener {
                     }
                 }, 30, p);
             } else if (i.equals(WaterSword.getFullItem().getItem()) && p.getWorld().getBlockAt(p.getLocation()).getType().equals(Material.WATER) && hasWater) {
-                new AbilityWithCoolDown(waterRight, () -> {
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 2));
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * 5, 2));
+                new AbilityWithCoolDown(waterShiftRight, () -> {
+                    Location center = p.getLocation();
+                    p.getNearbyEntities(5, 5, 5).forEach(entity -> {
+                        if (entity.getLocation().subtract(center).length() <= 5) {
+                            int taskNum = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {
+                                entity.setVelocity(center.subtract(entity.getLocation()).toVector().normalize());
+                            }, 0, 5).getTaskId();
+                            getServer().getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> getServer().getScheduler().cancelTask(taskNum),20*5);
+                        }
+                    });
                 }, 120, p);
             } else if (i.equals(AirSword.getFullItem().getItem()) && hasAir) {
-                new AbilityWithCoolDown(airRight, () -> {
-                    p.sendMessage("You can now fly for 5 seconds");
-                    p.setAllowFlight(true);
-                    getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> p.sendMessage("3"), 2 * 20);
-                    getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> p.sendMessage("2"), 3 * 20);
-                    getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> p.sendMessage("1"), 4 * 20);
-                    getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
-                        p.sendMessage("0");
-                        p.setAllowFlight(false);
-                    }, 5 * 20);
+                new AbilityWithCoolDown(airShiftRight, () -> {
+                    p.getNearbyEntities(5, 5, 5).forEach(entity -> {
+                        if (entity instanceof Player) {
+                            entity.setVelocity(entity.getLocation().toVector().subtract(p.getLocation().toVector()).normalize().add(new Vector(0, 1, 0)));
+                        }
+                    });
                 }, 60, p);
             } else if (i.equals(EarthSword.getFullItem().getItem()) && hasEarth) {
                 // Ability activation based on item clicked
-                new AbilityWithCoolDown(earthRight, () -> {
+                new AbilityWithCoolDown(earthShiftRight, () -> {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10 * 20, 1));
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10 * 20, 1));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 10 * 20, 1));
                 }, 40, p);
-            } else if (i.equals(ShadowSword.getFullItem().getItem()) && hasShadow) {
-                new AbilityWithCoolDown(basicShadowShiftRight, () -> {
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20 * 20, 1, true, false));
-                    for (Player player : getServer().getOnlinePlayers()) {
-                        player.hidePlayer(getPlugin(SpriteSMP.class), p);
+            } else if (i.equals(ThunderSword.getFullItem().getItem()) && hasThunder) {
+                new AbilityWithCoolDown(thunderShiftRight, () -> {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 5, 255));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP_BOOST, 20 * 5, 255));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 5, 0));
+                    getServer().getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> {
+                        p.getNearbyEntities(5, 5, 5).forEach(entity -> {
+                            if (entity instanceof Player) {
+                                ((Player)entity).damage(4);
+                                p.getWorld().strikeLightning(entity.getLocation());
+                            }
+                        });
+                    }, 20 * 5);
+                }, 120, p);
+            } else if (i.equals(FrostSword.getFullItem().getItem()) && hasFrost) {
+            } else if (i.equals(LightSword.getFullItem().getItem()) && hasLight) {
+                new AbilityWithCoolDown(lightShiftRight, () -> {
+                    int lightLevel = p.getWorld().getBlockAt(p.getLocation()).getLightLevel();
+                    switch (lightLevel) {
+                        case 0:
+                            break;
+                        case 1,2,3:
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 0));
+                            break;
+                        case 4,5,6:
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 5, 0));
+                            break;
+                        case 7,8,9:
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 0));
+                            break;
+                        case 10,11,12:
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20 * 5, 0));
+                            break;
+                        case 13,14,15:
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 20 * 5, 0));
+                            break;
                     }
-                    invisPlayers.add(p);
-                    getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
-                        for (Player player : getServer().getOnlinePlayers()) {
-                            player.showPlayer(getPlugin(SpriteSMP.class), p);
-                        }
-                        invisPlayers.remove(p);
-                    }, 20 * 20);
                 }, 120, p);
-            } else if (i.equals(GlowSword.getFullItem().getItem()) && hasGlow) {
-                new AbilityWithCoolDown(basicGlowShiftRight, () -> {
-                    p.setHealth(p.getHealth() + 10);
-                    p.getWorld().spawnParticle(Particle.REDSTONE, p.getLocation(), 10);
-                }, 120, p);
+            } else if (i.equals(DarkSword.getFullItem().getItem()) && hasDark) {
             } else if (i.equals(AdvancedFireSword.getFullItem().getItem()) && hasFire) {
-                new AbilityWithCoolDown(advancedFireRight, () -> {
+                new AbilityWithCoolDown(advancedFireShiftRight, () -> {
                     p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
                     p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
                     p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
                     p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
                 }, 120, p);
+            } else if (i.equals(AdvancedWaterSword.getFullItem().getItem()) && hasWater) {
+                new AbilityWithCoolDown(advancedWaterShiftRight, () -> {
+                    Location center = p.getLocation();
+                    p.getNearbyEntities(7, 7, 7).forEach(entity -> {
+                        if (entity.getLocation().subtract(center).length() <= 7) {
+                            int taskNum = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {
+                                entity.setVelocity(center.subtract(entity.getLocation()).toVector().normalize().multiply(1.1));
+                            }, 0, 5).getTaskId();
+                            getServer().getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> getServer().getScheduler().cancelTask(taskNum),20*7);
+                        }
+                    });
+                }, 60, p);
             } else if (i.equals(AdvancedAirSword.getFullItem().getItem()) && hasAir) {
-                new AbilityWithCoolDown(advancedAirRight, () -> {
-                    LivingEntity entity = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 20, en -> !en.equals((Entity) p)).getHitEntity();
-                    entity.getWorld().strikeLightning(entity.getLocation());
-                    entity.damage(16);
+                new AbilityWithCoolDown(advancedAirShiftRight, () -> {
+                    p.getNearbyEntities(9, 9, 9).forEach(entity -> {
+                        if (entity instanceof Player) {
+                            entity.setVelocity(entity.getLocation().toVector().subtract(p.getLocation().toVector()).normalize().multiply(1.2).add(new Vector(0, 2, 0)));
+                        }
+                    });
                 }, 180, p);
             } else if (i.equals(AdvancedEarthSword.getFullItem().getItem()) && hasEarth) {
-                new AbilityWithCoolDown(advancedEarthRight, () -> {
+                new AbilityWithCoolDown(advancedEarthShiftRight, () -> {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 1));
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 15 * 20, 1));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 15 * 20, 1));
                 }, 60, p);
-            } else if (i.equals(EndSword.getFullItem().getItem())) {
-                new AbilityWithCoolDown(endShiftRight, () -> {
-                    p.setVelocity(p.getVelocity().add(new Vector(0, 5, 0)));
-                    p.setGliding(true);
-                }, 240, p);
-            } else if (i.equals(AdvancedShadowSword.getFullItem().getItem()) && hasShadow) {
-                new AbilityWithCoolDown(advancedShadowShiftRight, () -> {
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20 * 30, 1, true, false));
-                    for (Player player : getServer().getOnlinePlayers()) {
-                        player.hidePlayer(getPlugin(SpriteSMP.class), p);
-                    }
-                    invisPlayers.add(p);
-                    getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
-                        for (Player player : getServer().getOnlinePlayers()) {
-                            player.showPlayer(getPlugin(SpriteSMP.class), p);
-                        }
-                        invisPlayers.remove(p);
-                    }, 20 * 20);
+            } else if (i.equals(AdvancedThunderSword.getFullItem().getItem()) && hasThunder) {
+                new AbilityWithCoolDown(advancedThunderShiftRight, () -> {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 3, 255));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP_BOOST, 20 * 3, 255));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 3, 0));
+                    getServer().getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> {
+                        p.getNearbyEntities(7, 7, 7).forEach(entity -> {
+                            if (entity instanceof Player) {
+                                ((Player)entity).damage(8);
+                                p.getWorld().strikeLightning(entity.getLocation());
+                            }
+                        });
+                    }, 20 * 5);
                 }, 120, p);
-            } else if (i.equals(AdvancedGlowSword.getFullItem().getItem()) && hasGlow) {
-                new AbilityWithCoolDown(advancedGlowShiftRight, () -> {
-                    p.setHealth(p.getHealth() + 20);
-                    p.getWorld().spawnParticle(Particle.REDSTONE, p.getLocation(), 20);
+            } else if (i.equals(AdvancedFrostSword.getFullItem().getItem()) && hasFrost) {
+            } else if (i.equals(AdvancedLightSword.getFullItem().getItem()) && hasLight) {
+                new AbilityWithCoolDown(advancedLightShiftRight, () -> {
+                    int lightLevel = p.getWorld().getBlockAt(p.getLocation()).getLightLevel();
+                    switch (lightLevel) {
+                        case 0:
+                            break;
+                        case 1,2,3:
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
+                            break;
+                        case 4,5,6:
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, 0));
+                            break;
+                        case 7,8,9:
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 10, 0));
+                            break;
+                        case 10,11,12:
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20 * 10, 0));
+                            break;
+                        case 13,14,15:
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 20 * 10, 0));
+                            break;
+                    };
                 }, 120, p);
-            }
-
-            // Other item interactions
-            if (e.getItem().isSimilar(RevivalSprite.getFullItem().getItem())) {
+            } else if (i.equals(AdvancedDarkSword.getFullItem().getItem()) && hasDark) {
+            } else if (i.isSimilar(RevivalSprite.getFullItem().getItem())) {
                 // Clear inventory and display banned players' heads
                 inv.clear();
                 for (OfflinePlayer op : getServer().getBannedPlayers()) {
@@ -433,118 +461,77 @@ public class OnClick implements Listener {
                     inv.addItem(head);
                 }
                 e.getItem().setAmount(e.getItem().getAmount() - 1);
-            }
-
-            if (e.getItem().isSimilar(RerollSprite.getFullItem().getItem())) {
+            } else if (i.isSimilar(RerollSprite.getFullItem().getItem())) {
                 // Reroll sprite ability
                 ps.rerollSprite(p);
                 e.getItem().setAmount(e.getItem().getAmount() - 1);
-            }
-
-            if (e.getItem().isSimilar(FireSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
+            } else if (i.isSimilar(FireSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
                 // Increment player sprite count and consume item
                 psc.updatePlayer(p, 1);
                 e.getItem().setAmount(e.getItem().getAmount() - 1);
-            }
-
-            if (e.getItem().isSimilar(WaterSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
+            } else if (i.isSimilar(WaterSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
                 // Increment player sprite count and consume item
                 psc.updatePlayer(p, 1);
                 e.getItem().setAmount(e.getItem().getAmount() - 1);
-            }
-
-            if (e.getItem().isSimilar(AirSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
+            } else if (i.isSimilar(AirSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
                 // Increment player sprite count and consume item
                 psc.updatePlayer(p, 1);
                 e.getItem().setAmount(e.getItem().getAmount() - 1);
-            }
-
-            if (e.getItem().isSimilar(EarthSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
+            } else if (i.isSimilar(EarthSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
                 // Increment player sprite count and consume item
                 psc.updatePlayer(p, 1);
                 e.getItem().setAmount(e.getItem().getAmount() - 1);
-            }
-
-            if (e.getItem().isSimilar(ShadowSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
-                getServer().getConsoleSender().sendMessage("test one passed");
-                // Increment player sprite count and consume item
-                psc.updatePlayer(p, 1);
-                e.getItem().setAmount(e.getItem().getAmount() - 1);
-            }
-
-            if (e.getItem().equals(TomeOfArcanes.getFullItem().getItem())) {
-                // Handle Tome of Arcanes actions
-                Action a = e.getAction();
-                boolean lc = a.equals(Action.LEFT_CLICK_AIR) || a.equals(Action.LEFT_CLICK_BLOCK);
-                boolean rc = a.equals(Action.RIGHT_CLICK_AIR) || a.equals(Action.RIGHT_CLICK_BLOCK);
-
-                if (lc && !p.isSneaking()) {
-                    new AbilityWithCoolDown(BOALeft, () -> {
-                        LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 5, entity -> !entity.equals((Entity) p)).getHitEntity();
-                        PotionEffect slow = new PotionEffect(PotionEffectType.SLOW, 10 * 20, 255);
-                        PotionEffect jump = new PotionEffect(PotionEffectType.JUMP, 10 * 20, 255);
-                        PotionEffect speed = new PotionEffect(PotionEffectType.SPEED, 10 * 20, 1);
-                        PotionEffect strength = new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10 * 20, 1);
-                        le.addPotionEffect(slow);
-                        le.addPotionEffect(jump);
-                        e.getPlayer().addPotionEffect(speed);
-                        e.getPlayer().addPotionEffect(strength);
-                    }, 120, p);
-                } else if (lc && p.isSneaking()) {
-                    new AbilityWithCoolDown(BOAShiftLeft, () -> {
-                        for (int j = 0; j < 8; j++) {
-                            p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
-                        }
-                    }, 120, p);
-                } else if (rc && !p.isSneaking()) {
-                    new AbilityWithCoolDown(BOARight, () -> {
-                        LivingEntity le = (LivingEntity) p.getWorld().rayTraceEntities(p.getEyeLocation(), p.getEyeLocation().getDirection().normalize(), 5, entity -> !entity.equals((Entity) p)).getHitEntity();
-                        le.setVelocity(p.getLocation().getDirection().normalize().multiply(2));
-                    }, 120, p);
-                } else if (rc && p.isSneaking()) {
-                    new AbilityWithCoolDown(BOAShiftRight, () -> {
-                        p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 25, 1));
-                        p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 15 * 20, 1));
-
-                        List<FallingBlock> fallingBlocks = new ArrayList<>();
-
-                        int id = getScheduler().scheduleSyncRepeatingTask(getPlugin(SpriteSMP.class), new Runnable() {
-                            double angle = 0;
-
-                            @Override
-                            public void run() {
-                                Location center = p.getEyeLocation();
-                                double radius = 5; // Change this to adjust the circle's radius
-
-                                for (int i = 0; i < 3; i++) {
-                                    if (fallingBlocks.size() <= i) {
-                                        fallingBlocks.add(center.getWorld().spawnFallingBlock(p.getEyeLocation(), Material.GRASS_BLOCK.createBlockData()));
-                                    }
-
-                                    FallingBlock fallingBlock = fallingBlocks.get(i);
-                                    fallingBlock.setGravity(false);
-                                    double x = center.getX() + radius * Math.cos(angle + i * ((2 * Math.PI) / 3)); // Adjust this to change the horizontal spacing
-                                    double z = center.getZ() + radius * Math.sin(angle + i * ((2 * Math.PI) / 3)); // Adjust this to change the horizontal spacing
-                                    fallingBlock.teleport(new Location(center.getWorld(), x, center.getY(), z));
-                                }
-
-                                angle += 1.5 * Math.PI / 180; // Change this to adjust the circle's speed
-                                if (angle > 2 * Math.PI) {
-                                    angle = 0;
-                                }
-                            }
-                        }, 0, 1);
-
-                        getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> {
-                            getScheduler().cancelTask(id);
-                            for (FallingBlock fallingBlock : fallingBlocks) {
-                                fallingBlock.remove();
-                            }
-                        }, 25 * 20);
-                    }, 120, p);
-                }
             }
         }
+    }
+
+
+    public List<Player> getAllVisiblePlayers(Player observer) {
+        List<Player> visiblePlayers = new ArrayList<>();
+        for (Player player : getOnlinePlayers()) {
+            if (isWithinUnobstructedFieldOfView(observer, player, 90)) {
+                visiblePlayers.add(player);
+            }
+        }
+        return visiblePlayers;
+    }
+
+
+    public boolean isWithinUnobstructedFieldOfView(Player observerPlayer, Player observedPlayer, double maxAngleDegrees) {
+        double maxAngle = Math.toRadians(maxAngleDegrees); // Convert max angle to radians
+
+        // Calculate the direction vector of the observer
+        Location observerLoc = observerPlayer.getLocation();
+        Location observerDir = observerPlayer.getLocation().setDirection(observerPlayer.getLocation().getDirection()).add(0, 0, 1);
+        double dxObserver = observerDir.getX() - observerLoc.getX();
+        double dyObserver = observerDir.getY() - observerLoc.getY();
+        double dzObserver = observerDir.getZ() - observerLoc.getZ();
+
+        // Calculate the vector to the observed player
+        Location observedLoc = observedPlayer.getLocation();
+        double dxObserved = observedLoc.getX() - observerLoc.getX();
+        double dyObserved = observedLoc.getY() - observerLoc.getY();
+        double dzObserved = observedLoc.getZ() - observerLoc.getZ();
+
+        // Calculate the angle between vectors
+        double dotProduct = dxObserver * dxObserved + dyObserver * dyObserved + dzObserver * dzObserved;
+        double magnitude = Math.sqrt(dxObserver * dxObserver + dyObserver * dyObserver + dzObserver * dzObserver) * Math.sqrt(dxObserved * dxObserved + dyObserved * dyObserved + dzObserved * dzObserved);
+        double angle = Math.acos(dotProduct / magnitude);
+
+        // Check if within field of view
+        if (angle > maxAngle) {
+            return false; // Observed player is outside the field of view
+        }
+
+        // Check for obstructions
+        List<Block> sightBlocks = observerPlayer.getLineOfSight((Set<Material>) null, (int) observerLoc.distance(observedLoc));
+        for (Block block : sightBlocks) {
+            if (block.getType() != Material.AIR) {
+                return false; // Obstruction detected
+            }
+        }
+
+        return true; // No obstructions and within field of view
     }
 }
 

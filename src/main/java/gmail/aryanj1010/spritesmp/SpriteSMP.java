@@ -10,16 +10,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * The main class of the SpriteSMP plugin.
@@ -33,10 +27,14 @@ public final class SpriteSMP extends JavaPlugin {
             items.FireSprite,
             items.WaterSprite,
             items.AirSprite,
-            items.EarthSprite};
+            items.EarthSprite,
+            items.ThunderSprite,
+            items.FrostSprite,
+            items.LightSprite,
+            items.DarkSprite
 
-    public static HashMap<Player, Player> markedPlayer = new HashMap<>();
-    public static List<Player> invisPlayers;
+    };
+
 
     @Override
     public void onEnable() {
@@ -45,12 +43,7 @@ public final class SpriteSMP extends JavaPlugin {
         if (!getDataFolder().exists()) getDataFolder().mkdirs();
         ps = new PlayerSprites(this);
         psc = new PlayerSpriteCount(this);
-        getServer().getScheduler().runTaskTimer(this, ()-> {
-            for (Player p:
-                 getServer().getOnlinePlayers()) {
-                updateEffects(p);
-            }
-        }, 0, 20*20);
+        getServer().getScheduler().runTaskTimer(this, this::save, 0, 20*20);
 
         for (Class<?> clazz:
              new Reflections(getClass().getPackage().getName() + ".Listeners").getSubTypesOf(Listener.class)) {
@@ -69,22 +62,10 @@ public final class SpriteSMP extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        ps.save();
-        psc.save();
+        save();
     }
 
-    public void updateEffects(Player p) {
-        p.removePotionEffect(PotionEffectType.REGENERATION);
-        p.removePotionEffect(PotionEffectType.WATER_BREATHING);
-        PotionEffect fire = new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20*21, 1, true, true);
-        PotionEffect earth = new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0, true, true);
-        PotionEffect water = new PotionEffect(PotionEffectType.DOLPHINS_GRACE, Integer.MAX_VALUE, 0, true, true);
-
-        switch (ps.getSprite(p)) {
-            case FireSprite:p.addPotionEffect(fire);break;
-            case EarthSprite:p.addPotionEffect(earth);break;
-            case WaterSprite:p.addPotionEffect(water);break;
-        }
+    public void save() {
         ps.save();
         psc.save();
     }
@@ -98,7 +79,8 @@ public final class SpriteSMP extends JavaPlugin {
         }
         if (command.getName().equalsIgnoreCase("sprite")) {
             if (sender instanceof Player) {
-                ((Player) sender).sendMessage("You have the " + ps.getSprite((Player) sender).toString() + " Sprite");
+                String sprite = ps.getSprite((Player) sender).toString().replace("Sprite", " Sprite");
+                ((Player) sender).sendMessage("You have the " + sprite);
             }
         }
         if (command.getName().equalsIgnoreCase("withdraw")) {

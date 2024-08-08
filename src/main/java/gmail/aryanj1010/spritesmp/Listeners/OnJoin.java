@@ -37,9 +37,6 @@ public class OnJoin implements Listener {
             getPlugin(SpriteSMP.class).getServer().dispatchCommand(getPlugin(SpriteSMP.class).getServer().getConsoleSender(), "ban " + e.getPlayer().getName());
             e.getPlayer().kickPlayer("Out of Sprites");
         }
-        if (invisPlayers.isEmpty()) return;
-        for (Player invisPlayer : invisPlayers) {
-            e.getPlayer().hidePlayer(getPlugin(SpriteSMP.class), invisPlayer);
-        }
+
     }
 }

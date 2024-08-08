@@ -57,6 +57,46 @@ public class initializeCrafts {
             new MaterialChoice(Material.GOLD_BLOCK),
             new ExactChoice(EarthSprite.getFullItem().getItem()),
             new MaterialChoice(Material.GOLD_BLOCK)}, "earthsword");
+    public static CraftingTableCraft thunderSword = new CraftingTableCraft(ThunderSword.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new ExactChoice(ThunderSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.EMERALD_BLOCK),
+            new MaterialChoice(Material.DIAMOND_SWORD),
+            new MaterialChoice(Material.EMERALD_BLOCK),
+            new MaterialChoice(Material.GOLD_BLOCK),
+            new ExactChoice(ThunderSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.GOLD_BLOCK)}, "thundersword");
+    public static CraftingTableCraft frostSword = new CraftingTableCraft(FrostSword.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new ExactChoice(FrostSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.EMERALD_BLOCK),
+            new MaterialChoice(Material.DIAMOND_SWORD),
+            new MaterialChoice(Material.EMERALD_BLOCK),
+            new MaterialChoice(Material.GOLD_BLOCK),
+            new ExactChoice(FrostSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.GOLD_BLOCK)}, "frostsword");
+    public static CraftingTableCraft lightSword = new CraftingTableCraft(LightSword.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new ExactChoice(LightSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.EMERALD_BLOCK),
+            new MaterialChoice(Material.DIAMOND_SWORD),
+            new MaterialChoice(Material.EMERALD_BLOCK),
+            new MaterialChoice(Material.GOLD_BLOCK),
+            new ExactChoice(LightSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.GOLD_BLOCK)}, "lightsword");
+    public static CraftingTableCraft darkSword = new CraftingTableCraft(DarkSword.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new ExactChoice(DarkSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.EMERALD_BLOCK),
+            new MaterialChoice(Material.DIAMOND_SWORD),
+            new MaterialChoice(Material.EMERALD_BLOCK),
+            new MaterialChoice(Material.GOLD_BLOCK),
+            new ExactChoice(DarkSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.GOLD_BLOCK)}, "darksword");
 
 
 
@@ -100,17 +140,47 @@ public class initializeCrafts {
             new MaterialChoice(Material.NETHERITE_INGOT),
             new ExactChoice(EarthSprite.getFullItem().getItem()),
             new MaterialChoice(Material.NETHERITE_INGOT)}, "advancedearthsword");
+    public static CraftingTableCraft advancedThunderSword = new CraftingTableCraft(AdvancedThunderSword.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(ThunderSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(ThunderSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.DIAMOND_SWORD),
+            new ExactChoice(ThunderSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(ThunderSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.NETHERITE_INGOT)}, "advancedthundersword");
+    public static CraftingTableCraft advancedFrostSword = new CraftingTableCraft(AdvancedFrostSword.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(FrostSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(FrostSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.DIAMOND_SWORD),
+            new ExactChoice(FrostSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(FrostSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.NETHERITE_INGOT)}, "advancedfrostsword");
+    public static CraftingTableCraft advancedLightSword = new CraftingTableCraft(AdvancedLightSword.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(LightSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(LightSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.DIAMOND_SWORD),
+            new ExactChoice(LightSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(LightSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.NETHERITE_INGOT)}, "advancedlightsword");
+    public static CraftingTableCraft advancedDarkSword = new CraftingTableCraft(AdvancedDarkSword.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(DarkSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(DarkSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.DIAMOND_SWORD),
+            new ExactChoice(DarkSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.NETHERITE_INGOT),
+            new ExactChoice(DarkSprite.getFullItem().getItem()),
+            new MaterialChoice(Material.NETHERITE_INGOT)}, "advanceddarksword");
 
-    public static CraftingTableCraft endSword = new CraftingTableCraft(EndSword.getFullItem().getItem(),new RecipeChoice[]{
-            new MaterialChoice(Material.NETHERITE_INGOT),
-            new ExactChoice(sprites),
-            new MaterialChoice(Material.NETHERITE_INGOT),
-            new ExactChoice(sprites),
-            new MaterialChoice(Material.DRAGON_EGG),
-            new ExactChoice(sprites),
-            new MaterialChoice(Material.NETHERITE_INGOT),
-            new ExactChoice(sprites),
-            new MaterialChoice(Material.NETHERITE_INGOT)}, "endsword");
 
     public static CraftingTableCraft revivalSprite = new CraftingTableCraft(RevivalSprite.getFullItem().getItem(),new RecipeChoice[]{
             new MaterialChoice(Material.DIAMOND_BLOCK),
@@ -172,6 +242,48 @@ public class initializeCrafts {
             new MaterialChoice(Material.IRON_INGOT),
             new MaterialChoice(Material.WITHER_SKELETON_SKULL),
             new MaterialChoice(Material.IRON_INGOT)}, "airsprite");
+    public static CraftingTableCraft thunderSprite = new CraftingTableCraft(ThunderSprite.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.COPPER_BLOCK),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT)}, "thundersprite");
+    public static CraftingTableCraft frostSprite = new CraftingTableCraft(FrostSprite.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.ICE),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT)}, "frostsprite");
+    public static CraftingTableCraft lightSprite = new CraftingTableCraft(LightSprite.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.GLOWSTONE),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT)}, "lightsprite");
+    public static CraftingTableCraft darkSprite = new CraftingTableCraft(DarkSprite.getFullItem().getItem(),new RecipeChoice[]{
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.TINTED_GLASS),
+            new MaterialChoice(Material.DIAMOND_BLOCK),
+            new MaterialChoice(Material.IRON_INGOT),
+            new MaterialChoice(Material.WITHER_SKELETON_SKULL),
+            new MaterialChoice(Material.IRON_INGOT)}, "darksprite");
+
+
 
 
 }
