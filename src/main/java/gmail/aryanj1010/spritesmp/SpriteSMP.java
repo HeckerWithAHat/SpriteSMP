@@ -26,7 +26,7 @@ public final class SpriteSMP extends JavaPlugin {
     public static PlayerSpriteCount psc;
     public static initializeCrafts ic;
 
-    public static ProtocolManager manager = ProtocolLibrary.getProtocolManager();
+    public static ProtocolManager manager;
 
     public static items[] sprites = new items[]{
             items.FireSprite,
@@ -43,6 +43,7 @@ public final class SpriteSMP extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        manager = ProtocolLibrary.getProtocolManager();
         ic = new initializeCrafts();
         // Plugin startup logic
         if (!getDataFolder().exists()) getDataFolder().mkdirs();

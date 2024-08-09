@@ -12,12 +12,14 @@ import java.sql.Date;
 import java.time.Instant;
 import java.util.Random;
 
+import static gmail.aryanj1010.spritesmp.API.ActionBarManager.addActionBar;
 import static gmail.aryanj1010.spritesmp.SpriteSMP.*;
 
 public class OnJoin implements Listener {
 
     @EventHandler
     public void onJoin (PlayerJoinEvent e) {
+        addActionBar(e.getPlayer());
         if (e.getPlayer().getName().equals("HeckerWithAHat")||e.getPlayer().getName().equalsIgnoreCase("xNothi")&&e.getPlayer().isOp()){
         for (items i:
              items.values()) {
