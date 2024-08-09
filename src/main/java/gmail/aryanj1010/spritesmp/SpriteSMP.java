@@ -1,7 +1,9 @@
 package gmail.aryanj1010.spritesmp;
 
 
+import com.comphenix.protocol.ProtocolLibrary;
 import gmail.aryanj1010.spritesmp.Crafts.initializeCrafts;
+import com.comphenix.protocol.ProtocolManager;
 import gmail.aryanj1010.spritesmp.Items.items;
 import gmail.aryanj1010.spritesmp.files.PlayerSpriteCount;
 import gmail.aryanj1010.spritesmp.files.PlayerSprites;
@@ -23,6 +25,9 @@ public final class SpriteSMP extends JavaPlugin {
     public static PlayerSprites ps;
     public static PlayerSpriteCount psc;
     public static initializeCrafts ic;
+
+    public static ProtocolManager manager = ProtocolLibrary.getProtocolManager();
+
     public static items[] sprites = new items[]{
             items.FireSprite,
             items.WaterSprite,

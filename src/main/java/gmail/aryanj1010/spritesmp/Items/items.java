@@ -17,6 +17,8 @@ import org.bukkit.Material;
 * Explosion Manipulation: Forms a 9 block orb of fire around you
 * 120 second cooldown
 *
+* DONE
+*
 *
 *
 * Water Sprite
@@ -54,6 +56,8 @@ import org.bukkit.Material;
 * Atmosphere Of Annihilation: Create a 5 block radius of Toxic Gas around you
 * 120 second cooldown
 *
+* DONE
+*
 *
 *
 * Thunder Sprite
@@ -75,10 +79,10 @@ import org.bukkit.Material;
 *
 * DONE
 *
-* Flash Freeze: Cause a snowstorm around you freezing the ground and slowing your enemies
+* Bouncing Brr: Slow all nearby entities and freeze the ground. Effects get extended by each person in the area
 * 120 second cooldown
 *
-*
+* DONE
 *
 * Light Sprite
 * Light Heal: Clear yourself of all ailments
@@ -99,7 +103,7 @@ import org.bukkit.Material;
 *
 * DONE
 *
-* DarkShift: Call upon the dark forces to shift into another dimension allowing you to move around
+* Crippling Corruption: Reverse Heal for a short amount of time, making you unable to move
 * 120 second cooldown
 *
 *
@@ -171,8 +175,8 @@ public enum items {
             ChatColor.WHITE+"Shoots a barrage of freezing arrows that slow your enemies and deal damage",
             ChatColor.WHITE+"60 second cooldown",
             "",
-            ChatColor.WHITE+""+ChatColor.BOLD+"Flash Freeze:",
-            ChatColor.WHITE+"Cause a snowstorm around you freezing the ground and slowing your enemies",
+            ChatColor.WHITE+""+ChatColor.BOLD+"Bouncing Brr:",
+            ChatColor.WHITE+"Slow all nearby entities and freeze the ground. Effects get extended by each person in the area",
             ChatColor.WHITE+"120 second cooldown"
     }, true, 6)),
     LightSword(Type.Weapon, new FullItem(Material.DIAMOND_SWORD, 1, ChatColor.WHITE + "Basic Light Sword", new String[]{
@@ -189,8 +193,8 @@ public enum items {
             ChatColor.WHITE+"Shrouds the player in darkness blinding all nearby players",
             ChatColor.WHITE+"60 second cooldown",
             "",
-            ChatColor.WHITE+""+ChatColor.BOLD+"DarkShift:",
-            ChatColor.WHITE+"Call upon the dark forces to shift into another dimension allowing you to move around unnoticed",
+            ChatColor.WHITE+""+ChatColor.BOLD+"Crippling Corruption:",
+            ChatColor.WHITE+"Reverse Heal for a short amount of time, making you unable to move",
             ChatColor.WHITE+"120 second cooldown"
     }, true, 8)),
 
@@ -247,8 +251,8 @@ public enum items {
             ChatColor.WHITE+"Shoots a barrage of freezing arrows that slow your enemies and deal damage",
             ChatColor.WHITE+"60 second cooldown",
             "",
-            ChatColor.WHITE+""+ChatColor.BOLD+"Flash Freeze:",
-            ChatColor.WHITE+"Cause a snowstorm around you freezing the ground and slowing your enemies",
+            ChatColor.WHITE+""+ChatColor.BOLD+"Bouncing Brr:",
+            ChatColor.WHITE+"Slow all nearby entities and freeze the ground. Effects get extended by each person in the area",
             ChatColor.WHITE+"120 second cooldown"
     }, true, 6)),
     AdvancedLightSword(Type.AdvancedWeapon, new FullItem(Material.NETHERITE_SWORD, 1, ChatColor.WHITE + "Advanced Light Sword", new String[]{
@@ -265,8 +269,8 @@ public enum items {
           ChatColor.WHITE+"Shrouds the player in darkness blinding all nearby players",
           ChatColor.WHITE+"60 second cooldown",
           "",
-          ChatColor.WHITE+""+ChatColor.BOLD+"DarkShift:",
-          ChatColor.WHITE+"Call upon the dark forces to shift into another dimension allowing you to move around unnoticed",
+          ChatColor.WHITE+""+ChatColor.BOLD+"Crippling Corruption:",
+          ChatColor.WHITE+"Reverse Heal for a short amount of time, making you unable to move",
           ChatColor.WHITE+"120 second cooldown"
   }, true, 8)),
 

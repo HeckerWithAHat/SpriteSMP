@@ -23,6 +23,7 @@ import org.bukkit.potion.PotionEffectTypeCategory;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.*;
 
@@ -36,54 +37,54 @@ import static org.bukkit.Bukkit.*;
  * It handles various abilities based on the item the player is holding.
  */
 public class OnClick implements Listener {
-    final HashMap<UUID, Long> fireRight = new HashMap<>();
-    final HashMap<UUID, Long> fireShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> fireRight = new HashMap<>();
+    public static final HashMap<UUID, Long> fireShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> waterRight = new HashMap<>();
-    final HashMap<UUID, Long> waterShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> waterRight = new HashMap<>();
+    public static final HashMap<UUID, Long> waterShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> airRight = new HashMap<>();
-    final HashMap<UUID, Long> airShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> airRight = new HashMap<>();
+    public static final HashMap<UUID, Long> airShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> earthRight = new HashMap<>();
-    final HashMap<UUID, Long> earthShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> earthRight = new HashMap<>();
+    public static final HashMap<UUID, Long> earthShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> thunderRight = new HashMap<>();
-    final HashMap<UUID, Long> thunderShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> thunderRight = new HashMap<>();
+    public static final HashMap<UUID, Long> thunderShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> frostRight = new HashMap<>();
-    final HashMap<UUID, Long> frostShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> frostRight = new HashMap<>();
+    public static final HashMap<UUID, Long> frostShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> lightRight = new HashMap<>();
-    final HashMap<UUID, Long> lightShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> lightRight = new HashMap<>();
+    public static final HashMap<UUID, Long> lightShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> darkRight = new HashMap<>();
-    final HashMap<UUID, Long> darkShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> darkRight = new HashMap<>();
+    public static final HashMap<UUID, Long> darkShiftRight = new HashMap<>();
 
 
-    final HashMap<UUID, Long> advancedFireRight = new HashMap<>();
-    final HashMap<UUID, Long> advancedFireShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedFireRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedFireShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> advancedWaterRight = new HashMap<>();
-    final HashMap<UUID, Long> advancedWaterShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedWaterRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedWaterShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> advancedAirRight = new HashMap<>();
-    final HashMap<UUID, Long> advancedAirShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedAirRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedAirShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> advancedEarthRight = new HashMap<>();
-    final HashMap<UUID, Long> advancedEarthShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedEarthRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedEarthShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> advancedThunderRight = new HashMap<>();
-    final HashMap<UUID, Long> advancedThunderShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedThunderRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedThunderShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> advancedFrostRight = new HashMap<>();
-    final HashMap<UUID, Long> advancedFrostShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedFrostRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedFrostShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> advancedLightRight = new HashMap<>();
-    final HashMap<UUID, Long> advancedLightShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedLightRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedLightShiftRight = new HashMap<>();
 
-    final HashMap<UUID, Long> advancedDarkRight = new HashMap<>();
-    final HashMap<UUID, Long> advancedDarkShiftRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedDarkRight = new HashMap<>();
+    public static final HashMap<UUID, Long> advancedDarkShiftRight = new HashMap<>();
 
 
     public static Inventory inv = getServer().createInventory(null, 36, "Revival Screen");
@@ -139,7 +140,7 @@ public class OnClick implements Listener {
 
                     p.setVelocity(p.getLocation().getDirection().normalize().multiply(2));
 
-                }, 30, p);
+                }, 60, p);
             } else if (i.equals(EarthSword.getFullItem().getItem()) && hasEarth) {
                 new AbilityWithCoolDown(earthRight, () -> {
                     Material[] blocksConsideredEarth = {Material.DIRT, Material.GRASS_BLOCK, Material.STONE, Material.SAND, Material.SANDSTONE, Material.GRAVEL, Material.CLAY, Material.COBBLESTONE, Material.COAL_ORE, Material.IRON_ORE, Material.GOLD_ORE, Material.DIAMOND_ORE, Material.EMERALD_ORE, Material.REDSTONE_ORE, Material.LAPIS_ORE, Material.NETHER_QUARTZ_ORE, Material.NETHERRACK, Material.END_STONE, Material.BASALT, Material.GRANITE, Material.DIORITE, Material.ANDESITE, Material.RED_SAND, Material.RED_SANDSTONE, Material.BLACKSTONE};
@@ -165,7 +166,7 @@ public class OnClick implements Listener {
                         p.getWorld().setThundering(false);
                         if (!raining) p.getWorld().setStorm(false);
                     }, 20*10);
-                    }, 120, p);
+                    }, 60, p);
             } else if (i.equals(FrostSword.getFullItem().getItem()) && hasFrost) {
                 new AbilityWithCoolDown(frostRight, () -> {
                     int taskNum = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {
@@ -192,7 +193,7 @@ public class OnClick implements Listener {
                             ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 20, 4));
                         }
                     });
-                }, 30, p);
+                }, 60, p);
             } else if (i.equals(AdvancedFireSword.getFullItem().getItem()) && hasFire) {
                 new AbilityWithCoolDown(advancedFireRight, () -> {
                     for (Player visPlayer : getAllVisiblePlayers(p)) {
@@ -218,7 +219,7 @@ public class OnClick implements Listener {
 
                     p.setVelocity(p.getLocation().getDirection().normalize().multiply(4));
 
-                }, 120, p);
+                }, 60, p);
             } else if (i.equals(AdvancedEarthSword.getFullItem().getItem()) && hasEarth) {
                 new AbilityWithCoolDown(advancedEarthRight, () -> {
                     Material[] blocksConsideredEarth = {Material.DIRT, Material.GRASS_BLOCK, Material.STONE, Material.SAND, Material.SANDSTONE, Material.GRAVEL, Material.CLAY, Material.COBBLESTONE, Material.COAL_ORE, Material.IRON_ORE, Material.GOLD_ORE, Material.DIAMOND_ORE, Material.EMERALD_ORE, Material.REDSTONE_ORE, Material.LAPIS_ORE, Material.NETHER_QUARTZ_ORE, Material.NETHERRACK, Material.END_STONE, Material.BASALT, Material.GRANITE, Material.DIORITE, Material.ANDESITE, Material.RED_SAND, Material.RED_SANDSTONE, Material.BLACKSTONE};
@@ -235,7 +236,7 @@ public class OnClick implements Listener {
                     }
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, Math.clamp(amtOfBlocks / 10, 0, 3)));
                     p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, Math.clamp(amtOfBlocks / 10, 0, 3)));
-                }, 120, p);
+                }, 60, p);
             }
         } else if (i.equals(AdvancedThunderSword.getFullItem().getItem()) && hasThunder) {
             new AbilityWithCoolDown(advancedThunderRight, () -> {
@@ -245,7 +246,7 @@ public class OnClick implements Listener {
                     p.getWorld().setThundering(false);
                     if (!raining) p.getWorld().setStorm(false);
                 }, 20*20);
-            }, 120, p);
+            }, 60, p);
         } else if (i.equals(AdvancedFrostSword.getFullItem().getItem()) && hasFrost) {
             new AbilityWithCoolDown(advancedFrostRight, () -> {
                 int taskNum = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {
@@ -265,7 +266,7 @@ public class OnClick implements Listener {
                         p.removePotionEffect(pet);
                     }
                 }
-            }, 30, p);
+            }, 60, p);
         } else if (i.equals(AdvancedDarkSword.getFullItem().getItem()) && hasDark) {
             new AbilityWithCoolDown(advancedDarkRight, () -> {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0));
@@ -274,25 +275,25 @@ public class OnClick implements Listener {
                         ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 20, 4));
                     }
                 });
-            }, 30, p);
+            }, 60, p);
         }
         /*
 
 
-            RIGHT CLICK ABILITIES
+            SHIFT RIGHT CLICK ABILITIES
 
 
         */
         if (p.isSneaking() && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
             if (i.equals(FireSword.getFullItem().getItem()) && hasFire) {
                 new AbilityWithCoolDown(fireShiftRight, () -> {
-                    for (int j = (int) p.getLocation().getX() - 2; j < (int) p.getLocation().getX() + 2; j++) {
-                        for (int k = (int) p.getLocation().getZ() - 2; k < (int) p.getLocation().getZ() + 2; k++) {
-                            if (p.getWorld().getBlockAt(new Location(p.getWorld(), j, p.getLocation().getY(), k)).getType().equals(Material.AIR))
-                                p.getWorld().setBlockData(new Location(p.getWorld(), j, p.getLocation().getY(), k), Material.FIRE.createBlockData());
+                    int tn = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {p.getNearbyEntities(5,5,5).forEach(entity -> {
+                        if (entity instanceof Player) {
+                            ((Player)entity).setFireTicks(20 * 3);
                         }
-                    }
-                }, 30, p);
+                    });}, 0, 10).getTaskId();
+                    getServer().getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> getServer().getScheduler().cancelTask(tn), 20 * 10);
+                }, 120, p);
             } else if (i.equals(WaterSword.getFullItem().getItem()) && p.getWorld().getBlockAt(p.getLocation()).getType().equals(Material.WATER) && hasWater) {
                 new AbilityWithCoolDown(waterShiftRight, () -> {
                     Location center = p.getLocation();
@@ -312,13 +313,17 @@ public class OnClick implements Listener {
                             entity.setVelocity(entity.getLocation().toVector().subtract(p.getLocation().toVector()).normalize().add(new Vector(0, 1, 0)));
                         }
                     });
-                }, 60, p);
+                }, 120, p);
             } else if (i.equals(EarthSword.getFullItem().getItem()) && hasEarth) {
                 // Ability activation based on item clicked
                 new AbilityWithCoolDown(earthShiftRight, () -> {
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10 * 20, 1));
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 10 * 20, 1));
-                }, 40, p);
+                    int tn = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {p.getNearbyEntities(5,5,5).forEach(entity -> {
+                        if (entity instanceof Player) {
+                            ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.POISON, 20 * 3, 0));
+                        }
+                    });}, 0, 10).getTaskId();
+                    getServer().getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> getServer().getScheduler().cancelTask(tn), 20 * 10);
+                }, 120, p);
             } else if (i.equals(ThunderSword.getFullItem().getItem()) && hasThunder) {
                 new AbilityWithCoolDown(thunderShiftRight, () -> {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 5, 255));
@@ -334,6 +339,10 @@ public class OnClick implements Listener {
                     }, 20 * 5);
                 }, 120, p);
             } else if (i.equals(FrostSword.getFullItem().getItem()) && hasFrost) {
+                new AbilityWithCoolDown(frostShiftRight, () -> {
+                    bounceIce(p);
+
+                }, 120, p);
             } else if (i.equals(LightSword.getFullItem().getItem()) && hasLight) {
                 new AbilityWithCoolDown(lightShiftRight, () -> {
                     int lightLevel = p.getWorld().getBlockAt(p.getLocation()).getLightLevel();
@@ -370,10 +379,12 @@ public class OnClick implements Listener {
             } else if (i.equals(DarkSword.getFullItem().getItem()) && hasDark) {
             } else if (i.equals(AdvancedFireSword.getFullItem().getItem()) && hasFire) {
                 new AbilityWithCoolDown(advancedFireShiftRight, () -> {
-                    p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
-                    p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
-                    p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
-                    p.getWorld().spawnFallingBlock(p.getLocation().add(new Random().nextInt(51) - 25, 10, new Random().nextInt(51) - 25), Material.MAGMA_BLOCK.createBlockData());
+                    int tn = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {p.getNearbyEntities(7,7,7).forEach(entity -> {
+                        if (entity instanceof Player) {
+                            ((Player)entity).setFireTicks(20 * 5);
+                        }
+                    });}, 0, 10).getTaskId();
+                    getServer().getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> getServer().getScheduler().cancelTask(tn), 20 * 15);
                 }, 120, p);
             } else if (i.equals(AdvancedWaterSword.getFullItem().getItem()) && hasWater) {
                 new AbilityWithCoolDown(advancedWaterShiftRight, () -> {
@@ -386,7 +397,7 @@ public class OnClick implements Listener {
                             getServer().getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> getServer().getScheduler().cancelTask(taskNum),20*7);
                         }
                     });
-                }, 60, p);
+                }, 120, p);
             } else if (i.equals(AdvancedAirSword.getFullItem().getItem()) && hasAir) {
                 new AbilityWithCoolDown(advancedAirShiftRight, () -> {
                     p.getNearbyEntities(9, 9, 9).forEach(entity -> {
@@ -394,12 +405,16 @@ public class OnClick implements Listener {
                             entity.setVelocity(entity.getLocation().toVector().subtract(p.getLocation().toVector()).normalize().multiply(1.2).add(new Vector(0, 2, 0)));
                         }
                     });
-                }, 180, p);
+                }, 120, p);
             } else if (i.equals(AdvancedEarthSword.getFullItem().getItem()) && hasEarth) {
                 new AbilityWithCoolDown(advancedEarthShiftRight, () -> {
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 1));
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 15 * 20, 1));
-                }, 60, p);
+                    int tn = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {p.getNearbyEntities(7,7,7).forEach(entity -> {
+                        if (entity instanceof Player) {
+                            ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.POISON, 20 * 5, 0));
+                        }
+                    });}, 0, 10).getTaskId();
+                    getServer().getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> getServer().getScheduler().cancelTask(tn), 20 * 15);
+                }, 120, p);
             } else if (i.equals(AdvancedThunderSword.getFullItem().getItem()) && hasThunder) {
                 new AbilityWithCoolDown(advancedThunderShiftRight, () -> {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 3, 255));
@@ -415,6 +430,9 @@ public class OnClick implements Listener {
                     }, 20 * 5);
                 }, 120, p);
             } else if (i.equals(AdvancedFrostSword.getFullItem().getItem()) && hasFrost) {
+                new AbilityWithCoolDown(advancedFrostShiftRight, () -> {
+                    bounceIce(p);
+                }, 120, p);
             } else if (i.equals(AdvancedLightSword.getFullItem().getItem()) && hasLight) {
                 new AbilityWithCoolDown(advancedLightShiftRight, () -> {
                     int lightLevel = p.getWorld().getBlockAt(p.getLocation()).getLightLevel();
@@ -496,6 +514,41 @@ public class OnClick implements Listener {
         return visiblePlayers;
     }
 
+    public void bounceIce(Player p) {
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                for (int z = 0; z < 9; z++) {
+                    if (!p.getWorld().getBlockAt(p.getLocation().add(x - 4, y - 4, z - 4)).getType().equals(Material.AIR)) {
+                        p.getWorld().getBlockAt(p.getLocation().add(x - 4, y - 4, z - 4)).setType(Material.ICE);
+                    }
+                }
+            }
+        }
+        p.getNearbyEntities(5, 5, 5).forEach(entity -> {
+            if (entity instanceof Player) {
+                ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 5, 2));
+                bounceIce((Player) entity);
+            }
+        });
+    }
+
+    public void bounceIceAdvanced(Player p) {
+        for (int x = 0; x < 11; x++) {
+            for (int y = 0; y < 11; y++) {
+                for (int z = 0; z < 11; z++) {
+                    if (!p.getWorld().getBlockAt(p.getLocation().add(x - 5, y - 5, z - 5)).getType().equals(Material.AIR)) {
+                        p.getWorld().getBlockAt(p.getLocation().add(x - 5, y - 5, z - 5)).setType(Material.ICE);
+                    }
+                }
+            }
+        }
+        p.getNearbyEntities(6, 6, 6).forEach(entity -> {
+            if (entity instanceof Player) {
+                ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 10, 2));
+                bounceIce((Player) entity);
+            }
+        });
+    }
 
     public boolean isWithinUnobstructedFieldOfView(Player observerPlayer, Player observedPlayer, double maxAngleDegrees) {
         double maxAngle = Math.toRadians(maxAngleDegrees); // Convert max angle to radians
