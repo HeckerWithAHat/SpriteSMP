@@ -15,6 +15,7 @@ import static org.bukkit.plugin.java.JavaPlugin.getPlugin;
 public class OnInventoryClick implements Listener {
     @EventHandler
     public void onInventoryClick (InventoryClickEvent e) {
+        if (e.getClickedInventory() == null) return;
         if (e.getClickedInventory().equals(inv) && e.getCurrentItem().getType().equals(Material.PLAYER_HEAD)) {
             e.setCancelled(true);
             SpriteSMP.getPlugin(SpriteSMP.class).getServer().dispatchCommand(getPlugin(SpriteSMP.class).getServer().getConsoleSender(), "pardon " + e.getWhoClicked().getName());

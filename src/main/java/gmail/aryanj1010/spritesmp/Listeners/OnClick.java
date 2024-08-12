@@ -131,7 +131,7 @@ public class OnClick implements Listener {
                             }
                         }.runTaskTimer(getPlugin(SpriteSMP.class), 0, 20);
                         getServer().getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), task::cancel
-                        , 20 * 6);
+                                , 20 * 6);
                     }
                 }, 60, p);
 
@@ -149,14 +149,14 @@ public class OnClick implements Listener {
                         for (int y = 3; y > 0; y--) {
                             for (int z = 5; z > 0; z--) {
                                 if (Arrays.asList(blocksConsideredEarth).contains(p.getWorld().getBlockAt(p.getLocation().add(x - 3, y - 2, z - 3)).getType())) {
-                                    p.getWorld().getBlockAt(p.getLocation().add(x-3, y-2, z-3)).setType(Material.AIR);
+                                    p.getWorld().getBlockAt(p.getLocation().add(x - 3, y - 2, z - 3)).setType(Material.AIR);
                                     amtOfBlocks++;
                                 }
                             }
                         }
                     }
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, Math.clamp(amtOfBlocks / 10, 0, 3)));
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 5, Math.clamp(amtOfBlocks / 10, 0, 3)));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, Math.clamp(amtOfBlocks / 20, 0, 3)));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 5, Math.clamp(amtOfBlocks / 20, 0, 3)));
                 }, 60, p);
             } else if (i.equals(ThunderSword.getFullItem().getItem()) && hasThunder) {
                 new AbilityWithCoolDown(thunderRight, () -> {
@@ -165,8 +165,8 @@ public class OnClick implements Listener {
                         boolean raining = p.getWorld().hasStorm();
                         p.getWorld().setThundering(false);
                         if (!raining) p.getWorld().setStorm(false);
-                    }, 20*10);
-                    }, 60, p);
+                    }, 20 * 10);
+                }, 60, p);
             } else if (i.equals(FrostSword.getFullItem().getItem()) && hasFrost) {
                 new AbilityWithCoolDown(frostRight, () -> {
                     int taskNum = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {
@@ -185,12 +185,12 @@ public class OnClick implements Listener {
                             p.removePotionEffect(pet);
                         }
                     }
-                    }, 60, p);
+                }, 60, p);
             } else if (i.equals(DarkSword.getFullItem().getItem()) && hasDark) {
                 new AbilityWithCoolDown(darkRight, () -> {
                     p.getNearbyEntities(5, 5, 5).forEach(entity -> {
                         if (entity instanceof Player) {
-                            ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 20, 4));
+                            ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 20, 4));
                         }
                     });
                 }, 60, p);
@@ -228,54 +228,56 @@ public class OnClick implements Listener {
                         for (int y = 5; y > 0; y--) {
                             for (int z = 7; z > 0; z--) {
                                 if (Arrays.asList(blocksConsideredEarth).contains(p.getWorld().getBlockAt(p.getLocation().add(x - 4, y - 3, z - 4)).getType())) {
-                                    p.getWorld().getBlockAt(p.getLocation().add(x-4, y-3, z-4)).setType(Material.AIR);
+                                    p.getWorld().getBlockAt(p.getLocation().add(x - 4, y - 3, z - 4)).setType(Material.AIR);
                                     amtOfBlocks++;
                                 }
                             }
                         }
                     }
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, Math.clamp(amtOfBlocks / 10, 0, 3)));
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, Math.clamp(amtOfBlocks / 10, 0, 3)));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, Math.clamp(amtOfBlocks / 20, 0, 3)));
+
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, Math.clamp(amtOfBlocks / 20, 0, 3)));
+                }, 60, p);
+
+            } else if (i.equals(AdvancedThunderSword.getFullItem().getItem()) && hasThunder) {
+                new AbilityWithCoolDown(advancedThunderRight, () -> {
+                    boolean raining = p.getWorld().hasStorm();
+                    p.getWorld().setThundering(true);
+                    getServer().getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
+                        p.getWorld().setThundering(false);
+                        if (!raining) p.getWorld().setStorm(false);
+                    }, 20 * 20);
+                }, 60, p);
+            } else if (i.equals(AdvancedFrostSword.getFullItem().getItem()) && hasFrost) {
+                new AbilityWithCoolDown(advancedFrostRight, () -> {
+                    int taskNum = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {
+                        Arrow arrowFired = p.launchProjectile(Arrow.class, p.getLocation().getDirection());
+                        arrowFired.setPickupStatus(AbstractArrow.PickupStatus.CREATIVE_ONLY);
+                        arrowFired.addCustomEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 5, 2), true);
+                        arrowFired.addCustomEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 5, 0), true);
+                        arrowFired.addCustomEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 5, 0), true);
+                        arrowFired.setColor(Color.BLUE);
+                    }, 0, 8).getTaskId();
+                    getServer().getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> getServer().getScheduler().cancelTask(taskNum), 8 * 25);
+                }, 60, p);
+            } else if (i.equals(AdvancedLightSword.getFullItem().getItem()) && hasLight) {
+                new AbilityWithCoolDown(advancedLightRight, () -> {
+                    for (PotionEffectType pet : PotionEffectType.values()) {
+                        if (pet.getCategory().equals(PotionEffectTypeCategory.HARMFUL)) {
+                            p.removePotionEffect(pet);
+                        }
+                    }
+                }, 60, p);
+            } else if (i.equals(AdvancedDarkSword.getFullItem().getItem()) && hasDark) {
+                new AbilityWithCoolDown(advancedDarkRight, () -> {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0));
+                    p.getNearbyEntities(7, 7, 7).forEach(entity -> {
+                        if (entity instanceof Player) {
+                            ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 20, 4));
+                        }
+                    });
                 }, 60, p);
             }
-        } else if (i.equals(AdvancedThunderSword.getFullItem().getItem()) && hasThunder) {
-            new AbilityWithCoolDown(advancedThunderRight, () -> {
-                boolean raining = p.getWorld().hasStorm();
-                p.getWorld().setThundering(true);
-                getServer().getScheduler().runTaskLater(SpriteSMP.getPlugin(SpriteSMP.class), () -> {
-                    p.getWorld().setThundering(false);
-                    if (!raining) p.getWorld().setStorm(false);
-                }, 20*20);
-            }, 60, p);
-        } else if (i.equals(AdvancedFrostSword.getFullItem().getItem()) && hasFrost) {
-            new AbilityWithCoolDown(advancedFrostRight, () -> {
-                int taskNum = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {
-                    Arrow arrowFired = p.launchProjectile(Arrow.class, p.getLocation().getDirection());
-                    arrowFired.setPickupStatus(AbstractArrow.PickupStatus.CREATIVE_ONLY);
-                    arrowFired.addCustomEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 5, 2), true);
-                    arrowFired.addCustomEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 5, 0), true);
-                    arrowFired.addCustomEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 5, 0), true);
-                    arrowFired.setColor(Color.BLUE);
-                }, 0, 8).getTaskId();
-                getServer().getScheduler().runTaskLater(getPlugin(SpriteSMP.class), () -> getServer().getScheduler().cancelTask(taskNum), 8 * 25);
-            }, 60, p);
-        } else if (i.equals(AdvancedLightSword.getFullItem().getItem()) && hasLight) {
-            new AbilityWithCoolDown(advancedLightRight, () -> {
-                for (PotionEffectType pet : PotionEffectType.values()) {
-                    if (pet.getCategory().equals(PotionEffectTypeCategory.HARMFUL)) {
-                        p.removePotionEffect(pet);
-                    }
-                }
-            }, 60, p);
-        } else if (i.equals(AdvancedDarkSword.getFullItem().getItem()) && hasDark) {
-            new AbilityWithCoolDown(advancedDarkRight, () -> {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0));
-                p.getNearbyEntities(7, 7, 7).forEach(entity -> {
-                    if (entity instanceof Player) {
-                        ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 20, 4));
-                    }
-                });
-            }, 60, p);
         }
         /*
 
@@ -284,7 +286,7 @@ public class OnClick implements Listener {
 
 
         */
-        if (p.isSneaking() && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
+         else if (p.isSneaking() && (a == Action.RIGHT_CLICK_AIR || a == Action.RIGHT_CLICK_BLOCK)) {
             if (i.equals(FireSword.getFullItem().getItem()) && hasFire) {
                 new AbilityWithCoolDown(fireShiftRight, () -> {
                     int tn = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {p.getNearbyEntities(5,5,5).forEach(entity -> {
@@ -340,7 +342,21 @@ public class OnClick implements Listener {
                 }, 120, p);
             } else if (i.equals(FrostSword.getFullItem().getItem()) && hasFrost) {
                 new AbilityWithCoolDown(frostShiftRight, () -> {
-                    bounceIce(p);
+                    for (int x = 0; x < 9; x++) {
+                        for (int y = 0; y < 9; y++) {
+                            for (int z = 0; z < 9; z++) {
+                                if (!p.getWorld().getBlockAt(p.getLocation().add(x - 4, y - 4, z - 4)).getType().equals(Material.AIR)) {
+                                    p.getWorld().getBlockAt(p.getLocation().add(x - 4, y - 4, z - 4)).setType(Material.ICE);
+                                }
+                            }
+                        }
+                    }
+                    p.getNearbyEntities(5, 5, 5).forEach(entity -> {
+                        if (entity instanceof Player) {
+                            ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 5, 2));
+                            bounceIce((Player) entity);
+                        }
+                    });
 
                 }, 120, p);
             } else if (i.equals(LightSword.getFullItem().getItem()) && hasLight) {
@@ -350,33 +366,42 @@ public class OnClick implements Listener {
                         case 0:
                             break;
                         case 1,2,3:
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
                             break;
                         case 4,5,6:
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, 0));
                             break;
                         case 7,8,9:
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 5, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 10, 0));
                             break;
                         case 10,11,12:
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 5, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20 * 10, 0));
                             break;
                         case 13,14,15:
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 5, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20 * 5, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 20 * 5, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 20 * 10, 0));
                             break;
                     }
                 }, 120, p);
             } else if (i.equals(DarkSword.getFullItem().getItem()) && hasDark) {
+                new AbilityWithCoolDown(darkShiftRight, () -> {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 20 * 10, 0));
+                    p.getNearbyEntities(5, 5, 5).forEach(entity -> {
+                        if (entity instanceof Player) {
+                            ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 5, 255));
+                            ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.JUMP_BOOST, 20 * 5, 255));
+                        }
+                    });
+                }, 120, p);
             } else if (i.equals(AdvancedFireSword.getFullItem().getItem()) && hasFire) {
                 new AbilityWithCoolDown(advancedFireShiftRight, () -> {
                     int tn = getServer().getScheduler().runTaskTimer(getPlugin(SpriteSMP.class), () -> {p.getNearbyEntities(7,7,7).forEach(entity -> {
@@ -431,7 +456,21 @@ public class OnClick implements Listener {
                 }, 120, p);
             } else if (i.equals(AdvancedFrostSword.getFullItem().getItem()) && hasFrost) {
                 new AbilityWithCoolDown(advancedFrostShiftRight, () -> {
-                    bounceIce(p);
+                    for (int x = 0; x < 11; x++) {
+                        for (int y = 0; y < 11; y++) {
+                            for (int z = 0; z < 11; z++) {
+                                if (!p.getWorld().getBlockAt(p.getLocation().add(x - 5, y - 5, z - 5)).getType().equals(Material.AIR)) {
+                                    p.getWorld().getBlockAt(p.getLocation().add(x - 5, y - 5, z - 5)).setType(Material.ICE);
+                                }
+                            }
+                        }
+                    }
+                    p.getNearbyEntities(6, 6, 6).forEach(entity -> {
+                        if (entity instanceof Player) {
+                            ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 10, 2));
+                            bounceIceAdvanced((Player) entity);
+                        }
+                    });
                 }, 120, p);
             } else if (i.equals(AdvancedLightSword.getFullItem().getItem()) && hasLight) {
                 new AbilityWithCoolDown(advancedLightShiftRight, () -> {
@@ -440,33 +479,42 @@ public class OnClick implements Listener {
                         case 0:
                             break;
                         case 1,2,3:
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 0));
                             break;
                         case 4,5,6:
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 20, 0));
                             break;
                         case 7,8,9:
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 20, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 20, 0));
                             break;
                         case 10,11,12:
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 10, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 20, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 20, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20 * 20, 0));
                             break;
                         case 13,14,15:
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 10, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 10, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20 * 10, 0));
-                            p.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 20 * 10, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, 20 * 20, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 20, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.RESISTANCE, 20 * 20, 0));
+                            p.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 20 * 20, 0));
                             break;
                     };
                 }, 120, p);
             } else if (i.equals(AdvancedDarkSword.getFullItem().getItem()) && hasDark) {
+                new AbilityWithCoolDown(advancedDarkShiftRight, () -> {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 20 * 10, 0));
+                    p.getNearbyEntities(7, 7, 7).forEach(entity -> {
+                        if (entity instanceof Player) {
+                            ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 5, 255));
+                            ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.JUMP_BOOST, 20 * 5, 255));
+                        }
+                    });
+                }, 120, p);
             } else if (i.isSimilar(RevivalSprite.getFullItem().getItem())) {
                 // Clear inventory and display banned players' heads
                 inv.clear();
@@ -499,6 +547,22 @@ public class OnClick implements Listener {
                 // Increment player sprite count and consume item
                 psc.updatePlayer(p, 1);
                 e.getItem().setAmount(e.getItem().getAmount() - 1);
+            } else if (i.isSimilar(ThunderSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
+                // Increment player sprite count and consume item
+                psc.updatePlayer(p, 1);
+                e.getItem().setAmount(e.getItem().getAmount() - 1);
+            } else if (i.isSimilar(FrostSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
+                // Increment player sprite count and consume item
+                psc.updatePlayer(p, 1);
+                e.getItem().setAmount(e.getItem().getAmount() - 1);
+            } else if (i.isSimilar(LightSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
+                // Increment player sprite count and consume item
+                psc.updatePlayer(p, 1);
+                e.getItem().setAmount(e.getItem().getAmount() - 1);
+            } else if (i.isSimilar(DarkSprite.getFullItem().getItem()) && psc.getCount(p) != 6) {
+                // Increment player sprite count and consume item
+                psc.updatePlayer(p, 1);
+                e.getItem().setAmount(e.getItem().getAmount() - 1);
             }
         }
     }
@@ -515,6 +579,24 @@ public class OnClick implements Listener {
     }
 
     public void bounceIce(Player p) {
+        for (int x = 0; x < 7; x++) {
+            for (int y = 0; y < 7; y++) {
+                for (int z = 0; z < 7; z++) {
+                    if (!p.getWorld().getBlockAt(p.getLocation().add(x - 3, y - 3, z - 3)).getType().equals(Material.AIR)) {
+                        p.getWorld().getBlockAt(p.getLocation().add(x - 3, y - 3, z - 3)).setType(Material.ICE);
+                    }
+                }
+            }
+        }
+        p.getNearbyEntities(3, 3, 3).forEach(entity -> {
+            if (entity instanceof Player) {
+                ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 5, 2));
+                bounceIce((Player) entity);
+            }
+        });
+    }
+
+    public void bounceIceAdvanced(Player p) {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 for (int z = 0; z < 9; z++) {
@@ -524,28 +606,10 @@ public class OnClick implements Listener {
                 }
             }
         }
-        p.getNearbyEntities(5, 5, 5).forEach(entity -> {
-            if (entity instanceof Player) {
-                ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 5, 2));
-                bounceIce((Player) entity);
-            }
-        });
-    }
-
-    public void bounceIceAdvanced(Player p) {
-        for (int x = 0; x < 11; x++) {
-            for (int y = 0; y < 11; y++) {
-                for (int z = 0; z < 11; z++) {
-                    if (!p.getWorld().getBlockAt(p.getLocation().add(x - 5, y - 5, z - 5)).getType().equals(Material.AIR)) {
-                        p.getWorld().getBlockAt(p.getLocation().add(x - 5, y - 5, z - 5)).setType(Material.ICE);
-                    }
-                }
-            }
-        }
-        p.getNearbyEntities(6, 6, 6).forEach(entity -> {
+        p.getNearbyEntities(4, 4, 4).forEach(entity -> {
             if (entity instanceof Player) {
                 ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 20 * 10, 2));
-                bounceIce((Player) entity);
+                bounceIceAdvanced((Player) entity);
             }
         });
     }

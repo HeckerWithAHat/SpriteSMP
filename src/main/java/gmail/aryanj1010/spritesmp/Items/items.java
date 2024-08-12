@@ -103,8 +103,10 @@ import org.bukkit.Material;
 *
 * DONE
 *
-* Crippling Corruption: Reverse Heal for a short amount of time, making you unable to move
+* Crippling Corruption: Corrupt the area near you, withering you but freezing your enemies
 * 120 second cooldown
+*
+* DONE
 *
 *
 * Revival Sprite
@@ -194,7 +196,7 @@ public enum items {
             ChatColor.WHITE+"60 second cooldown",
             "",
             ChatColor.WHITE+""+ChatColor.BOLD+"Crippling Corruption:",
-            ChatColor.WHITE+"Reverse Heal for a short amount of time, making you unable to move",
+            ChatColor.WHITE+"Corrupt the area near you, withering you but freezing your enemies",
             ChatColor.WHITE+"120 second cooldown"
     }, true, 8)),
 
@@ -270,7 +272,7 @@ public enum items {
           ChatColor.WHITE+"60 second cooldown",
           "",
           ChatColor.WHITE+""+ChatColor.BOLD+"Crippling Corruption:",
-          ChatColor.WHITE+"Reverse Heal for a short amount of time, making you unable to move",
+          ChatColor.WHITE+"Corrupt the area near you, withering you but freezing your enemies",
           ChatColor.WHITE+"120 second cooldown"
   }, true, 8)),
 

@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Logger;
 
 /**
  * The main class of the SpriteSMP plugin.
@@ -44,6 +45,8 @@ public final class SpriteSMP extends JavaPlugin {
     @Override
     public void onEnable() {
         manager = ProtocolLibrary.getProtocolManager();
+        Logger logger = Bukkit.getLogger();
+        logger.info("manager: " + manager);
         ic = new initializeCrafts();
         // Plugin startup logic
         if (!getDataFolder().exists()) getDataFolder().mkdirs();

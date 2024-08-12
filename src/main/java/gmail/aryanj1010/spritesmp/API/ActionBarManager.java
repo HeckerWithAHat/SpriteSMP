@@ -98,10 +98,10 @@ public class ActionBarManager {
 
 
             String actionBarText = playerSprite + "  |  " + playerSpriteCount + "  |  " + "Sword Right Click: " + swordRight + "s" + "  |  " + "Sword Shift Right Click: " + swordShiftRight + "s";
-            PacketContainer packet = manager.createPacket(PacketType.Play.Server.SET_ACTION_BAR_TEXT);
+            PacketContainer packet = new PacketContainer(PacketType.Play.Server.SET_ACTION_BAR_TEXT);
             packet.getChatComponents().write(0, WrappedChatComponent.fromText(actionBarText));
 
-            manager.sendServerPacket(p, packet);
+            manager.sendServerPacket(p, packet); // HERE
 
         }, 0, 20);
         playerActionBars.put(p, i);
